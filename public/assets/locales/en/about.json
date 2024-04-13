@@ -1,0 +1,54 @@
+{
+    "title": "About",
+
+    "definition": {
+        "title": "Definition",
+        "value": "Combined Credit History (CCH) is a report on an individual's credit history that combines and visualizes data from the Credit Bureau."
+    },
+
+    "tasks": {
+        "title": "Tasks",
+        "t1": {
+            "text": "The input data are credit history reports that have many differences between them.",
+            "title": "Standardization"
+        },
+        "t2": {
+            "text": "Merge credit histories, remove duplicates, calculate sums, payments and debt for each credit.",
+            "title": "Processing"
+        },
+        "t3": {
+            "text": "Indicate the presence of negative signs or positive requirements.",
+            "title": "Indication"
+        },
+        "t4": {
+            "text": "Order and display credits in parallel in order to simplify the relationship between payment periods and reduce the risk of specialist errors.",
+            "title": "Visualization"
+        },
+        "t5": {
+            "text": "Correction of Credit Bureau errors that violate customer evaluation requirements.",
+            "title": "Correction"
+        },
+        "t6": {
+            "text": "Provide information on the logic of decision-making regarding the displayed data.",
+            "title": "Autonomy"
+        },
+        "t7": {
+            "text": "Ability to make adjustments and connect additional Credit Bureaus.",
+            "title": "Flexibility"
+        }
+    },
+
+    "legend": {
+        "title": "Payment legend",
+        "0": "New",
+        "1": "On time",
+        "A": "Overdue 1-29 days",
+        "B": "Overdue 30-59 days",
+        "C": "Overdue 60-89 days",
+        "D": "Overdue 90-119 days",
+        "E": "Overdue more than 120 days",
+        "F": "Supplements to the contract",
+        "G": "Hopeless debt",
+        "-": "No data"
+    }
+}

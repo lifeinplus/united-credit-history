@@ -1,0 +1,21 @@
+.cch-list-group-item {
+    &.dark {
+        color: var(--bs-white);
+        background-color: var(--cch-black-light);
+        --bs-list-group-border-color: rgba(255, 255, 255, 0.125);
+    }
+
+    &.cch-list-group-item-info {
+        &.dark {
+            color: var(--cch-green-100);
+            background-color: var(--cch-green-900);
+        }
+    }
+
+    &.cch-list-group-item-primary {
+        &.dark {
+            color: var(--cch-purple-100);
+            background-color: var(--cch-purple-900);
+        }
+    }
+}

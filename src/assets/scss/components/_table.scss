@@ -1,0 +1,152 @@
+table {
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+
+table thead tr th {
+    border-bottom: 2px solid currentcolor !important;
+}
+
+th {
+    @mixin caret-up($color) {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#{$color}" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>');
+    }
+
+    @mixin caret-down($color) {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#{$color}" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>');
+    }
+
+    &.asc {
+        background-repeat: no-repeat;
+        background-position: center 109%;
+
+        &.dark {
+            @include caret-up(white);
+            &:hover {
+                @include caret-up(black);
+            }
+        }
+
+        &.light {
+            @include caret-up(black);
+            &:hover {
+                @include caret-up(white);
+            }
+        }
+    }
+
+    &.desc {
+        background-repeat: no-repeat;
+        background-position: center -9%;
+
+        &.dark {
+            @include caret-down(white);
+            &:hover {
+                @include caret-down(black);
+            }
+        }
+
+        &.light {
+            @include caret-down(black);
+            &:hover {
+                @include caret-down(white);
+            }
+        }
+    }
+
+    &.sortable {
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.dark:hover {
+            color: black;
+            background-color: var(--cch-purple-600);
+        }
+
+        &.light:hover {
+            color: white;
+            background-color: var(--cch-purple-700);
+        }
+    }
+}
+
+.cch-table {
+    &.dark {
+        --bs-table-bg: var(--cch-black-light);
+        --bs-table-hover-bg: var(--cch-purple-900);
+
+        &.active {
+            --bs-table-accent-bg: var(--cch-purple-600);
+            --bs-table-striped-bg: var(--cch-purple-600);
+            --bs-table-striped-color: black;
+            --bs-table-hover-bg: var(--cch-purple-600);
+            --bs-table-hover-color: black;
+            color: black;
+        }
+
+        &.info {
+            --bs-table-bg: var(--cch-green-900);
+        }
+
+        &.primary {
+            --bs-table-bg: var(--cch-purple-900);
+        }
+    }
+
+    &.light {
+        --bs-table-bg: white;
+        --bs-table-hover-bg: var(--cch-purple-100);
+
+        &.active {
+            --bs-table-accent-bg: var(--cch-purple-700);
+            --bs-table-striped-bg: var(--cch-purple-700);
+            --bs-table-striped-color: white;
+            --bs-table-hover-bg: var(--cch-purple-700);
+            --bs-table-hover-color: white;
+            color: white;
+        }
+    }
+}
+
+.cch-td-status {
+    text-align: center;
+}
+
+@media screen and (max-width: 575px) {
+    .table-mobile thead,
+    .table-mobile tbody,
+    .table-mobile th,
+    .table-mobile td,
+    .table-mobile tr {
+        display: block;
+    }
+
+    .table-mobile td.text-start {
+        text-align: end !important;
+    }
+
+    .table-mobile thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .table-mobile td {
+        position: relative;
+        padding-left: 50% !important;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .table-mobile td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0.5rem;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: start;
+    }
+}

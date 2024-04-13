@@ -1,0 +1,25 @@
+{
+    "app_creation_date": "Creation Date",
+    "app_number": "App No",
+    "document": {
+        "dataSource": "Source",
+        "clientName": "Client",
+        "birthDate": "Birth Date",
+        "documentNumber": "Passport Number",
+        "documentSeries": "Passport Series",
+        "documentIssueDate": "Issue Date"
+    },
+    "requests": {
+        "title_all": "Requests",
+        "title_microcredits": "Requests Microcredits",
+        "last24Months": "Last 24 months",
+        "last30Days": "Last 30 days",
+        "total": "Total",
+        "microcreditLast30Days": "Last 30 days",
+        "microcreditLastYear": "Last year",
+        "microcreditMore1Year": "More than 1 year",
+        "microcreditTotal": "Total"
+    },
+    "title": "Personal Data",
+    "score": "Score"
+}
