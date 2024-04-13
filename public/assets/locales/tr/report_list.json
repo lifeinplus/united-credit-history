@@ -1,0 +1,11 @@
+{
+    "table": {
+        "reportId": "ID",
+        "appCreationDate": "Oluşturma Tarihi",
+        "appNumber": "Başvuru No",
+        "clientName": "Müşteri",
+        "documentNumber": "Pasaport Numarası",
+        "documentSeries": "Pasaport Serisi"
+    },
+    "title": "Rapor Listesi"
+}

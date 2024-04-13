@@ -1,0 +1,21 @@
+.cch-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: 1;
+    color: var(--bs-white);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--bs-border-radius);
+
+    &.diff {
+        padding: 0.2em 0;
+        border-radius: 0.125rem;
+    }
+
+    &.status {
+        padding: 0.4em 1.6em;
+    }
+}

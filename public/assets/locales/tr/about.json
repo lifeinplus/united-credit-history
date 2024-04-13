@@ -1,0 +1,54 @@
+{
+    "title": "Hakkında",
+
+    "definition": {
+        "title": "Tanım",
+        "value": "Konsolide Kredi Geçmişi (KKG), bir bireyin kredi geçmişinden gelen verileri birleştiren ve görselleştiren bir rapordur."
+    },
+
+    "tasks": {
+        "title": "Görevler",
+        "t1": {
+            "text": "Girdi verileri arasında birçok fark bulunan kredi geçmişi raporlarıdır.",
+            "title": "Standartlaştırma"
+        },
+        "t2": {
+            "text": "Kredi geçmişlerini birleştirme, tekrarları kaldırma, her kredi için toplamlar, ödemeler ve borç hesaplama.",
+            "title": "İşleme"
+        },
+        "t3": {
+            "text": "Negatif işaretlerin veya pozitif gereksinimlerin varlığını belirtme.",
+            "title": "İşaretlenme"
+        },
+        "t4": {
+            "text": "Ödeme dönemleri arasındaki ilişkiyi basitleştirmek ve uzman hatalarının riskini azaltmak için kredileri sıralama ve paralel olarak gösterme.",
+            "title": "Görselleştirme"
+        },
+        "t5": {
+            "text": "Müşteri değerlendirme gereksinimlerine uymayan Kredi Bürosu hatalarının düzeltilmesi.",
+            "title": "Düzeltme"
+        },
+        "t6": {
+            "text": "Görüntülenen verilerle ilgili karar verme mantığını sağlama.",
+            "title": "Özerklik"
+        },
+        "t7": {
+            "text": "Düzenlemeler yapabilme ve ek Kredi Bürolarını bağlayabilme yeteneği.",
+            "title": "Esneklik"
+        }
+    },
+
+    "legend": {
+        "title": "Ödeme efsanesi",
+        "0": "Yeni",
+        "1": "Zamanında",
+        "A": "1-29 gün gecikmeli",
+        "B": "30-59 gün gecikmeli",
+        "C": "60-89 gün gecikmeli",
+        "D": "90-119 gün gecikmeli",
+        "E": "120 günden fazla gecikmeli",
+        "F": "Sözleşme ekleri",
+        "G": "Umutsuz borç",
+        "-": "Veri yok"
+    }
+}

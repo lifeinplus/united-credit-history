@@ -1,0 +1,59 @@
+.cch-navbar-text {
+    color: var(--bs-navbar-brand-color);
+}
+
+.cch-text-bg-0 {
+    color: black;
+    background-color: var(--cch-text-bg-0);
+    border: 1px solid var(--cch-text-bg--);
+}
+
+.cch-text-bg-1 {
+    background-color: var(--cch-text-bg-1);
+}
+
+.cch-text-bg-A {
+    color: black;
+    background-color: var(--cch-text-bg-a);
+}
+
+.cch-text-bg-B {
+    background-color: var(--cch-text-bg-b);
+}
+
+.cch-text-bg-C {
+    background-color: var(--cch-text-bg-c);
+}
+
+.cch-text-bg-D {
+    background-color: var(--cch-text-bg-d);
+}
+
+.cch-text-bg-E {
+    background-color: var(--cch-text-bg-e);
+}
+
+.cch-text-bg-F {
+    background-color: var(--cch-text-bg-f);
+}
+
+.cch-text-bg-G {
+    background-color: var(--cch-text-bg-g);
+    border: 1px solid var(--cch-text-bg--);
+}
+
+.cch-text-bg-- {
+    color: black;
+    background-color: var(--cch-text-bg--);
+}
+
+.cch-text-bg {
+    &.dark {
+        color: #fff;
+        background-color: var(--cch-text-bg-dark);
+    }
+
+    &.light {
+        background-color: RGBA(248, 249, 250, var(--bs-bg-opacity, 1));
+    }
+}

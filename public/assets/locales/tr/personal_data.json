@@ -1,0 +1,25 @@
+{
+    "app_creation_date": "Oluşturma Tarihi",
+    "app_number": "Başvuru No",
+    "document": {
+        "dataSource": "Kaynak",
+        "clientName": "Müşteri",
+        "birthDate": "Doğum Tarihi",
+        "documentNumber": "Pasaport Numarası",
+        "documentSeries": "Pasaport Serisi",
+        "documentIssueDate": "İhraç Tarihi"
+    },
+    "requests": {
+        "title_all": "Talepler",
+        "title_microcredits": "Talepleri Mikrokredi",
+        "last24Months": "Son 24 Ay",
+        "last30Days": "Son 30 Gün",
+        "total": "Toplam",
+        "microcreditLast30Days": "Son 30 Gün",
+        "microcreditLastYear": "Geçen Yıl",
+        "microcreditMore1Year": "1 Yıldan Fazla",
+        "microcreditTotal": "Toplam"
+    },
+    "title": "Kişisel Veri",
+    "score": "Puan"
+}
