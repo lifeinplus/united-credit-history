@@ -1,5 +1,12 @@
+import { Footer, Header } from "./layouts";
+
 function App() {
-    return <div>ggg</div>;
+    return (
+        <>
+            <Header />
+            <Footer />
+        </>
+    );
 }
 
 export default App;
