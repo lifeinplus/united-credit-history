@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import classNames from "classnames";
 
 import { useTheme } from "../../hooks/ThemeContext";
-import { joinClasses } from "../../util";
 // import LanguageSwitcher from "./components/LanguageSwitcher";
-// import ThemeSwitcher from "./components/ThemeSwitcher";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 const Header = () => {
     const { t } = useTranslation(["header"]);
@@ -18,13 +18,13 @@ const Header = () => {
     return (
         <header>
             <nav
-                className={joinClasses([
+                className={classNames(
                     "navbar",
                     `navbar-${theme}`,
                     "navbar-expand-md",
                     `bg-${theme}`,
-                    theme === "light" ? "shadow" : "cch-shadow-dark",
-                ])}
+                    theme === "light" ? "shadow" : "cch-shadow-dark"
+                )}
             >
                 <div className="container-fluid">
                     <NavLink
@@ -57,7 +57,7 @@ const Header = () => {
                         id="navbarSupportedContent"
                     >
                         <form className="d-flex">
-                            {/* <ThemeSwitcher /> */}
+                            <ThemeSwitcher />
                             {/* <LanguageSwitcher /> */}
                         </form>
                     </div>
