@@ -4,6 +4,9 @@ function App() {
     return (
         <>
             <Header />
+            <main>
+                <div className="container-fluid"></div>
+            </main>
             <Footer />
         </>
     );

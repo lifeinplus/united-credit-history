@@ -42,8 +42,4 @@ function getDateFormat(locale: string, type: keyof DateOptions) {
     return new Intl.DateTimeFormat(locale, options);
 }
 
-function joinClasses(list: string[]) {
-    return list.filter((item: string) => item).join(" ") || undefined;
-}
-
-export { getDateFormat, joinClasses, langs };
+export { getDateFormat, langs };
