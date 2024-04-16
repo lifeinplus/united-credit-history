@@ -61,55 +61,55 @@ th {
 
         &.dark:hover {
             color: black;
-            background-color: var(--cch-purple-600);
+            background-color: var(--uch-purple-600);
         }
 
         &.light:hover {
             color: white;
-            background-color: var(--cch-purple-700);
+            background-color: var(--uch-purple-700);
         }
     }
 }
 
-.cch-table {
+.uch-table {
     &.dark {
-        --bs-table-bg: var(--cch-black-light);
-        --bs-table-hover-bg: var(--cch-purple-900);
+        --bs-table-bg: var(--uch-black-light);
+        --bs-table-hover-bg: var(--uch-purple-900);
 
         &.active {
-            --bs-table-accent-bg: var(--cch-purple-600);
-            --bs-table-striped-bg: var(--cch-purple-600);
+            --bs-table-accent-bg: var(--uch-purple-600);
+            --bs-table-striped-bg: var(--uch-purple-600);
             --bs-table-striped-color: black;
-            --bs-table-hover-bg: var(--cch-purple-600);
+            --bs-table-hover-bg: var(--uch-purple-600);
             --bs-table-hover-color: black;
             color: black;
         }
 
         &.info {
-            --bs-table-bg: var(--cch-green-900);
+            --bs-table-bg: var(--uch-green-900);
         }
 
         &.primary {
-            --bs-table-bg: var(--cch-purple-900);
+            --bs-table-bg: var(--uch-purple-900);
         }
     }
 
     &.light {
         --bs-table-bg: white;
-        --bs-table-hover-bg: var(--cch-purple-100);
+        --bs-table-hover-bg: var(--uch-purple-100);
 
         &.active {
-            --bs-table-accent-bg: var(--cch-purple-700);
-            --bs-table-striped-bg: var(--cch-purple-700);
+            --bs-table-accent-bg: var(--uch-purple-700);
+            --bs-table-striped-bg: var(--uch-purple-700);
             --bs-table-striped-color: white;
-            --bs-table-hover-bg: var(--cch-purple-700);
+            --bs-table-hover-bg: var(--uch-purple-700);
             --bs-table-hover-color: white;
             color: white;
         }
     }
 }
 
-.cch-td-status {
+.uch-td-status {
     text-align: center;
 }
 

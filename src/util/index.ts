@@ -1,3 +1,15 @@
+type Lang = {
+    countryCode: string;
+    locale: string;
+    nativeName: string;
+};
+
+export const langs: { [key: string]: Lang } = {
+    en: { countryCode: "gb", locale: "en-GB", nativeName: "English" },
+    ru: { countryCode: "ru", locale: "ru-RU", nativeName: "Русский" },
+    tr: { countryCode: "tr", locale: "tr-TR", nativeName: "Türkçe" },
+};
+
 type DateOptions = {
     header: Intl.DateTimeFormatOptions;
     status: Intl.DateTimeFormatOptions;
@@ -26,13 +38,7 @@ const dateOptions: DateOptions = {
     },
 };
 
-const langs = {
-    en: { countryCode: "gb", locale: "en-GB", nativeName: "English" },
-    ru: { countryCode: "ru", locale: "ru-RU", nativeName: "Русский" },
-    tr: { countryCode: "tr", locale: "tr-TR", nativeName: "Türkçe" },
-};
-
-function getDateFormat(locale: string, type: keyof DateOptions) {
+export function getDateFormat(locale: string, type: keyof DateOptions) {
     const options = dateOptions[type] || {
         year: "numeric",
         month: "numeric",
@@ -41,5 +47,3 @@ function getDateFormat(locale: string, type: keyof DateOptions) {
 
     return new Intl.DateTimeFormat(locale, options);
 }
-
-export { getDateFormat, langs };
