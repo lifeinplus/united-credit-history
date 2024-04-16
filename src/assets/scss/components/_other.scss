@@ -1,12 +1,12 @@
-.cch-border-dark {
-    border-color: var(--cch-border-color) !important;
+.uch-border-dark {
+    border-color: var(--uch-border-color) !important;
 }
 
-.cch-card-border-dark {
-    border-color: var(--cch-border-color);
+.uch-card-border-dark {
+    border-color: var(--uch-border-color);
 }
 
-.cch-shadow-dark {
+.uch-shadow-dark {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
 }
 
@@ -17,12 +17,12 @@ html {
 body {
     &.dark {
         color-scheme: dark;
-        background-color: var(--cch-body-bg-dark);
+        background-color: var(--uch-body-bg-dark);
     }
 
     &.light {
         color-scheme: light;
-        background-color: var(--cch-body-bg-light);
+        background-color: var(--uch-body-bg-light);
     }
 }
 

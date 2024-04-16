@@ -1,56 +1,56 @@
-.cch-navbar-text {
+.uch-navbar-text {
     color: var(--bs-navbar-brand-color);
 }
 
-.cch-text-bg-0 {
+.uch-text-bg-0 {
     color: black;
-    background-color: var(--cch-text-bg-0);
-    border: 1px solid var(--cch-text-bg--);
+    background-color: var(--uch-text-bg-0);
+    border: 1px solid var(--uch-text-bg--);
 }
 
-.cch-text-bg-1 {
-    background-color: var(--cch-text-bg-1);
+.uch-text-bg-1 {
+    background-color: var(--uch-text-bg-1);
 }
 
-.cch-text-bg-A {
+.uch-text-bg-A {
     color: black;
-    background-color: var(--cch-text-bg-a);
+    background-color: var(--uch-text-bg-a);
 }
 
-.cch-text-bg-B {
-    background-color: var(--cch-text-bg-b);
+.uch-text-bg-B {
+    background-color: var(--uch-text-bg-b);
 }
 
-.cch-text-bg-C {
-    background-color: var(--cch-text-bg-c);
+.uch-text-bg-C {
+    background-color: var(--uch-text-bg-c);
 }
 
-.cch-text-bg-D {
-    background-color: var(--cch-text-bg-d);
+.uch-text-bg-D {
+    background-color: var(--uch-text-bg-d);
 }
 
-.cch-text-bg-E {
-    background-color: var(--cch-text-bg-e);
+.uch-text-bg-E {
+    background-color: var(--uch-text-bg-e);
 }
 
-.cch-text-bg-F {
-    background-color: var(--cch-text-bg-f);
+.uch-text-bg-F {
+    background-color: var(--uch-text-bg-f);
 }
 
-.cch-text-bg-G {
-    background-color: var(--cch-text-bg-g);
-    border: 1px solid var(--cch-text-bg--);
+.uch-text-bg-G {
+    background-color: var(--uch-text-bg-g);
+    border: 1px solid var(--uch-text-bg--);
 }
 
-.cch-text-bg-- {
+.uch-text-bg-- {
     color: black;
-    background-color: var(--cch-text-bg--);
+    background-color: var(--uch-text-bg--);
 }
 
-.cch-text-bg {
+.uch-text-bg {
     &.dark {
         color: #fff;
-        background-color: var(--cch-text-bg-dark);
+        background-color: var(--uch-text-bg-dark);
     }
 
     &.light {
