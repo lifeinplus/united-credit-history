@@ -1,21 +1,21 @@
-.cch-list-group-item {
+.uch-list-group-item {
     &.dark {
         color: var(--bs-white);
-        background-color: var(--cch-black-light);
+        background-color: var(--uch-black-light);
         --bs-list-group-border-color: rgba(255, 255, 255, 0.125);
     }
 
-    &.cch-list-group-item-info {
+    &.uch-list-group-item-info {
         &.dark {
-            color: var(--cch-green-100);
-            background-color: var(--cch-green-900);
+            color: var(--uch-green-100);
+            background-color: var(--uch-green-900);
         }
     }
 
-    &.cch-list-group-item-primary {
+    &.uch-list-group-item-primary {
         &.dark {
-            color: var(--cch-purple-100);
-            background-color: var(--cch-purple-900);
+            color: var(--uch-purple-100);
+            background-color: var(--uch-purple-900);
         }
     }
 }

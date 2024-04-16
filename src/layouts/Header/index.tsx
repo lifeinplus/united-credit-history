@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 
 import { useTheme } from "../../hooks/ThemeContext";
-// import LanguageSwitcher from "./components/LanguageSwitcher";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
                     `navbar-${theme}`,
                     "navbar-expand-md",
                     `bg-${theme}`,
-                    theme === "light" ? "shadow" : "cch-shadow-dark"
+                    theme === "light" ? "shadow" : "uch-shadow-dark"
                 )}
             >
                 <div className="container-fluid">
@@ -58,7 +58,7 @@ const Header = () => {
                     >
                         <form className="d-flex">
                             <ThemeSwitcher />
-                            {/* <LanguageSwitcher /> */}
+                            <LanguageSwitcher />
                         </form>
                     </div>
                 </div>
