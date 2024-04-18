@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 import { Footer, Header } from "./layouts";
+import { Reports } from "./pages";
 import { useThemeUpdate } from "./hooks/ThemeContext";
 import { langs } from "./util";
 
@@ -60,7 +62,11 @@ function App() {
         <>
             <Header />
             <main>
-                <div className="container-fluid"></div>
+                <div className="container-fluid">
+                    <Routes>
+                        <Route path="/" element={<Reports />} />
+                    </Routes>
+                </div>
             </main>
             <Footer />
         </>
