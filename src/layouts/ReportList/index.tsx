@@ -1,13 +1,18 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
+import { TReport } from "../../pages/Reports";
 import { useTheme } from "../../hooks/ThemeContext";
 import { customFields } from "./util";
 
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 
-const ReportList = () => {
+type Props = {
+    reports: TReport[];
+};
+
+const ReportList = ({ reports }: Props) => {
     const theme = useTheme();
     const { t } = useTranslation(["report_list"]);
 
@@ -34,7 +39,12 @@ const ReportList = () => {
                     </div>
                     <div className="row">
                         <div className="col">
-                            <Table id={"rl"} columns={columns} />
+                            <Table
+                                id={"rl"}
+                                columns={columns}
+                                data={reports}
+                                rowHover={true}
+                            />
                         </div>
                     </div>
                 </div>
