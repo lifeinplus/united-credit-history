@@ -11,12 +11,19 @@ export const langs: { [key: string]: Lang } = {
 };
 
 type DateOptions = {
+    date: Intl.DateTimeFormatOptions;
     header: Intl.DateTimeFormatOptions;
     status: Intl.DateTimeFormatOptions;
     time: Intl.DateTimeFormatOptions;
 };
 
 const dateOptions: DateOptions = {
+    date: {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+    },
+
     header: {
         year: "numeric",
         month: "numeric",
@@ -39,11 +46,6 @@ const dateOptions: DateOptions = {
 };
 
 export function getDateFormat(locale: string, type: keyof DateOptions) {
-    const options = dateOptions[type] || {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-    };
-
+    const options = dateOptions[type];
     return new Intl.DateTimeFormat(locale, options);
 }
