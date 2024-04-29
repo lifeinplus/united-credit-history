@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { ReportList } from "../layouts";
 
 export type TReport = {
@@ -10,22 +12,16 @@ export type TReport = {
     documentSeries: string;
 };
 
-type TDatabase = {
-    reports?: TReport[];
-};
-
 const Reports = () => {
-    const [database, setDatabase] = useState<TDatabase>({});
+    const [reports, setReports] = useState([]);
 
     useEffect(() => {
-        fetch(`../data/db.json`)
-            .then((response) => response.json())
-            .then((json) => setDatabase(json));
+        axios.get("http://localhost:9090/reports").then((response) => {
+            setReports(response.data.reports);
+        });
     }, []);
 
-    return (
-        <>{database.reports && <ReportList reports={database.reports} />};</>
-    );
+    return <>{reports && <ReportList reports={reports} />};</>;
 };
 
 export default Reports;
