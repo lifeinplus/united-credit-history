@@ -1,18 +1,19 @@
 {
     "name": "united-credit-history",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "build": "webpack",
         "build:prod": "NODE_ENV=production webpack",
-        "dev": "webpack serve"
+        "serve": "webpack serve"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "@popperjs/core": "^2.11.8",
+        "axios": "^1.6.8",
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
         "classnames": "^2.5.1",
