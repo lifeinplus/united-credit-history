@@ -16,7 +16,7 @@ const Reports = () => {
     const [reports, setReports] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:9090/reports").then((response) => {
+        axios.get("http://localhost:9090/reports/get").then((response) => {
             setReports(response.data.reports);
         });
     }, []);
