@@ -4,11 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 import { Footer, Header } from "./layouts";
-import { Reports } from "./pages";
+import { About, Reports } from "./pages";
 import { useThemeUpdate } from "./hooks/ThemeContext";
 import { langs } from "./util";
 
-function App() {
+const App = () => {
     const { i18n } = useTranslation();
     const toggleTheme = useThemeUpdate();
 
@@ -65,12 +65,16 @@ function App() {
                 <div className="container-fluid">
                     <Routes>
                         <Route path="/" element={<Reports />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/reports">
+                            <Route index element={<Reports />} />
+                        </Route>
                     </Routes>
                 </div>
             </main>
             <Footer />
         </>
     );
-}
+};
 
 export default App;

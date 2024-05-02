@@ -1,10 +1,4 @@
-export type CustomField = {
-    alignment: string;
-    dataType: string;
-    isLink?: boolean;
-    name?: string;
-    sysName: string;
-};
+import type { CustomField } from "../../types";
 
 export const customFields: CustomField[] = [
     {

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useTheme } from "../../../hooks/ThemeContext";
-import { CustomField } from "../../../layouts/ReportList/util";
+import type { CustomField } from "../../../types";
 
 type HeadProps = {
     columns: CustomField[];

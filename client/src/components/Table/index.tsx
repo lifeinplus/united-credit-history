@@ -1,7 +1,6 @@
 import classNames from "classnames";
 
-import { TReport } from "../../pages/Reports";
-import { CustomField } from "../../layouts/ReportList/util";
+import type { CustomField, TReport } from "../../types";
 import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";

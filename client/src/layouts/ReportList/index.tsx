@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { TReport } from "../../pages/Reports";
+import type { TReport } from "../../types";
 import { useTheme } from "../../hooks/ThemeContext";
 import { customFields } from "./util";
 
