@@ -1,3 +1,4 @@
+import About from "./About";
 import Reports from "./Reports";
 
-export { Reports };
+export { About, Reports };
