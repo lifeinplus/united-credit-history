@@ -3,15 +3,6 @@ import axios from "axios";
 
 import { ReportList } from "../layouts";
 
-export type TReport = {
-    _id: string;
-    appNumber: string;
-    appCreationDate: string;
-    clientName: string;
-    documentNumber: string;
-    documentSeries: string;
-};
-
 const Reports = () => {
     const [reports, setReports] = useState([]);
 
@@ -21,7 +12,7 @@ const Reports = () => {
         });
     }, []);
 
-    return <>{reports && <ReportList reports={reports} />};</>;
+    return <>{reports && <ReportList reports={reports} />}</>;
 };
 
 export default Reports;

@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { CustomField } from "../../../layouts/ReportList/util";
-import { TReport } from "../../../pages/Reports";
+import type { CustomField, TReport } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
 import { getDateFormat, langs } from "../../../util";
 
