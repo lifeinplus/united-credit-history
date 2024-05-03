@@ -1,13 +1,14 @@
 import classNames from "classnames";
+
+import type { TableColumn } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
-import type { CustomField } from "../../../types";
 
 type HeadProps = {
-    columns: CustomField[];
+    columns: TableColumn[];
 };
 
 type ThProps = {
-    column: CustomField;
+    column: TableColumn;
 };
 
 const Head = ({ columns }: HeadProps) => {

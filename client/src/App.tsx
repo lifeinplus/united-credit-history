@@ -1,10 +1,10 @@
+import Cookies from "universal-cookie";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
-import Cookies from "universal-cookie";
 
 import { Footer, Header } from "./layouts";
-import { About, Reports } from "./pages";
+import { About, Report, Reports } from "./pages";
 import { useThemeUpdate } from "./hooks/ThemeContext";
 import { langs } from "./util";
 
@@ -68,6 +68,7 @@ const App = () => {
                         <Route path="/about" element={<About />} />
                         <Route path="/reports">
                             <Route index element={<Reports />} />
+                            <Route path=":reportId" element={<Report />} />
                         </Route>
                     </Routes>
                 </div>

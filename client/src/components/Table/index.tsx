@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import type { CustomField, TReport } from "../../types";
+import type { TableColumn, TReport } from "../../types";
 import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
@@ -8,7 +8,7 @@ import Body from "./components/Body";
 
 type Props = {
     id: string;
-    columns: CustomField[];
+    columns: TableColumn[];
     data: TReport[];
     rowHover: boolean;
 };
