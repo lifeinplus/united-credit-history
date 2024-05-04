@@ -1,25 +1,26 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { TReport } from "../../types";
+import type { TPerson, TReport } from "../../types";
 import Header from "../../components/Header";
-// import Table from "../../components/Table";
+import Table from "../../components/Table";
 import { useTheme } from "../../hooks/ThemeContext";
 
-// import { tableColumns } from "./util";
+import { tableColumns } from "./util";
 
-type Props = {
-    report: TReport | undefined;
+type PersonalDataProps = {
+    persons?: TPerson[];
+    report?: TReport;
 };
 
-const PersonalData = ({ report }: Props) => {
+const PersonalData = ({ persons, report }: PersonalDataProps) => {
     const { t } = useTranslation(["personal_data"]);
     const theme = useTheme();
 
-    // const columns = tableColumns.map((item) => ({
-    //     ...item,
-    //     name: t(`document.${item.sysName}`),
-    // }));
+    const columns = tableColumns.map((item) => ({
+        ...item,
+        name: t(`document.${item.sysName}`),
+    }));
 
     return (
         <div className="container-fluid mb-3">
@@ -47,11 +48,13 @@ const PersonalData = ({ report }: Props) => {
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-md-12 col-lg-7 col-xl-8">
-                            {/* <Table
+                            <Table
                                 id={"pd"}
                                 columns={columns}
-                                rowHover={false}
-                            /> */}
+                                data={persons}
+                                mobileView={true}
+                                textDifference={true}
+                            />
                         </div>
                     </div>
                 </div>

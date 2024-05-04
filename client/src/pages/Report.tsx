@@ -6,7 +6,15 @@ import { PersonalData } from "../layouts";
 
 const Report = () => {
     const { reportId } = useParams();
+
+    const [persons, setPersons] = useState(undefined);
     const [report, setReport] = useState(undefined);
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:9090/persons/getByReportId/${reportId}`)
+            .then((response) => setPersons(response.data.persons));
+    }, [reportId]);
 
     useEffect(() => {
         axios
@@ -14,7 +22,7 @@ const Report = () => {
             .then((response) => setReport(response.data.report));
     }, [reportId]);
 
-    return <PersonalData report={report} />;
+    return <PersonalData persons={persons} report={report} />;
 };
 
 export default Report;
