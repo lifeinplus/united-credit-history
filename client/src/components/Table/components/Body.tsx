@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import type { CustomField, TReport } from "../../../types";
+import type { TableColumn, TReport } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
 import { getDateFormat, langs } from "../../../util";
 
 type Props = {
-    columns: CustomField[];
+    columns: TableColumn[];
     data: TReport[];
 };
 
@@ -15,13 +15,7 @@ type RowProps = {
 };
 
 type CellProps = {
-    id: string;
-    column: CustomField;
-    data: TReport;
-};
-
-type CommonDataProps = {
-    column: CustomField;
+    column: TableColumn;
     data: TReport;
 };
 
@@ -49,9 +43,7 @@ const Body = ({ columns, data }: Props) => {
             <tr id={_id}>
                 {columns.map((element, index) => {
                     const key = `${_id}-${index}`;
-                    return (
-                        <Cell key={key} id={key} column={element} data={data} />
-                    );
+                    return <Cell key={key} column={element} data={data} />;
                 })}
             </tr>
         );
@@ -76,7 +68,7 @@ const Body = ({ columns, data }: Props) => {
         );
     }
 
-    function getCommonData({ column, data }: CommonDataProps) {
+    function getCommonData({ column, data }: CellProps) {
         const { alignment, dataType, sysName } = column;
 
         const currentSource = data[sysName as keyof typeof data] || "";
