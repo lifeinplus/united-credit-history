@@ -10,7 +10,7 @@ const Report = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:9090/reports/get/${reportId}`)
+            .get(`http://localhost:9090/reports/getById/${reportId}`)
             .then((response) => setReport(response.data.report));
     }, [reportId]);
 

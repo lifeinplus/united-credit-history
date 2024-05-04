@@ -1,9 +1,9 @@
 import express from "express";
-import controller from "../controllers/Report";
+import { Report } from "../controllers";
 
 const router = express.Router();
 
-router.get("/get/:reportId", controller.read);
-router.get("/get", controller.readAll);
+router.get("/getById/:reportId", Report.getById);
+router.get("/get", Report.get);
 
 export = router;

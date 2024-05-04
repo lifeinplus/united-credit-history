@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Report from "../models/Report";
+import { Report } from "../models";
 
-const read = (req: Request, res: Response) => {
+const getById = (req: Request, res: Response) => {
     const { reportId } = req.params;
 
     return Report.findById(reportId)
@@ -13,11 +13,11 @@ const read = (req: Request, res: Response) => {
         .catch((error) => res.status(500).json({ error }));
 };
 
-const readAll = (req: Request, res: Response) => {
+const get = (req: Request, res: Response) => {
     return Report.find()
         .sort("appNumber")
         .then((reports) => res.status(200).json({ reports }))
         .catch((error) => res.status(500).json({ error }));
 };
 
-export default { read, readAll };
+export default { getById, get };
