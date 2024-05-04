@@ -1,4 +1,4 @@
-export type CustomField = {
+export type TableColumn = {
     alignment: string;
     dataType: string;
     isLink?: boolean;
