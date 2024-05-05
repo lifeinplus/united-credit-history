@@ -1,19 +1,28 @@
 import classNames from "classnames";
 
-import type { TableColumn, TReport } from "../../types";
+import type { TableColumn, TPerson, TReport } from "../../types";
 import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
 
-type Props = {
+type TableProps = {
     id: string;
     columns: TableColumn[];
-    data: TReport[];
-    rowHover: boolean;
+    data?: TPerson[] | TReport[];
+    mobileView?: boolean;
+    rowHover?: boolean;
+    textDifference?: boolean;
 };
 
-const Table = ({ id, columns, data, rowHover }: Props) => {
+const Table = ({
+    id,
+    columns,
+    data,
+    mobileView = false,
+    rowHover = false,
+    textDifference = false,
+}: TableProps) => {
     const theme = useTheme();
 
     return (
@@ -31,11 +40,17 @@ const Table = ({ id, columns, data, rowHover }: Props) => {
                     `table-${theme}`,
                     `uch-table ${theme}`,
                     rowHover && `table-hover`,
-                    "table-striped align-middle mb-0"
+                    "table-striped align-middle mb-0",
+                    mobileView && "table-mobile"
                 )}
             >
                 <Head columns={columns} />
-                <Body columns={columns} data={data} />
+                <Body
+                    columns={columns}
+                    data={data}
+                    mobileView={mobileView}
+                    textDifference={textDifference}
+                />
             </table>
         </div>
     );

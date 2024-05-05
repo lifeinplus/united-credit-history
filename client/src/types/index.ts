@@ -6,6 +6,16 @@ export type TableColumn = {
     sysName: string;
 };
 
+export type TPerson = {
+    _id: string;
+    birthDate: string;
+    clientName: string;
+    dataSource: string;
+    documentIssueDate: string;
+    documentNumber: string;
+    documentSeries: string;
+};
+
 export type TReport = {
     _id: string;
     appNumber: string;
