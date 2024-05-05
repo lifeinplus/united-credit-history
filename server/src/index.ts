@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import { config } from "./config/config";
-import { Person, Report } from "./routes";
+import { Person, Report, RequestCount } from "./routes";
 
 const app = express();
 
@@ -23,8 +23,9 @@ const StartServer = () => {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
-    app.use("/reports", Report);
     app.use("/persons", Person);
+    app.use("/reports", Report);
+    app.use("/requestCounts", RequestCount);
 
     app.get("/ping", (req, res, next) =>
         res.status(200).json({ message: "pong" })

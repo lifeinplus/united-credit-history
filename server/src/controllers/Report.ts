@@ -16,7 +16,11 @@ const getById = (req: Request, res: Response) => {
 const get = (req: Request, res: Response) => {
     return Report.find()
         .sort("appNumber")
-        .then((reports) => res.status(200).json({ reports }))
+        .then((reports) =>
+            reports.length
+                ? res.status(200).json({ reports })
+                : res.status(404).json({ message: "Not found" })
+        )
         .catch((error) => res.status(500).json({ error }));
 };
 
