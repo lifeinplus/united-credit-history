@@ -10,17 +10,17 @@ import RequestCounts from "./components/RequestCounts";
 import { tableColumns } from "./util";
 
 type PersonalDataProps = {
+    commons?: ICommon;
     persons?: IPerson[];
     report?: IReport;
     requestCounts?: IRequestCount;
-    commons?: ICommon;
 };
 
 const PersonalData = ({
+    commons,
     persons,
     report,
     requestCounts,
-    commons,
 }: PersonalDataProps) => {
     const { t } = useTranslation(["personal_data"]);
     const theme = useTheme();
