@@ -38,7 +38,7 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
     const dateFormat = getDateFormat(lang.locale, "date");
     const timeFormat = getDateFormat(lang.locale, "time");
 
-    const firstDataItem = data?.length ? data[0] : {};
+    const firstDataItem = data && data[0];
 
     return (
         <tbody>
@@ -108,12 +108,10 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
     function getCommonData({ column, data }: CellProps) {
         const { alignment, dataType, sysName } = column;
 
-        const firstKey = sysName as keyof typeof firstDataItem;
-        const firstSource = firstDataItem[firstKey];
-        const firstValue = prepare(firstSource, dataType);
+        const firstSource = firstDataItem && firstDataItem[sysName];
+        const firstValue = firstSource && prepare(firstSource, dataType);
 
-        const currentKey = sysName as keyof typeof data;
-        const currentSource = data[currentKey] ?? "";
+        const currentSource = data[sysName] ?? "";
         const currentValue = prepare(currentSource, dataType);
 
         const diffData = compare(firstValue, currentValue);
