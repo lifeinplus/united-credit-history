@@ -3,6 +3,12 @@ export type ListField = {
     type: string;
 };
 
+export type ScoreStyle = {
+    min: number;
+    max: number;
+    style: string;
+};
+
 export type TableColumn = {
     alignment: string;
     dataType: string;
@@ -11,7 +17,23 @@ export type TableColumn = {
     sysName: string;
 };
 
-export interface TPerson extends Record<string, string> {
+export interface ICommon extends Record<string, number> {
+    chbCreditCardsAmountGbp: number;
+    chbCreditCardsAmountRub: number;
+    chbCreditCardsAmountTry: number;
+    chbLoansAmountGbp: number;
+    chbLoansAmountRub: number;
+    chbLoansAmountTry: number;
+    chbPaymentsAmountGbp: number;
+    chbPaymentsAmountRub: number;
+    chbPaymentsAmountTry: number;
+    flcPaymentsAmountGbp: number;
+    flcPaymentsAmountRub: number;
+    flcPaymentsAmountTry: number;
+    score: number;
+}
+
+export interface IPerson extends Record<string, string> {
     _id: string;
     birthDate: string;
     clientName: string;
@@ -21,7 +43,7 @@ export interface TPerson extends Record<string, string> {
     documentSeries: string;
 }
 
-export interface TReport extends Record<string, string> {
+export interface IReport extends Record<string, string> {
     _id: string;
     appNumber: string;
     appCreationDate: string;
@@ -30,7 +52,7 @@ export interface TReport extends Record<string, string> {
     documentSeries: string;
 }
 
-export interface TRequestCount extends Record<string, number> {
+export interface IRequestCount extends Record<string, number> {
     total: number;
     last24Months: number;
     last30Days: number;
