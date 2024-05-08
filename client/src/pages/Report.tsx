@@ -9,6 +9,7 @@ const Report = () => {
 
     const [persons, setPersons] = useState(undefined);
     const [report, setReport] = useState(undefined);
+    const [requestCounts, setRequestCounts] = useState(undefined);
 
     useEffect(() => {
         axios
@@ -22,7 +23,21 @@ const Report = () => {
             .then((response) => setReport(response.data.report));
     }, [reportId]);
 
-    return <PersonalData persons={persons} report={report} />;
+    useEffect(() => {
+        axios
+            .get(
+                `http://localhost:9090/requestCounts/getByReportId/${reportId}`
+            )
+            .then((response) => setRequestCounts(response.data.requestCounts));
+    }, [reportId]);
+
+    return (
+        <PersonalData
+            persons={persons}
+            report={report}
+            requestCounts={requestCounts}
+        />
+    );
 };
 
 export default Report;

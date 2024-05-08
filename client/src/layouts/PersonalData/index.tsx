@@ -1,19 +1,25 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { TPerson, TReport } from "../../types";
+import type { TPerson, TReport, TRequestCount } from "../../types";
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 import { useTheme } from "../../hooks/ThemeContext";
 
+import RequestCounts from "./components/RequestCounts";
 import { tableColumns } from "./util";
 
 type PersonalDataProps = {
     persons?: TPerson[];
     report?: TReport;
+    requestCounts?: TRequestCount;
 };
 
-const PersonalData = ({ persons, report }: PersonalDataProps) => {
+const PersonalData = ({
+    persons,
+    report,
+    requestCounts,
+}: PersonalDataProps) => {
     const { t } = useTranslation(["personal_data"]);
     const theme = useTheme();
 
@@ -55,6 +61,9 @@ const PersonalData = ({ persons, report }: PersonalDataProps) => {
                                 mobileView={true}
                                 textDifference={true}
                             />
+                        </div>
+                        <div className="col-md-8 col-lg-5 col-xl-4 mb-sm-3">
+                            <RequestCounts counts={requestCounts} />
                         </div>
                     </div>
                 </div>

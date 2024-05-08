@@ -1,3 +1,8 @@
+export type ListField = {
+    sysName: string;
+    type: string;
+};
+
 export type TableColumn = {
     alignment: string;
     dataType: string;
@@ -6,7 +11,7 @@ export type TableColumn = {
     sysName: string;
 };
 
-export type TPerson = {
+export interface TPerson extends Record<string, string> {
     _id: string;
     birthDate: string;
     clientName: string;
@@ -14,13 +19,23 @@ export type TPerson = {
     documentIssueDate: string;
     documentNumber: string;
     documentSeries: string;
-};
+}
 
-export type TReport = {
+export interface TReport extends Record<string, string> {
     _id: string;
     appNumber: string;
     appCreationDate: string;
     clientName: string;
     documentNumber: string;
     documentSeries: string;
-};
+}
+
+export interface TRequestCount extends Record<string, number> {
+    total: number;
+    last24Months: number;
+    last30Days: number;
+    microcreditTotal: number;
+    microcreditLast30Days: number;
+    microcreditLastYear: number;
+    microcreditMore1Year: number;
+}
