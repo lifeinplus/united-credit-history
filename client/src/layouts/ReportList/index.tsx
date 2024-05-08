@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { TReport } from "../../types";
+import type { IReport } from "../../types";
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 import { useTheme } from "../../hooks/ThemeContext";
@@ -9,7 +9,7 @@ import { useTheme } from "../../hooks/ThemeContext";
 import { tableColumns } from "./util";
 
 type Props = {
-    reports: TReport[];
+    reports: IReport[];
 };
 
 const ReportList = ({ reports }: Props) => {

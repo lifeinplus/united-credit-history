@@ -2,12 +2,13 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "../../../../hooks/ThemeContext";
-import { TRequestCount } from "../../../../types";
+import type { IRequestCount } from "../../../../types";
 
-import { customFields } from "./util";
+import { customFields, scoreStyles } from "./util";
 
 type RequestCountsProps = {
-    counts?: TRequestCount;
+    counts?: IRequestCount;
+    score?: number;
 };
 
 type CardProps = {
@@ -21,7 +22,7 @@ type ItemProps = {
     type: string;
 };
 
-const RequestCounts = ({ counts }: RequestCountsProps) => {
+const RequestCounts = ({ counts, score }: RequestCountsProps) => {
     const { t } = useTranslation(["personal_data"]);
     const theme = useTheme();
 
@@ -36,6 +37,7 @@ const RequestCounts = ({ counts }: RequestCountsProps) => {
         const fields = customFields.filter((item) => item.type === type);
         const values = fields.map(({ sysName }) => counts && counts[sysName]);
 
+        const scoreDanger = score && score < 500;
         const microDanger = type === "micro" && values.some((item) => item);
 
         return (
@@ -44,7 +46,7 @@ const RequestCounts = ({ counts }: RequestCountsProps) => {
                     "card",
                     `uch-text-bg ${theme}`,
                     theme === "dark" && "uch-card-border-dark",
-                    microDanger && "border-danger"
+                    (scoreDanger || microDanger) && "border-danger"
                 )}
             >
                 <div
@@ -69,6 +71,7 @@ const RequestCounts = ({ counts }: RequestCountsProps) => {
                         })}
                     </ul>
                 )}
+                {type === "all" && <Footer />}
             </div>
         );
     }
@@ -100,6 +103,25 @@ const RequestCounts = ({ counts }: RequestCountsProps) => {
                     {count}
                 </span>
             </li>
+        );
+    }
+
+    function Footer() {
+        const scoreStyle = scoreStyles.find(({ min, max }) => {
+            return score && score >= min && score <= max;
+        });
+
+        return (
+            <div className="card-footer text-center">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span className="text-truncate">{t("score")}</span>
+                    <span
+                        className={`badge rounded-pill ${scoreStyle?.style} ms-2`}
+                    >
+                        {score}
+                    </span>
+                </li>
+            </div>
         );
     }
 };

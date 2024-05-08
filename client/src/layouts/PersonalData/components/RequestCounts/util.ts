@@ -1,6 +1,6 @@
-import { ListField } from "../../../../types";
+import type { ListField, ScoreStyle } from "../../../../types";
 
-const customFields: ListField[] = [
+export const customFields: ListField[] = [
     {
         sysName: "total",
         type: "all",
@@ -31,4 +31,9 @@ const customFields: ListField[] = [
     },
 ];
 
-export { customFields };
+export const scoreStyles: ScoreStyle[] = [
+    { min: 300, max: 499, style: "text-bg-danger" },
+    { min: 500, max: 649, style: "text-bg-warning" },
+    { min: 650, max: 799, style: "text-bg-info" },
+    { min: 800, max: 850, style: "text-bg-success" },
+];

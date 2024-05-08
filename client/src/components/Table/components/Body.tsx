@@ -1,25 +1,25 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import type { TableColumn, TPerson, TReport } from "../../../types";
+import type { TableColumn, IPerson, IReport } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
 import { getDateFormat, langs } from "../../../util";
 
 type BodyProps = {
     columns: TableColumn[];
-    data?: TPerson[] | TReport[];
+    data?: IPerson[] | IReport[];
     mobileView: boolean;
     textDifference: boolean;
 };
 
 type RowProps = {
-    data: TPerson | TReport;
+    data: IPerson | IReport;
 };
 
 type CellProps = {
     id: string;
     column: TableColumn;
-    data: TPerson | TReport;
+    data: IPerson | IReport;
 };
 
 type Diff = { text?: string; spanText?: string };

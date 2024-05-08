@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { TPerson, TReport, TRequestCount } from "../../types";
+import type { ICommon, IPerson, IReport, IRequestCount } from "../../types";
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 import { useTheme } from "../../hooks/ThemeContext";
@@ -10,15 +10,17 @@ import RequestCounts from "./components/RequestCounts";
 import { tableColumns } from "./util";
 
 type PersonalDataProps = {
-    persons?: TPerson[];
-    report?: TReport;
-    requestCounts?: TRequestCount;
+    persons?: IPerson[];
+    report?: IReport;
+    requestCounts?: IRequestCount;
+    commons?: ICommon;
 };
 
 const PersonalData = ({
     persons,
     report,
     requestCounts,
+    commons,
 }: PersonalDataProps) => {
     const { t } = useTranslation(["personal_data"]);
     const theme = useTheme();
@@ -63,7 +65,10 @@ const PersonalData = ({
                             />
                         </div>
                         <div className="col-md-8 col-lg-5 col-xl-4 mb-sm-3">
-                            <RequestCounts counts={requestCounts} />
+                            <RequestCounts
+                                counts={requestCounts}
+                                score={commons?.score}
+                            />
                         </div>
                     </div>
                 </div>
