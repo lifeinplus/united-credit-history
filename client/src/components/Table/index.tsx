@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import type { TableColumn, TPerson, TReport } from "../../types";
+import type { TableColumn, IPerson, IReport } from "../../types";
 import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
@@ -9,7 +9,7 @@ import Body from "./components/Body";
 type TableProps = {
     id: string;
     columns: TableColumn[];
-    data?: TPerson[] | TReport[];
+    data?: IPerson[] | IReport[];
     mobileView?: boolean;
     rowHover?: boolean;
     textDifference?: boolean;
