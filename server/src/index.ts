@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import { config } from "./config/config";
-import { Common, Person, Report, RequestCount } from "./routes";
+import { Common, Loan, Person, Report, RequestCount } from "./routes";
 
 const app = express();
 
@@ -24,6 +24,7 @@ const StartServer = () => {
     app.use(express.json());
 
     app.use("/commons", Common);
+    app.use("/loans", Loan);
     app.use("/persons", Person);
     app.use("/reports", Report);
     app.use("/requestCounts", RequestCount);

@@ -1,3 +1,22 @@
+export type AmountField = {
+    sysName: string;
+    type: string;
+    country?: string;
+    hide?: boolean;
+};
+
+export interface AmountContextField extends AmountField {
+    chb?: string;
+    flc?: string;
+    context?: string;
+    extended?: boolean;
+}
+
+export interface AmountListField extends AmountContextField {
+    name: string;
+    value: string;
+}
+
 export type ListField = {
     sysName: string;
     type: string;
@@ -31,6 +50,26 @@ export interface ICommon extends Record<string, number> {
     flcPaymentsAmountRub: number;
     flcPaymentsAmountTry: number;
     score: number;
+}
+
+export interface ILoan extends Record<string, string> {
+    businessCategory: string;
+    chbPayment: string;
+    closeDate: string;
+    contractPeriod: string;
+    creationDate: string;
+    currency: string;
+    delinquencyAmount: string;
+    guarantee: string;
+    lastUpdateDate: string;
+    loanAmount: string;
+    loanNumberNchb: string;
+    loanType: string;
+    monthsNumberBeforeCloseDate: string;
+    monthsNumberSinceCreationDate: string;
+    paymentPeriod: string;
+    status: string;
+    unpaidPercentStatus: string;
 }
 
 export interface IPerson extends Record<string, string> {
