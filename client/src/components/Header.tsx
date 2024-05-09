@@ -3,16 +3,27 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "../hooks/ThemeContext";
 import { getDateFormat, langs } from "../util";
 
+import ExtendControl from "./ExtendControl";
+
 type HeaderField = { caption: string | undefined; value: string | undefined };
 
 type HeaderProps = {
     date?: HeaderField;
+    handleExtend?: () => void;
     iconName: string;
     nameSpaces: string[];
     number?: HeaderField;
+    showExtendedData?: boolean;
 };
 
-const Header = ({ date, iconName, nameSpaces, number }: HeaderProps) => {
+const Header = ({
+    date,
+    handleExtend,
+    iconName,
+    nameSpaces,
+    number,
+    showExtendedData,
+}: HeaderProps) => {
     const { i18n, t } = useTranslation(nameSpaces);
     const theme = useTheme();
 
@@ -25,20 +36,32 @@ const Header = ({ date, iconName, nameSpaces, number }: HeaderProps) => {
                     <i className={`bi ${iconName} me-2`}></i>
                     {t("title")}
                 </a>
-                {date && number && (
-                    <form className="d-flex">
-                        <span className="navbar-text">
+                {handleExtend && (
+                    <ul className="navbar-nav me-auto">
+                        <li className="nav-item">
+                            <ExtendControl
+                                handleExtend={handleExtend}
+                                showExtendedData={showExtendedData}
+                            />
+                        </li>
+                    </ul>
+                )}
+                <form className="d-flex">
+                    <span className="navbar-text">
+                        {number && (
                             <HeaderField
                                 caption={number.caption}
                                 value={number.value}
                             />
+                        )}
+                        {date && (
                             <HeaderField
                                 caption={date.caption}
                                 value={headerDate}
                             />
-                        </span>
-                    </form>
-                )}
+                        )}
+                    </span>
+                </form>
             </div>
         </nav>
     );
