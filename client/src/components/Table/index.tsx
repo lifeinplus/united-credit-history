@@ -1,15 +1,16 @@
 import classNames from "classnames";
 
-import type { TableColumn, IPerson, IReport } from "../../types";
+import type { TableColumn, ILoan, IPerson, IReport } from "../../types";
 import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
+import { useSortableData } from "./hooks/useSortableData";
 
 type TableProps = {
     id: string;
     columns: TableColumn[];
-    data?: IPerson[] | IReport[];
+    data?: ILoan[] | IPerson[] | IReport[];
     mobileView?: boolean;
     rowHover?: boolean;
     textDifference?: boolean;
@@ -24,6 +25,19 @@ const Table = ({
     textDifference = false,
 }: TableProps) => {
     const theme = useTheme();
+
+    const { sortedData, requestSort, sortConfig } = useSortableData(data, {
+        dataType: "amount",
+        direction: "asc",
+        sysName: "chbPayment",
+        sysNameStatus: "chbPaymentStatus",
+    });
+
+    const getSortClass = (name: string) => {
+        return sortConfig && sortConfig.sysName === name
+            ? sortConfig.direction
+            : undefined;
+    };
 
     return (
         <div
@@ -44,10 +58,14 @@ const Table = ({
                     mobileView && "table-mobile"
                 )}
             >
-                <Head columns={columns} />
+                <Head
+                    columns={columns}
+                    getSortClass={getSortClass}
+                    requestSort={requestSort}
+                />
                 <Body
                     columns={columns}
-                    data={data}
+                    data={sortedData}
                     mobileView={mobileView}
                     textDifference={textDifference}
                 />

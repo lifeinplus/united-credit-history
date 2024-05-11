@@ -1,32 +1,32 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import type { TableColumn, IPerson, IReport } from "../../../types";
+import type { TableColumn, ILoan, IPerson, IReport } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
 import { getDateFormat, langs } from "../../../util";
 
 type BodyProps = {
     columns: TableColumn[];
-    data?: IPerson[] | IReport[];
+    data?: (IPerson | IReport | ILoan)[];
     mobileView: boolean;
     textDifference: boolean;
 };
 
 type RowProps = {
-    data: IPerson | IReport;
+    data: ILoan | IPerson | IReport;
 };
 
 type CellProps = {
     id: string;
     column: TableColumn;
-    data: IPerson | IReport;
+    data: ILoan | IPerson | IReport;
 };
 
 type Diff = { text?: string; spanText?: string };
 
 type DiffBadgesProps = {
     id: string;
-    data: Diff[];
+    data?: Diff[];
 };
 
 const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
@@ -34,6 +34,7 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
 
     const { i18n } = useTranslation();
     const lang = langs[i18n.resolvedLanguage || "gb"];
+    const numberFormat = new Intl.NumberFormat(lang.locale);
 
     const dateFormat = getDateFormat(lang.locale, "date");
     const timeFormat = getDateFormat(lang.locale, "time");
@@ -67,7 +68,7 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
         const { id, column, data } = params;
         const { isLink, name } = column;
 
-        const { cell, diffData, value } = getCommonData(params);
+        const { cell, badge, diffData, value } = getCommonData(params);
 
         const label = mobileView && name;
 
@@ -79,7 +80,7 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
 
         return (
             <td className={cell} data-label={label}>
-                <span>
+                <span className={badge}>
                     {textDifference ? (
                         <DiffBadges id={id} data={diffData} />
                     ) : (
@@ -91,7 +92,7 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
     }
 
     function DiffBadges({ id, data }: DiffBadgesProps) {
-        return data.map((element, index) => {
+        return data?.map((element, index) => {
             const { spanText, text } = element;
             const key = `${id}-span${index}`;
 
@@ -106,20 +107,36 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
     }
 
     function getCommonData({ column, data }: CellProps) {
-        const { alignment, dataType, sysName } = column;
+        const { alignment, dataType, sysName, sysNameStatus } = column;
+        const { badgeEqual, badgeMore, badgeType } = column;
 
         const firstSource = firstDataItem && firstDataItem[sysName];
         const firstValue = firstSource && prepare(firstSource, dataType);
 
-        const currentSource = data[sysName] ?? "";
+        const currentStatusSource = data[sysNameStatus || ""];
+        const currentSource = currentStatusSource ?? data[sysName] ?? "";
         const currentValue = prepare(currentSource, dataType);
 
-        const diffData = compare(firstValue, currentValue);
+        const badge =
+            currentSource === badgeEqual ||
+            (badgeMore !== undefined && Number(currentSource) > badgeMore)
+                ? `uch-badge uch-text-bg-${badgeType}`
+                : undefined;
 
-        return { cell: alignment, diffData, value: currentValue };
+        const diffData = textDifference
+            ? compare(firstValue, currentValue)
+            : undefined;
+
+        return { cell: alignment, badge, diffData, value: currentValue };
     }
 
     function prepare(sourceValue: string, dataType: string) {
+        const numberValue = Number(sourceValue);
+
+        if (dataType === "amount" && !isNaN(numberValue)) {
+            return numberFormat.format(numberValue);
+        }
+
         if (dataType === "date" && sourceValue) {
             const milliseconds = Date.parse(sourceValue);
             return dateFormat.format(milliseconds);
