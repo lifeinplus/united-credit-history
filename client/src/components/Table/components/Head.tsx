@@ -43,17 +43,29 @@ const Head = ({ columns, getSortClass, requestSort }: HeadProps) => {
 };
 
 const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
-    const { alignment, sysName } = column;
-    const { sortable } = column;
+    const { alignment, sysName, type } = column;
+    const { extended, sortable } = column;
     const { name } = column;
 
-    const sortableThemeClass = sortable && `sortable ${theme}`;
-    const sortClass = sortable && getSortClass(sysName);
+    const common = type === "common";
+
+    const extendedClass =
+        common &&
+        extended &&
+        (theme === "light" ? "table-info" : "uch-table dark info");
+
+    const sortableThemeClass = common && sortable && `sortable ${theme}`;
+    const sortClass = common && sortable && getSortClass(sysName);
 
     return (
         <th
-            className={classNames(sortableThemeClass, sortClass, alignment)}
-            onClick={() => requestSort(column)}
+            className={classNames(
+                extendedClass,
+                sortableThemeClass,
+                sortClass,
+                alignment
+            )}
+            onClick={common ? () => requestSort(column) : undefined}
             scope="col"
         >
             {name}

@@ -41,6 +41,7 @@ export type TableColumn = {
     sysName: string;
     sysNameStatus?: string;
     tooltip?: boolean;
+    type?: string;
 };
 
 export interface ICommon extends Record<string, number> {

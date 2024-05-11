@@ -5,6 +5,7 @@ import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
+import { useRowActive } from "./hooks/useRowActive";
 import { useSortableData } from "./hooks/useSortableData";
 
 type TableProps = {
@@ -12,6 +13,7 @@ type TableProps = {
     columns: TableColumn[];
     data?: ILoan[] | IPerson[] | IReport[];
     mobileView?: boolean;
+    rowActive?: boolean;
     rowHover?: boolean;
     textDifference?: boolean;
 };
@@ -21,17 +23,22 @@ const Table = ({
     columns,
     data,
     mobileView = false,
+    rowActive = false,
     rowHover = false,
     textDifference = false,
 }: TableProps) => {
+    const rowActiveData = useRowActive(rowActive, data);
     const theme = useTheme();
 
-    const { sortedData, requestSort, sortConfig } = useSortableData(data, {
-        dataType: "amount",
-        direction: "asc",
-        sysName: "chbPayment",
-        sysNameStatus: "chbPaymentStatus",
-    });
+    const { sortedData, requestSort, sortConfig } = useSortableData(
+        rowActiveData,
+        {
+            dataType: "amount",
+            direction: "asc",
+            sysName: "chbPayment",
+            sysNameStatus: "chbPaymentStatus",
+        }
+    );
 
     const getSortClass = (name: string) => {
         return sortConfig && sortConfig.sysName === name
@@ -67,6 +74,7 @@ const Table = ({
                     columns={columns}
                     data={sortedData}
                     mobileView={mobileView}
+                    rowActive={rowActive}
                     textDifference={textDifference}
                 />
             </table>
