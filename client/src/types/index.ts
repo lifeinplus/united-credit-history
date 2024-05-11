@@ -30,10 +30,17 @@ export type ScoreStyle = {
 
 export type TableColumn = {
     alignment: string;
+    badgeEqual?: string;
+    badgeMore?: number;
+    badgeType?: string;
     dataType: string;
+    extended?: boolean;
     isLink?: boolean;
     name?: string;
+    sortable?: boolean;
     sysName: string;
+    sysNameStatus?: string;
+    tooltip?: boolean;
 };
 
 export interface ICommon extends Record<string, number> {

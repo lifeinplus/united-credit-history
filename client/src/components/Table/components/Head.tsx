@@ -5,13 +5,18 @@ import { useTheme } from "../../../hooks/ThemeContext";
 
 type HeadProps = {
     columns: TableColumn[];
+    getSortClass: (arg0: string) => string | undefined;
+    requestSort: (arg0: TableColumn) => void;
 };
 
 type ThProps = {
     column: TableColumn;
+    getSortClass: (arg0: string) => string | undefined;
+    requestSort: (arg0: TableColumn) => void;
+    theme: string;
 };
 
-const Head = ({ columns }: HeadProps) => {
+const Head = ({ columns, getSortClass, requestSort }: HeadProps) => {
     const theme = useTheme();
 
     return (
@@ -24,19 +29,33 @@ const Head = ({ columns }: HeadProps) => {
                 }
             >
                 {columns.map((item) => (
-                    <Th key={item.sysName || item.name} column={item} />
+                    <Th
+                        key={item.sysName || item.name}
+                        column={item}
+                        getSortClass={getSortClass}
+                        requestSort={requestSort}
+                        theme={theme}
+                    />
                 ))}
             </tr>
         </thead>
     );
 };
 
-const Th = ({ column }: ThProps) => {
-    const { alignment } = column;
+const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
+    const { alignment, sysName } = column;
+    const { sortable } = column;
     const { name } = column;
 
+    const sortableThemeClass = sortable && `sortable ${theme}`;
+    const sortClass = sortable && getSortClass(sysName);
+
     return (
-        <th className={classNames(alignment)} scope="col">
+        <th
+            className={classNames(sortableThemeClass, sortClass, alignment)}
+            onClick={() => requestSort(column)}
+            scope="col"
+        >
             {name}
         </th>
     );
