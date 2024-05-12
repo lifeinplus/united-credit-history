@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -9,6 +10,7 @@ type BodyProps = {
     columns: TableColumn[];
     data?: (IPerson | IReport | ILoan)[];
     mobileView: boolean;
+    rowActive: boolean;
     textDifference: boolean;
 };
 
@@ -29,7 +31,17 @@ type DiffBadgesProps = {
     data?: Diff[];
 };
 
-const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
+const Body = ({
+    columns,
+    data,
+    mobileView,
+    rowActive,
+    textDifference,
+}: BodyProps) => {
+    const [activeRowId, setActiveRowId] = useState<string | undefined>(
+        undefined
+    );
+
     const theme = useTheme();
 
     const { i18n } = useTranslation();
@@ -41,6 +53,12 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
 
     const firstDataItem = data && data[0];
 
+    const handleClick = ({ currentTarget }: { currentTarget: HTMLElement }) => {
+        if (!rowActive) return;
+        const id = currentTarget?.id;
+        setActiveRowId(id !== activeRowId ? id : undefined);
+    };
+
     return (
         <tbody>
             {data?.map((element) => (
@@ -50,10 +68,18 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
     );
 
     function Row({ data }: RowProps) {
-        const { _id } = data;
+        const { activeId, _id } = data;
 
         return (
-            <tr id={_id}>
+            <tr
+                id={activeId}
+                className={
+                    rowActive && activeId === activeRowId
+                        ? `uch-table ${theme} active`
+                        : undefined
+                }
+                onClick={handleClick}
+            >
                 {columns.map((element, index) => {
                     const key = `${_id}-${index}`;
                     return (
@@ -70,7 +96,7 @@ const Body = ({ columns, data, mobileView, textDifference }: BodyProps) => {
 
         const { cell, badge, diffData, value } = getCommonData(params);
 
-        const label = mobileView && name;
+        const label = mobileView ? name : undefined;
 
         const linkValue = isLink && (
             <Link className={`uch-link ${theme}`} to={`/reports/${data._id}`}>
