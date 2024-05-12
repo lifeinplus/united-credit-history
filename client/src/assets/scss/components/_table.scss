@@ -82,7 +82,7 @@ th {
             --bs-table-striped-color: black;
             --bs-table-hover-bg: var(--uch-purple-600);
             --bs-table-hover-color: black;
-            color: black;
+            --bs-table-color: black;
         }
 
         &.info {
@@ -104,7 +104,7 @@ th {
             --bs-table-striped-color: white;
             --bs-table-hover-bg: var(--uch-purple-700);
             --bs-table-hover-color: white;
-            color: white;
+            --bs-table-color: white;
         }
     }
 }

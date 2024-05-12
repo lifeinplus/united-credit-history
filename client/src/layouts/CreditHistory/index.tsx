@@ -63,7 +63,13 @@ const CreditHistory = ({
                     />
                     <div className="row">
                         <div className="col">
-                            <Table id={"ch"} columns={columns} data={data} />
+                            <Table
+                                id={"ch"}
+                                columns={columns}
+                                data={data}
+                                rowActive={true}
+                                rowHover={true}
+                            />
                         </div>
                     </div>
                 </div>

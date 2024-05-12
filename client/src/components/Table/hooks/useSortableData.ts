@@ -10,7 +10,7 @@ type SortConfig = {
 };
 
 const useSortableData = (
-    data: ILoan[] | IPerson[] | IReport[] = [],
+    data: (ILoan | IPerson | IReport)[] = [],
     config: SortConfig
 ) => {
     const [sortConfig, setSortConfig] = useState(config);
