@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { ILoan, IPerson, IReport } from "../../../types";
 
-const useRowActive = (
+export const useRowActive = (
     rowActive: boolean,
     data: ILoan[] | IPerson[] | IReport[] = []
 ) => {
@@ -14,5 +14,3 @@ const useRowActive = (
             : data;
     }, [rowActive, data]);
 };
-
-export { useRowActive };

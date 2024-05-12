@@ -5,8 +5,7 @@ import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
-import { useRowActive } from "./hooks/useRowActive";
-import { useSortableData } from "./hooks/useSortableData";
+import { useRowActive, useSortableData, useStickyHeader } from "./hooks";
 
 type TableProps = {
     id: string;
@@ -15,6 +14,7 @@ type TableProps = {
     mobileView?: boolean;
     rowActive?: boolean;
     rowHover?: boolean;
+    stickyHeader?: boolean;
     textDifference?: boolean;
 };
 
@@ -25,6 +25,7 @@ const Table = ({
     mobileView = false,
     rowActive = false,
     rowHover = false,
+    stickyHeader = false,
     textDifference = false,
 }: TableProps) => {
     const rowActiveData = useRowActive(rowActive, data);
@@ -40,6 +41,8 @@ const Table = ({
         }
     );
 
+    const { tableWrapperRef, headerRef } = useStickyHeader(stickyHeader);
+
     const getSortClass = (name: string) => {
         return sortConfig && sortConfig.sysName === name
             ? sortConfig.direction
@@ -54,6 +57,7 @@ const Table = ({
                 "border",
                 theme === "dark" && "uch-border-dark"
             )}
+            ref={tableWrapperRef}
         >
             <table
                 className={classNames(
@@ -68,6 +72,7 @@ const Table = ({
                 <Head
                     columns={columns}
                     getSortClass={getSortClass}
+                    ref={headerRef}
                     requestSort={requestSort}
                 />
                 <Body

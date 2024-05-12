@@ -9,7 +9,7 @@ type SortConfig = {
     sysNameStatus?: string;
 };
 
-const useSortableData = (
+export const useSortableData = (
     data: (ILoan | IPerson | IReport)[] = [],
     config: SortConfig
 ) => {
@@ -137,5 +137,3 @@ function getCompareFunction(type: string) {
 
     return _compareFunctions[type];
 }
-
-export { useSortableData };

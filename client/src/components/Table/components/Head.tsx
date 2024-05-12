@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { forwardRef } from "react";
 
 import type { TableColumn } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
@@ -16,31 +17,33 @@ type ThProps = {
     theme: string;
 };
 
-const Head = ({ columns, getSortClass, requestSort }: HeadProps) => {
-    const theme = useTheme();
+const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
+    ({ columns, getSortClass, requestSort }: HeadProps, ref) => {
+        const theme = useTheme();
 
-    return (
-        <thead className="align-middle">
-            <tr
-                className={
-                    theme === "light"
-                        ? "table-primary"
-                        : "uch-table dark primary"
-                }
-            >
-                {columns.map((item) => (
-                    <Th
-                        key={item.sysName || item.name}
-                        column={item}
-                        getSortClass={getSortClass}
-                        requestSort={requestSort}
-                        theme={theme}
-                    />
-                ))}
-            </tr>
-        </thead>
-    );
-};
+        return (
+            <thead className="align-middle" ref={ref}>
+                <tr
+                    className={
+                        theme === "light"
+                            ? "table-primary"
+                            : "uch-table dark primary"
+                    }
+                >
+                    {columns.map((item) => (
+                        <Th
+                            key={item.sysName || item.name}
+                            column={item}
+                            getSortClass={getSortClass}
+                            requestSort={requestSort}
+                            theme={theme}
+                        />
+                    ))}
+                </tr>
+            </thead>
+        );
+    }
+);
 
 const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
     const { alignment, sysName, type } = column;
