@@ -69,6 +69,7 @@ const CreditHistory = ({
                                 data={data}
                                 rowActive={true}
                                 rowHover={true}
+                                stickyHeader={true}
                             />
                         </div>
                     </div>
