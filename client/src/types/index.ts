@@ -41,6 +41,7 @@ export type TableColumn = {
     sysName: string;
     sysNameStatus?: string;
     tooltip?: boolean;
+    tooltipName?: string;
     type?: string;
 };
 

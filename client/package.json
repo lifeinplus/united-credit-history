@@ -28,6 +28,7 @@
         "universal-cookie": "^7.1.4"
     },
     "devDependencies": {
+        "@types/bootstrap": "^5.2.10",
         "@types/react": "^18.2.75",
         "@types/react-dom": "^18.2.24",
         "css-loader": "^7.1.1",
