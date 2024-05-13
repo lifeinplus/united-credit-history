@@ -4,10 +4,13 @@ import { forwardRef } from "react";
 import type { TableColumn } from "../../../types";
 import { useTheme } from "../../../hooks/ThemeContext";
 
+import { useTooltip } from "../hooks";
+
 type HeadProps = {
     columns: TableColumn[];
     getSortClass: (arg0: string) => string | undefined;
     requestSort: (arg0: TableColumn) => void;
+    tooltips: boolean;
 };
 
 type ThProps = {
@@ -18,8 +21,9 @@ type ThProps = {
 };
 
 const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
-    ({ columns, getSortClass, requestSort }: HeadProps, ref) => {
+    ({ columns, getSortClass, requestSort, tooltips }: HeadProps, ref) => {
         const theme = useTheme();
+        useTooltip(tooltips, columns);
 
         return (
             <thead className="align-middle" ref={ref}>
@@ -48,7 +52,7 @@ const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
 const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
     const { alignment, sysName, type } = column;
     const { extended, sortable } = column;
-    const { name } = column;
+    const { name, tooltipName } = column;
 
     const common = type === "common";
 
@@ -68,6 +72,9 @@ const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
                 sortClass,
                 alignment
             )}
+            data-bs-toggle={tooltipName && "tooltip"}
+            data-bs-placement={tooltipName && "top"}
+            data-bs-title={tooltipName}
             onClick={common ? () => requestSort(column) : undefined}
             scope="col"
         >
