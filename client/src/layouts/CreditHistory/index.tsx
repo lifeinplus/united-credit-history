@@ -70,6 +70,7 @@ const CreditHistory = ({
                                 rowActive={true}
                                 rowHover={true}
                                 stickyHeader={true}
+                                tooltips={true}
                             />
                         </div>
                     </div>
@@ -98,6 +99,9 @@ const CreditHistory = ({
                 name: t(`columns.${sysName}`),
                 sortable: true,
                 type: "common",
+                tooltipName: tooltip
+                    ? t(`columns.tooltips.${sysName}`)
+                    : undefined,
             };
         });
     }

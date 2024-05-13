@@ -1,6 +1,6 @@
 {
     "name": "united-credit-history",
-    "version": "2.11.0",
+    "version": "2.12.0",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -28,6 +28,7 @@
         "universal-cookie": "^7.1.4"
     },
     "devDependencies": {
+        "@types/bootstrap": "^5.2.10",
         "@types/react": "^18.2.75",
         "@types/react-dom": "^18.2.24",
         "css-loader": "^7.1.1",

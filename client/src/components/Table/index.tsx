@@ -16,6 +16,7 @@ type TableProps = {
     rowHover?: boolean;
     stickyHeader?: boolean;
     textDifference?: boolean;
+    tooltips?: boolean;
 };
 
 const Table = ({
@@ -27,6 +28,7 @@ const Table = ({
     rowHover = false,
     stickyHeader = false,
     textDifference = false,
+    tooltips = false,
 }: TableProps) => {
     const rowActiveData = useRowActive(rowActive, data);
     const theme = useTheme();
@@ -74,6 +76,7 @@ const Table = ({
                     getSortClass={getSortClass}
                     ref={headerRef}
                     requestSort={requestSort}
+                    tooltips={tooltips}
                 />
                 <Body
                     columns={columns}
