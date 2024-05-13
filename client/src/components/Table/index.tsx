@@ -5,7 +5,14 @@ import { useTheme } from "../../hooks/ThemeContext";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
-import { useRowActive, useSortableData, useStickyHeader } from "./hooks";
+import ScrollButtons from "./components/ScrollButtons";
+
+import {
+    useRowActive,
+    useSortableData,
+    useStickyHeader,
+    useTableScroll,
+} from "./hooks";
 
 type TableProps = {
     id: string;
@@ -14,6 +21,7 @@ type TableProps = {
     mobileView?: boolean;
     rowActive?: boolean;
     rowHover?: boolean;
+    scrolling?: boolean;
     stickyHeader?: boolean;
     textDifference?: boolean;
     tooltips?: boolean;
@@ -26,6 +34,7 @@ const Table = ({
     mobileView = false,
     rowActive = false,
     rowHover = false,
+    scrolling = false,
     stickyHeader = false,
     textDifference = false,
     tooltips = false,
@@ -44,6 +53,8 @@ const Table = ({
     );
 
     const { tableWrapperRef, headerRef } = useStickyHeader(stickyHeader);
+    const { scrollWrapperRef, btnRefs, handleScroll } =
+        useTableScroll(scrolling);
 
     const getSortClass = (name: string) => {
         return sortConfig && sortConfig.sysName === name
@@ -59,8 +70,18 @@ const Table = ({
                 "border",
                 theme === "dark" && "uch-border-dark"
             )}
-            ref={tableWrapperRef}
+            ref={(node) => {
+                tableWrapperRef.current = node;
+                scrollWrapperRef.current = node;
+            }}
         >
+            {scrolling && (
+                <ScrollButtons
+                    btnRefs={btnRefs}
+                    handleScroll={handleScroll}
+                    wrapperRef={scrollWrapperRef}
+                />
+            )}
             <table
                 className={classNames(
                     "table",

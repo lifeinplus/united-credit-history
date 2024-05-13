@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export const useStickyHeader = (sticky: boolean) => {
-    const tableWrapperRef = useRef<HTMLDivElement>(null);
+    const tableWrapperRef = useRef<HTMLDivElement | null>(null);
     const headerRef = useRef<HTMLTableSectionElement>(null);
 
     useEffect(() => {
