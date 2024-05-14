@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { IReport } from "../../types";
 import Header from "../../components/Header";
 import Table from "../../components/Table";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useTheme } from "../../hooks";
 
 import { tableColumns } from "./util";
 

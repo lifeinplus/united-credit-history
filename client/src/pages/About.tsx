@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "../hooks/ThemeContext";
 import Header from "../components/Header";
+import { useTheme } from "../hooks";
 
 const About = () => {
     const theme = useTheme();

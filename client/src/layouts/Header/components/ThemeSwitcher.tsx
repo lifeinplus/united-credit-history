@@ -1,4 +1,4 @@
-import { useTheme, useThemeUpdate } from "../../../hooks/ThemeContext";
+import { useTheme, useThemeUpdate } from "../../../hooks";
 
 const ThemeSwitcher = () => {
     const theme = useTheme();
