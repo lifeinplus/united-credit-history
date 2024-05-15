@@ -1,9 +1,10 @@
+import classNames from "classnames";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import classNames from "classnames";
 
-import { useTheme } from "../../hooks/ThemeContext";
+import { useTheme } from "../../hooks";
+
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 

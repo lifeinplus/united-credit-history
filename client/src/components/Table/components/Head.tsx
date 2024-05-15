@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { forwardRef } from "react";
 
 import type { TableColumn } from "../../../types";
-import { useTheme } from "../../../hooks/ThemeContext";
+import { useTheme } from "../../../hooks";
 
 import { useTooltip } from "../hooks";
 

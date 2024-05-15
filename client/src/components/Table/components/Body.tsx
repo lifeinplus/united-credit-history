@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import type { TableColumn, ILoan, IPerson, IReport } from "../../../types";
-import { useTheme } from "../../../hooks/ThemeContext";
+import { useTheme } from "../../../hooks";
 import { getDateFormat, langs } from "../../../util";
 
 type BodyProps = {
@@ -72,7 +72,7 @@ const Body = ({
 
         return (
             <tr
-                id={activeId}
+                id={String(activeId)}
                 className={
                     rowActive && activeId === activeRowId
                         ? `uch-table ${theme} active`
@@ -156,7 +156,7 @@ const Body = ({
         return { cell: alignment, badge, diffData, value: currentValue };
     }
 
-    function prepare(sourceValue: string, dataType: string) {
+    function prepare(sourceValue: string | number, dataType: string) {
         const numberValue = Number(sourceValue);
 
         if (dataType === "amount" && !isNaN(numberValue)) {
@@ -164,12 +164,12 @@ const Body = ({
         }
 
         if (dataType === "date" && sourceValue) {
-            const milliseconds = Date.parse(sourceValue);
+            const milliseconds = Date.parse(String(sourceValue));
             return dateFormat.format(milliseconds);
         }
 
         if (dataType === "dateTime" && sourceValue) {
-            const milliseconds = Date.parse(sourceValue);
+            const milliseconds = Date.parse(String(sourceValue));
             const date = dateFormat.format(milliseconds);
             const time = timeFormat.format(milliseconds);
             return date + " " + time;
@@ -178,11 +178,14 @@ const Body = ({
         return sourceValue;
     }
 
-    function compare(valueA = "", valueB = "") {
+    function compare(
+        valueA: string | number = "",
+        valueB: string | number = ""
+    ) {
         let result: Diff[] = [];
 
-        const arrayA = valueA.split(" ");
-        const arrayB = valueB.split(" ");
+        const arrayA = String(valueA).split(" ");
+        const arrayB = String(valueB).split(" ");
 
         const maxLength = Math.max(arrayA.length, arrayB.length);
 

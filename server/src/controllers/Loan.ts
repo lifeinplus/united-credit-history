@@ -7,8 +7,8 @@ const getByReportId = (req: Request, res: Response) => {
     return Loan.find({ reportId })
         .then((loans) =>
             loans.length
-                ? res.status(200).json({ loans })
-                : res.status(404).json({ message: "Not found" })
+                ? res.status(200).json(loans)
+                : res.status(404).json({ message: "loans not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };

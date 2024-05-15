@@ -1,5 +1,5 @@
 import { MouseEvent, RefObject } from "react";
-import { useTheme } from "../../../hooks/ThemeContext";
+import { useTheme } from "../../../hooks";
 
 type ScrollButtonsProps = {
     btnRefs: {

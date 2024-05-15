@@ -1,8 +1,8 @@
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
-import { useTheme } from "../../../hooks/ThemeContext";
+import { useTheme } from "../../../hooks";
 import { langs } from "../../../util";
 
 const LanguageSwitcher = () => {

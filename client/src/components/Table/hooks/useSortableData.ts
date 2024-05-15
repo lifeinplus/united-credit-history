@@ -66,8 +66,8 @@ export const useSortableData = (
     return { sortedData, requestSort, sortConfig };
 };
 type CompareFunction = {
-    statusA: string;
-    statusB: string;
+    statusA: string | number;
+    statusB: string | number;
     valueA: string | number;
     valueB: string | number;
 };

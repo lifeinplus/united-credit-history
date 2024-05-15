@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import { useThemeUpdate } from "./hooks/ThemeContext";
+import { useThemeUpdate } from "./hooks";
 import { Footer, Header } from "./layouts";
 import { About, Report, Reports } from "./pages";
 import { langs } from "./util";
