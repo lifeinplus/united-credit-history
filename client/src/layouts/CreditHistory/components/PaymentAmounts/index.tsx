@@ -8,9 +8,9 @@ import type {
 } from "../../../../types";
 
 import { useTheme } from "../../../../hooks";
-import { langs } from "../../../../util";
+import { langs } from "../../../../utils";
 
-import { obligationFields, paymentFields } from "./util";
+import { obligationFields, paymentFields } from "./utils";
 
 type PaymentAmountsProps = {
     data?: ICommon;

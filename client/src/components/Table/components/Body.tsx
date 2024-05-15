@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import type { TableColumn, ILoan, IPerson, IReport } from "../../../types";
 import { useTheme } from "../../../hooks";
-import { getDateFormat, langs } from "../../../util";
+import { getDateFormat, langs } from "../../../utils";
 
 type BodyProps = {
     columns: TableColumn[];

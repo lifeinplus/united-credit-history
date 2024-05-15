@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "../../../hooks";
-import { langs } from "../../../util";
+import { langs } from "../../../utils";
 
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation();

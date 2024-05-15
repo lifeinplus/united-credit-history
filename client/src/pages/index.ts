@@ -1,5 +1,6 @@
 import About from "./About";
+import NotFound from "./NotFound";
 import Report from "./Report";
 import Reports from "./Reports";
 
-export { About, Report, Reports };
+export { About, NotFound, Report, Reports };

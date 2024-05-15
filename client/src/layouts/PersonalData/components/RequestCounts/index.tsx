@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../../hooks";
 import type { IRequestCount } from "../../../../types";
 
-import { customFields, scoreStyles } from "./util";
+import { customFields, scoreStyles } from "./utils";
 
 type RequestCountsProps = {
     counts?: IRequestCount;

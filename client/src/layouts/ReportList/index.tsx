@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import Table from "../../components/Table";
 import { useTheme } from "../../hooks";
 
-import { tableColumns } from "./util";
+import { tableColumns } from "./utils";
 
 type Props = {
     reports: IReport[];

@@ -9,7 +9,7 @@ import Table from "../../components/Table";
 import { useDataById, useTheme } from "../../hooks";
 
 import RequestCounts from "./components/RequestCounts";
-import { tableColumns } from "./util";
+import { tableColumns } from "./utils";
 
 type PersonalDataProps = {
     commons?: ICommon;
