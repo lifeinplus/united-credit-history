@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import type { ICommon, IDelinquency, ILoan, IReport } from "../../types";
+import type { ICommon, IDelinquency, IFlc, ILoan, IReport } from "../../types";
 
 import Header from "../../components/Header";
 import Table from "../../components/Table";
@@ -42,6 +42,8 @@ const CreditHistory = ({
         loanIds
     );
 
+    const flcs = useDataByIds<IFlc[]>("flcs/getByLoanIds", loanIds);
+
     const columns = defineColumns();
 
     const data = loans?.map((loan) => {
@@ -57,6 +59,20 @@ const CreditHistory = ({
                 delinquency60Plus: delinquency.delinquency60Plus,
                 delinquency90Plus: delinquency.delinquency90Plus,
                 delinquencyRefinancing: delinquency.delinquencyRefinancing,
+            };
+        });
+
+        flcs?.forEach((flc) => {
+            if (flc.loanId !== loan._id) {
+                return;
+            }
+
+            loan = {
+                ...loan,
+                flcNchb: flc.flcNchb,
+                flcPayment: flc.flcPayment,
+                flcTaken: flc.flcTaken,
+                flcUcb: flc.flcUcb,
             };
         });
 

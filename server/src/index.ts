@@ -7,6 +7,7 @@ import { config } from "./config";
 import {
     Common,
     Delinquency,
+    Flc,
     Loan,
     Person,
     Report,
@@ -33,6 +34,7 @@ const StartServer = () => {
 
     app.use("/commons", Common);
     app.use("/delinquencies", Delinquency);
+    app.use("/flcs", Flc);
     app.use("/loans", Loan);
     app.use("/persons", Person);
     app.use("/reports", Report);

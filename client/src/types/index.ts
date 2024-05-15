@@ -49,6 +49,8 @@ export interface ICommon extends Record<string, number> {}
 
 export interface IDelinquency extends Record<string, string | number> {}
 
+export interface IFlc extends Record<string, string | number> {}
+
 export interface ILoan extends Record<string, string | number> {
     _id: string;
 }
