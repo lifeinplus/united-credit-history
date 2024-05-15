@@ -7,8 +7,8 @@ const getByReportId = (req: Request, res: Response) => {
     return Person.find({ reportId })
         .then((persons) =>
             persons.length
-                ? res.status(200).json({ persons })
-                : res.status(404).json({ message: "Not found" })
+                ? res.status(200).json(persons)
+                : res.status(404).json({ message: "persons not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };

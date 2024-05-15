@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import type {
@@ -6,11 +7,10 @@ import type {
     AmountListField,
 } from "../../../../types";
 
-import { useTheme } from "../../../../hooks/ThemeContext";
+import { useTheme } from "../../../../hooks";
 import { langs } from "../../../../util";
 
 import { obligationFields, paymentFields } from "./util";
-import classNames from "classnames";
 
 type PaymentAmountsProps = {
     data?: ICommon;

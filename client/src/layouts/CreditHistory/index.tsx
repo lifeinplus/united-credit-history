@@ -1,11 +1,13 @@
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
-import type { ICommon, ILoan, IReport } from "../../types";
+import type { ICommon, IDelinquency, ILoan, IReport } from "../../types";
 
 import Header from "../../components/Header";
 import Table from "../../components/Table";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useDataById, useDataByIds, useTheme } from "../../hooks/";
 
 import PaymentAmounts from "./components/PaymentAmounts";
 import { customFields } from "./util";
@@ -13,7 +15,6 @@ import { customFields } from "./util";
 type CreditHistoryProps = {
     commons?: ICommon;
     handleExtend: () => void;
-    loans?: ILoan[];
     report?: IReport;
     showExtendedData: boolean;
 };
@@ -21,15 +22,46 @@ type CreditHistoryProps = {
 const CreditHistory = ({
     commons,
     handleExtend,
-    loans,
     report,
     showExtendedData,
 }: CreditHistoryProps) => {
-    const { t } = useTranslation(["credit_history"]);
+    const { reportId } = useParams();
     const theme = useTheme();
+    const { t } = useTranslation(["credit_history"]);
+
+    const loans = useDataById<ILoan[]>("loans/getByReportId", reportId);
+    const [loanIds, setLoanIds] = useState<string[]>();
+
+    useEffect(() => {
+        if (!loans?.length) return;
+        setLoanIds(loans.map((loan) => loan._id));
+    }, [loans]);
+
+    const delinquencies = useDataByIds<IDelinquency[]>(
+        "delinquencies/getByLoanIds",
+        loanIds
+    );
 
     const columns = defineColumns();
-    const data = loans;
+
+    const data = loans?.map((loan) => {
+        delinquencies?.forEach((delinquency) => {
+            if (delinquency.loanId !== loan._id) {
+                return;
+            }
+
+            loan = {
+                ...loan,
+                delinquency0Plus: delinquency.delinquency0Plus,
+                delinquency30Plus: delinquency.delinquency30Plus,
+                delinquency60Plus: delinquency.delinquency60Plus,
+                delinquency90Plus: delinquency.delinquency90Plus,
+                delinquencyRefinancing: delinquency.delinquencyRefinancing,
+            };
+        });
+
+        return loan;
+    });
 
     return (
         <div className="container-fluid mb-3">

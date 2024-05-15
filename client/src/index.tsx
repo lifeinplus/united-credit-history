@@ -8,7 +8,7 @@ import "./assets/js/main";
 
 import App from "./App";
 import Spinner from "./components/Spinner";
-import ThemeProvider from "./hooks/ThemeContext";
+import { ThemeProvider } from "./hooks";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!);

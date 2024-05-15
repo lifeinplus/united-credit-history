@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "../../../../hooks/ThemeContext";
+import { useTheme } from "../../../../hooks";
 import type { IRequestCount } from "../../../../types";
 
 import { customFields, scoreStyles } from "./util";

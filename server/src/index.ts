@@ -2,8 +2,16 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 
-import { config } from "./config/config";
-import { Common, Loan, Person, Report, RequestCount } from "./routes";
+import { config } from "./config";
+
+import {
+    Common,
+    Delinquency,
+    Loan,
+    Person,
+    Report,
+    RequestCount,
+} from "./routes";
 
 const app = express();
 
@@ -24,6 +32,7 @@ const StartServer = () => {
     app.use(express.json());
 
     app.use("/commons", Common);
+    app.use("/delinquencies", Delinquency);
     app.use("/loans", Loan);
     app.use("/persons", Person);
     app.use("/reports", Report);
@@ -34,7 +43,7 @@ const StartServer = () => {
     );
 
     app.use((req, res, next) => {
-        const error = new Error("not found");
+        const error = new Error("url not found");
         return res.status(404).json({ message: error.message });
     });
 

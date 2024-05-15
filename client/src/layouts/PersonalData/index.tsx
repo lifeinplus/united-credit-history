@@ -1,29 +1,31 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 import type { ICommon, IPerson, IReport, IRequestCount } from "../../types";
+
 import Header from "../../components/Header";
 import Table from "../../components/Table";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useDataById, useTheme } from "../../hooks";
 
 import RequestCounts from "./components/RequestCounts";
 import { tableColumns } from "./util";
 
 type PersonalDataProps = {
     commons?: ICommon;
-    persons?: IPerson[];
     report?: IReport;
-    requestCounts?: IRequestCount;
 };
 
-const PersonalData = ({
-    commons,
-    persons,
-    report,
-    requestCounts,
-}: PersonalDataProps) => {
+const PersonalData = ({ commons, report }: PersonalDataProps) => {
+    const { reportId } = useParams();
     const { t } = useTranslation(["personal_data"]);
     const theme = useTheme();
+
+    const persons = useDataById<IPerson[]>("persons/getByReportId", reportId);
+    const requestCounts = useDataById<IRequestCount>(
+        "requestCounts/getByReportId",
+        reportId
+    );
 
     const columns = tableColumns.map((item) => ({
         ...item,

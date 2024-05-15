@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 import type { TableColumn, ILoan, IPerson, IReport } from "../../types";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useTheme } from "../../hooks";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
