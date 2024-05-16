@@ -10,7 +10,7 @@ import Table from "../../components/Table";
 import { useDataById, useDataByIds, useTheme } from "../../hooks/";
 
 import PaymentAmounts from "./components/PaymentAmounts";
-import { customFields } from "./util";
+import { customFields } from "./utils";
 
 type CreditHistoryProps = {
     commons?: ICommon;

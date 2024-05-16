@@ -5,8 +5,8 @@ import Cookies from "universal-cookie";
 
 import { useThemeUpdate } from "./hooks";
 import { Footer, Header } from "./layouts";
-import { About, Report, Reports } from "./pages";
-import { langs } from "./util";
+import { About, NotFound, Report, Reports } from "./pages";
+import { langs } from "./utils";
 
 const App = () => {
     const { i18n } = useTranslation();
@@ -78,6 +78,7 @@ const App = () => {
                                 }
                             />
                         </Route>
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
             </main>

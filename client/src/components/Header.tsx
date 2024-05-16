@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "../hooks";
-import { getDateFormat, langs } from "../util";
+import { getDateFormat, langs } from "../utils";
 
 import ExtendControl from "./ExtendControl";
 

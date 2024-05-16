@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 
-import { langs } from "../../util";
+import { langs } from "../../utils";
 
 i18next
     .use(initReactI18next) // passes i18n down to react-i18next
