@@ -1,6 +1,13 @@
 import classNames from "classnames";
 
-import type { TableColumn, ILoan, IPerson, IReport } from "../../types";
+import type {
+    TableColumn,
+    ILoan,
+    IPerson,
+    IReport,
+    SortClass,
+} from "../../types";
+
 import { useTheme } from "../../hooks";
 
 import Head from "./components/Head";
@@ -56,8 +63,8 @@ const Table = ({
     const { scrollWrapperRef, btnRefs, handleScroll } =
         useTableScroll(scrolling);
 
-    const getSortClass = (name: string) => {
-        return sortConfig && sortConfig.sysName === name
+    const getSortClass: SortClass = (sysName) => {
+        return sortConfig && sortConfig.sysName === sysName
             ? sortConfig.direction
             : undefined;
     };
