@@ -9,6 +9,7 @@ import {
     Delinquency,
     Flc,
     Loan,
+    PaymentHistory,
     Person,
     Report,
     RequestCount,
@@ -36,6 +37,7 @@ const StartServer = () => {
     app.use("/delinquencies", Delinquency);
     app.use("/flcs", Flc);
     app.use("/loans", Loan);
+    app.use("/paymenthistories", PaymentHistory);
     app.use("/persons", Person);
     app.use("/reports", Report);
     app.use("/requestCounts", RequestCount);

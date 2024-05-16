@@ -8,7 +8,7 @@ const getById = (req: Request, res: Response) => {
         .then((report) =>
             report
                 ? res.status(200).json(report)
-                : res.status(404).json({ message: "report not found" })
+                : res.status(404).json({ message: "Report not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };
@@ -19,7 +19,7 @@ const get = (req: Request, res: Response) => {
         .then((reports) =>
             reports.length
                 ? res.status(200).json(reports)
-                : res.status(404).json({ message: "reports not found" })
+                : res.status(404).json({ message: "Reports not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };
