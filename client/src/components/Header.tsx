@@ -80,7 +80,7 @@ const Header = ({
     }
 
     function getHeaderDate(value: string) {
-        const lang = langs[i18n.resolvedLanguage || "gb"];
+        const lang = langs[i18n.resolvedLanguage || "en"];
         const dateFormat = getDateFormat(lang.locale, "header");
         const milliseconds = Date.parse(value);
 

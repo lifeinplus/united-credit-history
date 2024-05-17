@@ -8,7 +8,7 @@ import { langs } from "../../../utils";
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation();
     const { resolvedLanguage, changeLanguage } = i18n;
-    const { countryCode, nativeName } = langs[resolvedLanguage ?? "gb"];
+    const { countryCode, nativeName } = langs[resolvedLanguage ?? "en"];
     const keys = Object.keys(langs).filter((key) => key !== resolvedLanguage);
 
     const theme = useTheme();

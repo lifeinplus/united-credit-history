@@ -3,14 +3,22 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import type { ICommon, IDelinquency, IFlc, ILoan, IReport } from "../../types";
+import type {
+    ICommon,
+    IDelinquency,
+    IFlc,
+    ILoan,
+    IPaymentHistory,
+    IReport,
+} from "../../types";
 
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 import { useDataById, useDataByIds, useTheme } from "../../hooks/";
+import { getDateFormat } from "../../utils";
 
 import PaymentAmounts from "./components/PaymentAmounts";
-import { customFields } from "./utils";
+import { TimePeriod, tableColumns } from "./utils";
 
 type CreditHistoryProps = {
     commons?: ICommon;
@@ -44,6 +52,12 @@ const CreditHistory = ({
 
     const flcs = useDataByIds<IFlc[]>("flcs/getByLoanIds", loanIds);
 
+    const paymentHistories = useDataByIds<IPaymentHistory[]>(
+        "paymenthistories/getByLoanIds",
+        loanIds
+    );
+
+    const dateFormat = getDateFormat("ru", "status");
     const columns = defineColumns();
 
     const data = loans?.map((loan) => {
@@ -74,6 +88,14 @@ const CreditHistory = ({
                 flcTaken: flc.flcTaken,
                 flcUcb: flc.flcUcb,
             };
+        });
+
+        paymentHistories?.forEach((paymentHistory) => {
+            if (paymentHistory.loanId === loan._id) {
+                const milliseconds = Date.parse(paymentHistory.date);
+                const name = dateFormat.format(milliseconds);
+                loan[name] = paymentHistory.status;
+            }
         });
 
         return loan;
@@ -130,12 +152,13 @@ const CreditHistory = ({
 
     function defineColumns() {
         const commonCols = getCommonCols();
+        const statusCols = getStatusCols();
 
-        return [...commonCols];
+        return [...commonCols, ...statusCols];
     }
 
     function getCommonCols() {
-        const all = [...customFields];
+        const all = [...tableColumns];
 
         const columns = showExtendedData
             ? all
@@ -151,6 +174,22 @@ const CreditHistory = ({
                 tooltipName: tooltip
                     ? t(`columns.tooltips.${sysName}`)
                     : undefined,
+            };
+        });
+    }
+
+    function getStatusCols() {
+        if (!paymentHistories?.length || !report?.reportCreationDate) return [];
+
+        const timePeriod = new TimePeriod(
+            paymentHistories,
+            report?.reportCreationDate
+        );
+
+        return timePeriod.result.map((value: Date) => {
+            return {
+                name: dateFormat.format(value),
+                type: "status",
             };
         });
     }

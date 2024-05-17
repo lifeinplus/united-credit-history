@@ -10,7 +10,7 @@ const getByLoanIds = (req: Request, res: Response) => {
         .then((delinquencies) =>
             delinquencies.length
                 ? res.status(200).json(delinquencies)
-                : res.status(404).json({ message: "delinquencies not found" })
+                : res.status(404).json({ message: "Delinquencies not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };

@@ -24,7 +24,7 @@ type GroupProps = {
 
 const PaymentAmounts = ({ data, showExtendedData }: PaymentAmountsProps) => {
     const { i18n, t } = useTranslation(["credit_history"]);
-    const resolvedLanguage = i18n.resolvedLanguage ?? "gb";
+    const resolvedLanguage = i18n.resolvedLanguage ?? "en";
     const lang = langs[resolvedLanguage];
     const numberFormat = new Intl.NumberFormat(lang.locale);
 

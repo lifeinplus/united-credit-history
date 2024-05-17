@@ -3,9 +3,9 @@ import { useMemo, useState } from "react";
 import type { ILoan, IPerson, IReport, TableColumn } from "../../../types";
 
 type SortConfig = {
-    dataType: string;
+    dataType?: string;
     direction: string;
-    sysName: string;
+    sysName?: string;
     sysNameStatus?: string;
 };
 
@@ -17,6 +17,8 @@ export const useSortableData = (
 
     const sortedData = useMemo(() => {
         const { dataType, direction, sysName, sysNameStatus } = sortConfig;
+
+        if (!dataType || !sysName) return data;
 
         const more = direction === "asc" ? 1 : -1;
         const less = direction === "asc" ? -1 : 1;
@@ -49,42 +51,41 @@ export const useSortableData = (
         return result;
     }, [data, sortConfig]);
 
-    const requestSort = (field: TableColumn) => {
+    const requestSort = (column: TableColumn) => {
         let direction = "asc";
 
         if (
             sortConfig &&
-            sortConfig.sysName === field.sysName &&
+            sortConfig.sysName === column.sysName &&
             sortConfig.direction === "asc"
         ) {
             direction = "desc";
         }
 
-        setSortConfig({ ...field, direction });
+        setSortConfig({ ...column, direction });
     };
 
     return { sortedData, requestSort, sortConfig };
 };
-type CompareFunction = {
+
+interface CompareOptions {
     statusA: string | number;
     statusB: string | number;
     valueA: string | number;
     valueB: string | number;
-};
+}
 
-type CompareResult = {
-    order?: number;
-    resultA?: string | number;
-    resultB?: string | number;
-};
-
-type ObjectWithMethods = {
-    [key: string]: (arg0: CompareFunction) => CompareResult;
-};
+interface CompareFunction {
+    (arg0: CompareOptions): {
+        order?: number;
+        resultA?: string | number;
+        resultB?: string | number;
+    };
+}
 
 function getCompareFunction(type: string) {
-    const _compareFunctions: ObjectWithMethods = {
-        amount({ statusA, statusB, valueA, valueB }: CompareFunction) {
+    const _compareFunctions: Record<string, CompareFunction> = {
+        amount({ statusA, statusB, valueA, valueB }) {
             if (statusA === "Ошибка вычисления") return { order: -1 };
             if (statusB === "Ошибка вычисления") return { order: 1 };
 
@@ -94,7 +95,7 @@ function getCompareFunction(type: string) {
             return { resultA: valueA, resultB: valueB };
         },
 
-        date({ valueA, valueB }: CompareFunction) {
+        date({ valueA, valueB }) {
             const resultA = Date.parse(String(valueA)) || "";
             const resultB = Date.parse(String(valueB)) || "";
 
@@ -104,7 +105,7 @@ function getCompareFunction(type: string) {
             return { resultA, resultB };
         },
 
-        numeric({ statusA, statusB, valueA, valueB }: CompareFunction) {
+        numeric({ statusA, statusB, valueA, valueB }) {
             if (statusA === "Ошибка вычисления") return { order: -1 };
             if (statusB === "Ошибка вычисления") return { order: 1 };
 
@@ -114,7 +115,7 @@ function getCompareFunction(type: string) {
             return { resultA: valueA, resultB: valueB };
         },
 
-        numericArray({ valueA = "", valueB = "" }: CompareFunction) {
+        numericArray({ valueA = "", valueB = "" }) {
             const arrayA = String(valueA).split(",");
             const arrayB = String(valueB).split(",");
 
@@ -127,7 +128,7 @@ function getCompareFunction(type: string) {
             return { resultA, resultB };
         },
 
-        text({ valueA = "", valueB = "" }: CompareFunction) {
+        text({ valueA = "", valueB = "" }) {
             if (!valueA) return { order: 1 };
             if (!valueB) return { order: -1 };
 
