@@ -2,6 +2,9 @@ $dropdown-min-width: 8.5rem;
 $dropdown-dark-link-active-bg: #a785ff;
 $dropdown-dark-link-active-color: black;
 
+$link-decoration: none;
+$link-hover-decoration: underline;
+
 $primary: #7860b7;
 
 $spacer: 1rem;
@@ -19,5 +22,4 @@ $spacers: (
     10: $spacer * 7,
 );
 
-$link-decoration: none;
-$link-hover-decoration: underline;
+$tooltip-opacity: 1;
