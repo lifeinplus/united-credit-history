@@ -8,7 +8,7 @@ const getByReportId = (req: Request, res: Response) => {
         .then((commons) =>
             commons
                 ? res.status(200).json(commons)
-                : res.status(404).json({ message: "commons not found" })
+                : res.status(404).json({ message: "Commons not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };

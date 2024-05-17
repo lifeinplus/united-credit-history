@@ -45,7 +45,7 @@ const Body = ({
     const theme = useTheme();
 
     const { i18n } = useTranslation();
-    const lang = langs[i18n.resolvedLanguage || "gb"];
+    const lang = langs[i18n.resolvedLanguage || "en"];
     const numberFormat = new Intl.NumberFormat(lang.locale);
 
     const dateFormat = getDateFormat(lang.locale, "date");
@@ -92,9 +92,12 @@ const Body = ({
 
     function Cell(params: CellProps) {
         const { id, column, data } = params;
-        const { isLink, name } = column;
+        const { isLink, name, type } = column;
 
-        const { cell, badge, diffData, value } = getCommonData(params);
+        const { cell, badge, diffData, value } =
+            type === "common" || !type
+                ? getCommonData(params)
+                : getStatusData(params);
 
         const label = mobileView ? name : undefined;
 
@@ -133,8 +136,15 @@ const Body = ({
     }
 
     function getCommonData({ column, data }: CellProps) {
-        const { alignment, dataType, sysName, sysNameStatus } = column;
-        const { badgeEqual, badgeMore, badgeType } = column;
+        const {
+            alignment,
+            badgeEqual,
+            badgeMore,
+            badgeType,
+            dataType = "",
+            sysName = "",
+            sysNameStatus,
+        } = column;
 
         const firstSource = firstDataItem && firstDataItem[sysName];
         const firstValue = firstSource && prepare(firstSource, dataType);
@@ -154,6 +164,15 @@ const Body = ({
             : undefined;
 
         return { cell: alignment, badge, diffData, value: currentValue };
+    }
+
+    function getStatusData({ column, data }: CellProps) {
+        const { name } = column;
+
+        const value = data[name || ""];
+        const badge = value ? `uch-badge status uch-text-bg-${value}` : "";
+
+        return { cell: "uch-td-status", badge, diffData: undefined, value };
     }
 
     function prepare(sourceValue: string | number, dataType: string) {

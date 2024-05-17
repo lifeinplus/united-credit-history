@@ -1,22 +1,22 @@
 import classNames from "classnames";
 import { forwardRef } from "react";
 
-import type { TableColumn } from "../../../types";
+import type { Sort, SortClass, TableColumn } from "../../../types";
 import { useTheme } from "../../../hooks";
 
 import { useTooltip } from "../hooks";
 
 type HeadProps = {
     columns: TableColumn[];
-    getSortClass: (arg0: string) => string | undefined;
-    requestSort: (arg0: TableColumn) => void;
+    getSortClass: SortClass;
+    requestSort: Sort;
     tooltips: boolean;
 };
 
 type ThProps = {
     column: TableColumn;
-    getSortClass: (arg0: string) => string | undefined;
-    requestSort: (arg0: TableColumn) => void;
+    getSortClass: SortClass;
+    requestSort: Sort;
     theme: string;
 };
 
@@ -50,9 +50,8 @@ const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
 );
 
 const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
-    const { alignment, sysName, type } = column;
-    const { extended, sortable } = column;
-    const { name, tooltipName } = column;
+    const { alignment, extended, name, sortable, sysName, tooltipName, type } =
+        column;
 
     const common = type === "common";
 

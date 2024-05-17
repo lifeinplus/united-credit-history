@@ -8,7 +8,7 @@ const getByReportId = (req: Request, res: Response) => {
         .then((requestCounts) =>
             requestCounts
                 ? res.status(200).json(requestCounts)
-                : res.status(404).json({ message: "requestCounts not found" })
+                : res.status(404).json({ message: "RequestCounts not found" })
         )
         .catch((error) => res.status(500).json({ error }));
 };
