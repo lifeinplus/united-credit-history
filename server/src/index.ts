@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import { config } from "./config";
+import Logging from "./library/Logging";
 
 import {
     Common,
@@ -20,15 +21,31 @@ const app = express();
 mongoose
     .connect(config.mongo.uri, { authSource: "admin" })
     .then(() => {
-        console.log(`Connected to MongoDB`);
+        Logging.info("Server connected to MongoDB");
         StartServer();
     })
     .catch((error) => {
-        console.error("Unable to connect to MongoDB: ");
-        console.error(error);
+        Logging.error("Unable to connect to MongoDB:");
+        Logging.error(error);
     });
 
 const StartServer = () => {
+    app.use((req, res, next) => {
+        Logging.info(
+            `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]]`,
+            "incoming"
+        );
+
+        res.on("finish", () => {
+            Logging.info(
+                `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]] - Status: [${res.statusCode}]`,
+                "outgoing"
+            );
+        });
+
+        next();
+    });
+
     app.use(cors());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
@@ -47,11 +64,12 @@ const StartServer = () => {
     );
 
     app.use((req, res, next) => {
-        const error = new Error("url not found");
+        const error = new Error("URL not found");
+        Logging.error(error);
         return res.status(404).json({ message: error.message });
     });
 
     app.listen(config.server.port, () => {
-        console.log(`Server is running on port ${config.server.port}`);
+        Logging.info(`Server is running on port ${config.server.port}`);
     });
 };
