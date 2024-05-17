@@ -73,6 +73,7 @@ const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
             )}
             data-bs-toggle={tooltipName && "tooltip"}
             data-bs-placement={tooltipName && "top"}
+            data-bs-custom-class={`uch-tooltip ${theme}`}
             data-bs-title={tooltipName}
             onClick={common ? () => requestSort(column) : undefined}
             scope="col"

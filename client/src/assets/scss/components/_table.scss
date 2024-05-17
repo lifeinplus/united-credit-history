@@ -113,6 +113,18 @@ th {
     text-align: center;
 }
 
+.uch-tooltip {
+    &.dark {
+        --bs-tooltip-bg: var(--uch-purple-600);
+        --bs-tooltip-color: black;
+    }
+
+    &.light {
+        --bs-tooltip-bg: var(--uch-purple-700);
+        --bs-tooltip-color: white;
+    }
+}
+
 @media screen and (max-width: 575px) {
     .table-mobile thead,
     .table-mobile tbody,
