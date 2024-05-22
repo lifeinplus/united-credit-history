@@ -6,6 +6,7 @@ import PaymentHistory from "./PaymentHistory";
 import Person from "./Person";
 import Report from "./Report";
 import RequestCount from "./RequestCount";
+import User from "./User";
 
 export {
     Common,
@@ -16,4 +17,5 @@ export {
     Person,
     Report,
     RequestCount,
+    User,
 };

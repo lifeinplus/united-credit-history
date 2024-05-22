@@ -1,4 +1,5 @@
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import express from "express";
 import mongoose from "mongoose";
 
@@ -14,6 +15,7 @@ import {
     Person,
     Report,
     RequestCount,
+    User,
 } from "./routes";
 
 const app = express();
@@ -46,7 +48,14 @@ const StartServer = () => {
         next();
     });
 
-    app.use(cors());
+    app.use(
+        cors({
+            credentials: true,
+            origin: "http://localhost:8080",
+        })
+    );
+
+    app.use(cookieParser());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
@@ -58,6 +67,7 @@ const StartServer = () => {
     app.use("/persons", Person);
     app.use("/reports", Report);
     app.use("/requestCounts", RequestCount);
+    app.use("/users", User);
 
     app.get("/ping", (req, res, next) =>
         res.status(200).json({ message: "pong" })
