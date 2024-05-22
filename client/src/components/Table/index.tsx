@@ -1,14 +1,8 @@
 import classNames from "classnames";
 
-import type {
-    TableColumn,
-    ILoan,
-    IPerson,
-    IReport,
-    SortClass,
-} from "../../types";
+import type { TableColumn, Loan, Person, Report, SortClass } from "../../types";
 
-import { useTheme } from "../../hooks";
+import { useTheme } from "../../contexts";
 
 import Head from "./components/Head";
 import Body from "./components/Body";
@@ -24,7 +18,7 @@ import {
 type TableProps = {
     id: string;
     columns: TableColumn[];
-    data?: ILoan[] | IPerson[] | IReport[];
+    data?: Loan[] | Person[] | Report[];
     mobileView?: boolean;
     rowActive?: boolean;
     rowHover?: boolean;

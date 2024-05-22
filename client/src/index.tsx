@@ -8,7 +8,7 @@ import "./assets/js/main";
 
 import App from "./App";
 import Spinner from "./components/Spinner";
-import { ThemeProvider } from "./hooks";
+import { ProfileProvider, ThemeProvider } from "./contexts";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!);
@@ -18,7 +18,9 @@ root.render(
         <Suspense fallback={<Spinner />}>
             <BrowserRouter>
                 <ThemeProvider>
-                    <App />
+                    <ProfileProvider>
+                        <App />
+                    </ProfileProvider>
                 </ThemeProvider>
             </BrowserRouter>
         </Suspense>

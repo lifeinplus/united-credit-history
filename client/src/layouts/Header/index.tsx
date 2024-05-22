@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
-import { useTheme } from "../../hooks";
+import { useTheme } from "../../contexts";
 
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import Signin from "./components/Signin";
 
 const Header = () => {
     const { t } = useTranslation(["header"]);
@@ -60,6 +61,7 @@ const Header = () => {
                         <form className="d-flex">
                             <ThemeSwitcher />
                             <LanguageSwitcher />
+                            <Signin />
                         </form>
                     </div>
                 </div>

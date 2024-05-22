@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import Header from "../components/Header";
-import { useTheme } from "../hooks";
+import { useTheme } from "../contexts";
 
 const About = () => {
     const theme = useTheme();

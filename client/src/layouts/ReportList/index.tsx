@@ -1,15 +1,15 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { IReport } from "../../types";
+import type { Report } from "../../types";
 import Header from "../../components/Header";
 import Table from "../../components/Table";
-import { useTheme } from "../../hooks";
+import { useTheme } from "../../contexts";
 
 import { tableColumns } from "./utils";
 
 type Props = {
-    reports: IReport[];
+    reports: Report[];
 };
 
 const ReportList = ({ reports }: Props) => {
@@ -24,11 +24,11 @@ const ReportList = ({ reports }: Props) => {
     return (
         <div className="container-fluid mb-3">
             <div
-                className={classNames([
+                className={classNames(
                     `row panel ${theme} pt-2 rounded-bottom`,
                     `border border-top-0`,
-                    theme === "dark" && "uch-border-dark",
-                ])}
+                    theme === "dark" && "uch-border-dark"
+                )}
             >
                 <div className="col">
                     <div className="row">

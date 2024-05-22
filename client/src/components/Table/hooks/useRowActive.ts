@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { ILoan, IPerson, IReport } from "../../../types";
+import { Loan, Person, Report } from "../../../types";
 
 export const useRowActive = (
     rowActive: boolean,
-    data: ILoan[] | IPerson[] | IReport[] = []
+    data: Loan[] | Person[] | Report[] = []
 ) => {
     return useMemo(() => {
         return rowActive
