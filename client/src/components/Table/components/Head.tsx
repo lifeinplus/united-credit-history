@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { forwardRef } from "react";
 
 import type { Sort, SortClass, TableColumn } from "../../../types";
-import { useTheme } from "../../../hooks";
+import { useTheme } from "../../../contexts";
 
 import { useTooltip } from "../hooks";
 

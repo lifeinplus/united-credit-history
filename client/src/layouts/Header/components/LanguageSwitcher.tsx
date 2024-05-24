@@ -2,7 +2,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "../../../hooks";
+import { useTheme } from "../../../contexts";
 import { langs } from "../../../utils";
 
 const LanguageSwitcher = () => {
@@ -14,7 +14,7 @@ const LanguageSwitcher = () => {
     const theme = useTheme();
 
     return (
-        <div className="language-switcher dropdown">
+        <div className="dropdown me-2">
             <button
                 className={classNames(
                     "btn",

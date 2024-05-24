@@ -5,6 +5,7 @@ const getById = (req: Request, res: Response) => {
     const { reportId } = req.params;
 
     return Report.findById(reportId)
+        .select("-__v")
         .then((report) =>
             report
                 ? res.status(200).json(report)
@@ -15,6 +16,7 @@ const getById = (req: Request, res: Response) => {
 
 const get = (req: Request, res: Response) => {
     return Report.find()
+        .select("-__v")
         .sort("appNumber")
         .then((reports) =>
             reports.length

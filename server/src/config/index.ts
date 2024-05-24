@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const JWT_SECRET = process.env.JWT_SECRET || "";
+
 const MONGO_USERNAME = process.env.MONGO_USERNAME || "";
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || "";
 const MONGO_PORT = process.env.MONGO_PORT || "";
@@ -13,6 +15,9 @@ const SERVER_PORT = process.env.SERVER_PORT
     : 1337;
 
 export const config = {
+    jwt: {
+        secret: JWT_SECRET,
+    },
     mongo: {
         uri: MONGO_URI,
     },

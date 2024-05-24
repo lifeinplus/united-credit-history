@@ -1,6 +1,25 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const Common: Schema = new Schema(
+interface Common {
+    reportId: string;
+    chbCreditCardsAmountGbp: number;
+    chbCreditCardsAmountRub: number;
+    chbCreditCardsAmountTry: number;
+    chbLoansAmountGbp: number;
+    chbLoansAmountRub: number;
+    chbLoansAmountTry: number;
+    chbPaymentsAmountGbp: number;
+    chbPaymentsAmountRub: number;
+    chbPaymentsAmountTry: number;
+    flcPaymentsAmountGbp: number;
+    flcPaymentsAmountRub: number;
+    flcPaymentsAmountTry: number;
+    score: number;
+}
+
+interface CommonModel extends Common, Document {}
+
+const CommonSchema: Schema = new Schema(
     {
         reportId: {
             type: mongoose.SchemaTypes.ObjectId,
@@ -33,4 +52,4 @@ const Common: Schema = new Schema(
     { versionKey: false }
 );
 
-export default mongoose.model("commons", Common);
+export default mongoose.model<CommonModel>("commons", CommonSchema);

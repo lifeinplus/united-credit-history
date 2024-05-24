@@ -4,26 +4,27 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 import type {
-    ICommon,
-    IDelinquency,
-    IFlc,
-    ILoan,
-    IPaymentHistory,
-    IReport,
+    Common,
+    Delinquency,
+    Flc,
+    Loan,
+    PaymentHistory,
+    Report,
 } from "../../types";
 
 import Header from "../../components/Header";
 import Table from "../../components/Table";
-import { useDataById, useDataByIds, useTheme } from "../../hooks/";
+import { useTheme } from "../../contexts";
+import { useDataById, useDataByIds } from "../../hooks";
 import { getDateFormat } from "../../utils";
 
 import PaymentAmounts from "./components/PaymentAmounts";
 import { TimePeriod, tableColumns } from "./utils";
 
 type CreditHistoryProps = {
-    commons?: ICommon;
+    commons?: Common;
     handleExtend: () => void;
-    report?: IReport;
+    report?: Report;
     showExtendedData: boolean;
 };
 
@@ -37,7 +38,7 @@ const CreditHistory = ({
     const theme = useTheme();
     const { t } = useTranslation(["credit_history"]);
 
-    const loans = useDataById<ILoan[]>("loans/getByReportId", reportId);
+    const loans = useDataById<Loan[]>("loans/getByReportId", reportId);
     const [loanIds, setLoanIds] = useState<string[]>();
 
     useEffect(() => {
@@ -45,14 +46,14 @@ const CreditHistory = ({
         setLoanIds(loans.map((loan) => loan._id));
     }, [loans]);
 
-    const delinquencies = useDataByIds<IDelinquency[]>(
+    const delinquencies = useDataByIds<Delinquency[]>(
         "delinquencies/getByLoanIds",
         loanIds
     );
 
-    const flcs = useDataByIds<IFlc[]>("flcs/getByLoanIds", loanIds);
+    const flcs = useDataByIds<Flc[]>("flcs/getByLoanIds", loanIds);
 
-    const paymentHistories = useDataByIds<IPaymentHistory[]>(
+    const paymentHistories = useDataByIds<PaymentHistory[]>(
         "paymenthistories/getByLoanIds",
         loanIds
     );

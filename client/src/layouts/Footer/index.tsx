@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { useTheme } from "../../hooks";
+import { useTheme } from "../../contexts";
 
 const Footer = () => {
     const { t } = useTranslation(["footer"]);
@@ -35,17 +35,17 @@ const Footer = () => {
                     <li className="nav-item">
                         <NavLink
                             className="nav-link px-2 text-secondary"
-                            to={"/about"}
+                            to={"/reports"}
                         >
-                            {t("about")}
+                            Reports
                         </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink
                             className="nav-link px-2 text-secondary"
-                            to={"/404"}
+                            to={"/about"}
                         >
-                            404
+                            {t("about")}
                         </NavLink>
                     </li>
                 </ul>

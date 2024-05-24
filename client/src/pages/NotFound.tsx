@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useTheme } from "../hooks";
+import { useTheme } from "../contexts";
 
 const NotFound = () => {
     const theme = useTheme();

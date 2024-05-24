@@ -2,26 +2,26 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import type { TableColumn, ILoan, IPerson, IReport } from "../../../types";
-import { useTheme } from "../../../hooks";
+import type { TableColumn, Loan, Person, Report } from "../../../types";
+import { useTheme } from "../../../contexts";
 import { getDateFormat, langs } from "../../../utils";
 
 type BodyProps = {
     columns: TableColumn[];
-    data?: (IPerson | IReport | ILoan)[];
+    data?: (Person | Report | Loan)[];
     mobileView: boolean;
     rowActive: boolean;
     textDifference: boolean;
 };
 
 type RowProps = {
-    data: ILoan | IPerson | IReport;
+    data: Loan | Person | Report;
 };
 
 type CellProps = {
     id: string;
     column: TableColumn;
-    data: ILoan | IPerson | IReport;
+    data: Loan | Person | Report;
 };
 
 type Diff = { text?: string; spanText?: string };

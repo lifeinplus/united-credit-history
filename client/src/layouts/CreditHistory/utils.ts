@@ -1,9 +1,9 @@
-import type { IPaymentHistory, TableColumn } from "../../types";
+import type { PaymentHistory, TableColumn } from "../../types";
 import { getDateFormat } from "../../utils";
 
 export class TimePeriod {
     constructor(
-        private readonly history: IPaymentHistory[],
+        private readonly history: PaymentHistory[],
         private readonly lastDate: string
     ) {}
 
