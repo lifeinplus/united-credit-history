@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-import type { ILoan, IPerson, IReport, TableColumn } from "../../../types";
+import type { Loan, Person, Report, TableColumn } from "../../../types";
 
 type SortConfig = {
     dataType?: string;
@@ -10,7 +10,7 @@ type SortConfig = {
 };
 
 export const useSortableData = (
-    data: (ILoan | IPerson | IReport)[] = [],
+    data: (Loan | Person | Report)[] = [],
     config: SortConfig
 ) => {
     const [sortConfig, setSortConfig] = useState(config);

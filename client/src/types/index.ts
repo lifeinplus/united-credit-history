@@ -53,20 +53,24 @@ export interface TableColumn {
     type?: string;
 }
 
-export interface ICommon extends Record<string, number> {}
+export interface Profile {
+    userName?: string;
+}
 
-export interface IDelinquency extends Record<string, string | number> {}
+export interface Common extends Record<string, number> {}
 
-export interface IFlc extends Record<string, string | number> {}
+export interface Delinquency extends Record<string, string | number> {}
 
-export interface ILoan extends Record<string, string | number> {
+export interface Flc extends Record<string, string | number> {}
+
+export interface Loan extends Record<string, string | number> {
     _id: string;
 }
 
-export interface IPaymentHistory extends Record<string, string> {}
+export interface PaymentHistory extends Record<string, string> {}
 
-export interface IPerson extends Record<string, string> {}
+export interface Person extends Record<string, string> {}
 
-export interface IReport extends Record<string, string> {}
+export interface Report extends Record<string, string> {}
 
-export interface IRequestCount extends Record<string, number> {}
+export interface RequestCount extends Record<string, number> {}

@@ -1,12 +1,17 @@
+import axios from "axios";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import { useThemeUpdate } from "./hooks";
+import { useThemeUpdate } from "./contexts";
 import { Footer, Header } from "./layouts";
-import { About, NotFound, Report, Reports } from "./pages";
+import { About, NotFound, Report, Reports, Signin, Signup } from "./pages";
 import { langs } from "./utils";
+
+axios.defaults.baseURL = "http://localhost:9090";
+axios.defaults.withCredentials = true;
 
 const App = () => {
     const { i18n } = useTranslation();
@@ -61,6 +66,7 @@ const App = () => {
     return (
         <>
             <Header />
+            <Toaster toastOptions={{ duration: 3000 }} />
             <main>
                 <div className="container-fluid">
                     <Routes>
@@ -78,6 +84,8 @@ const App = () => {
                                 }
                             />
                         </Route>
+                        <Route path="/signin" element={<Signin />} />
+                        <Route path="/signup" element={<Signup />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>

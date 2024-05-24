@@ -1,19 +1,23 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-import type { IReport } from "../types";
+import type { Report } from "../types";
+import { useProfile } from "../contexts";
 import { ReportList } from "../layouts";
 
 const Reports = () => {
-    const [reports, setReports] = useState<IReport[]>();
+    const profile = useProfile();
+    const [reports, setReports] = useState<Report[]>();
 
     useEffect(() => {
-        axios.get("http://localhost:9090/reports/get").then((response) => {
+        axios.get("/reports/get").then((response) => {
             setReports(response.data);
         });
     }, []);
 
-    return <>{reports && <ReportList reports={reports} />}</>;
+    return (
+        <>{profile.userName && reports && <ReportList reports={reports} />}</>
+    );
 };
 
 export default Reports;

@@ -8,7 +8,7 @@ export const useDataByIds = <T>(method: string, ids?: string[]) => {
         if (!ids?.length) return;
 
         axios
-            .get(`http://localhost:9090/${method}`, {
+            .get(`/${method}`, {
                 params: { loanIds: ids },
             })
             .then((response) => setData(response.data))

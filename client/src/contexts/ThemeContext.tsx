@@ -29,6 +29,7 @@ const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
 
     useEffect(() => {
         localStorage.setItem("theme", theme);
+        document.documentElement.setAttribute("data-bs-theme", theme);
         document.body.className = theme;
     }, [theme]);
 

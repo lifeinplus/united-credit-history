@@ -8,7 +8,7 @@ export const useDataById = <T>(method: string, id?: string) => {
         if (!id) return;
 
         axios
-            .get(`http://localhost:9090/${method}/${id}`)
+            .get(`/${method}/${id}`)
             .then((response) => setData(response.data))
             .catch((error) => console.log(error.message));
     }, [id]);

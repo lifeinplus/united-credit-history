@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { useTheme } from "../../hooks";
+import { useTheme } from "../../contexts";
 
 const Footer = () => {
     const { t } = useTranslation(["footer"]);
@@ -10,7 +10,7 @@ const Footer = () => {
         <footer className={`footer flex-wrap bg-${theme} mt-auto py-2`}>
             <div className="container-fluid d-flex align-items-center">
                 <span className="col-5 text-secondary">
-                    v2.19.0 © 2024 Artem Denisov
+                    v3.0.0 © 2024 Artem Denisov
                 </span>
                 <NavLink
                     className="col-2 d-flex justify-content-center"
@@ -35,17 +35,17 @@ const Footer = () => {
                     <li className="nav-item">
                         <NavLink
                             className="nav-link px-2 text-secondary"
-                            to={"/about"}
+                            to={"/reports"}
                         >
-                            {t("about")}
+                            Reports
                         </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink
                             className="nav-link px-2 text-secondary"
-                            to={"/404"}
+                            to={"/about"}
                         >
-                            404
+                            {t("about")}
                         </NavLink>
                     </li>
                 </ul>

@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "../../../../hooks";
-import type { IRequestCount } from "../../../../types";
+import { useTheme } from "../../../../contexts";
+import type { RequestCount } from "../../../../types";
 
 import { customFields, scoreStyles } from "./utils";
 
 type RequestCountsProps = {
-    counts?: IRequestCount;
+    counts?: RequestCount;
     score?: number;
 };
 

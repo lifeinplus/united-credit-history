@@ -2,18 +2,18 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import type {
-    ICommon,
+    Common,
     AmountContextField,
     AmountListField,
 } from "../../../../types";
 
-import { useTheme } from "../../../../hooks";
+import { useTheme } from "../../../../contexts";
 import { langs } from "../../../../utils";
 
 import { obligationFields, paymentFields } from "./utils";
 
 type PaymentAmountsProps = {
-    data?: ICommon;
+    data?: Common;
     showExtendedData: boolean;
 };
 
