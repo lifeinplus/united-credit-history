@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import type { SubmitCallback } from "../types/Auth";
@@ -8,6 +9,7 @@ import { useProfileUpdate } from "../contexts";
 const Signin = () => {
     const navigate = useNavigate();
     const profileUpdate = useProfileUpdate();
+    const { t } = useTranslation(["signin"]);
 
     const submitCallback: SubmitCallback = ({ status }, { userName }) => {
         if (status === 200) {
@@ -18,17 +20,17 @@ const Signin = () => {
 
     return (
         <Auth
-            buttonText={"Sign in"}
+            buttonText={t("buttonText")}
             question={{
                 link: "/signup",
-                linkText: "Sign up",
-                text: "Don't have an account?",
+                linkText: t("linkText"),
+                text: t("questionText"),
             }}
             submit={{
                 callback: submitCallback,
                 url: "/users/signin",
             }}
-            title={"Please sign in"}
+            title={t("title")}
         />
     );
 };
