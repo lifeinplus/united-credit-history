@@ -37,7 +37,7 @@ const Footer = () => {
                             className="nav-link px-2 text-secondary"
                             to={"/reports"}
                         >
-                            Reports
+                            {t("reports")}
                         </NavLink>
                     </li>
                     <li className="nav-item">
