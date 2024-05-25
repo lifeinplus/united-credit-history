@@ -10,7 +10,7 @@ const Footer = () => {
         <footer className={`footer flex-wrap bg-${theme} mt-auto py-2`}>
             <div className="container-fluid d-flex align-items-center">
                 <span className="col-5 text-secondary">
-                    v3.0.0 © 2024 Artem Denisov
+                    v3.1.0 © 2024 Artem Denisov
                 </span>
                 <NavLink
                     className="col-2 d-flex justify-content-center"
@@ -37,7 +37,7 @@ const Footer = () => {
                             className="nav-link px-2 text-secondary"
                             to={"/reports"}
                         >
-                            Reports
+                            {t("reports")}
                         </NavLink>
                     </li>
                     <li className="nav-item">

@@ -1,6 +1,7 @@
 import axios from "axios";
 import classNames from "classnames";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -12,6 +13,8 @@ import type {
 } from "../../types/Auth";
 
 const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
+    const { t } = useTranslation(["auth"]);
+
     const [data, setData] = useState<UserData>({
         userName: "",
         password: "",
@@ -46,22 +49,22 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
                         id="floatingUserName"
                         className="form-control"
                         onChange={(e) => handleOnChange(e, "userName")}
-                        placeholder="User name"
+                        placeholder={t("userName")}
                         type="text"
                         value={data.userName}
                     />
-                    <label htmlFor="floatingUserName">User name</label>
+                    <label htmlFor="floatingUserName">{t("userName")}</label>
                 </div>
                 <div className="form-floating">
                     <input
                         id="floatingPassword"
                         className="form-control"
                         onChange={(e) => handleOnChange(e, "password")}
-                        placeholder="Password"
+                        placeholder={t("password")}
                         type="password"
                         value={data.password}
                     />
-                    <label htmlFor="floatingPassword">Password</label>
+                    <label htmlFor="floatingPassword">{t("password")}</label>
                 </div>
                 <div className="my-3">
                     <label className="form-label">

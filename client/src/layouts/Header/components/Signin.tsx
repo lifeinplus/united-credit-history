@@ -4,12 +4,14 @@ import Cookies from "universal-cookie";
 
 import { useProfile, useTheme } from "../../../contexts";
 import { useProfileUpdate } from "../../../contexts/ProfileContext";
+import { useTranslation } from "react-i18next";
 
 const Signin = () => {
     const navigate = useNavigate();
     const profile = useProfile();
     const profileUpdate = useProfileUpdate();
     const theme = useTheme();
+    const { t } = useTranslation("header");
 
     return profile.userName ? <Out /> : <In />;
 
@@ -51,7 +53,7 @@ const Signin = () => {
                             onClick={handleClick}
                             type="button"
                         >
-                            Sign out
+                            {t("signout")}
                         </button>
                     </li>
                 </ul>
