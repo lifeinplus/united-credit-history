@@ -1,9 +1,10 @@
-import axios from "axios";
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+
+import axios from "../../api/axios";
 
 import type {
     AuthProps,
@@ -14,11 +15,17 @@ import type {
 
 const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
     const { t } = useTranslation(["auth"]);
+    const userNameRef = useRef<HTMLInputElement>(null);
+    const [validated, setValidated] = useState(false);
 
     const [data, setData] = useState<UserData>({
         userName: "",
         password: "",
     });
+
+    useEffect(() => {
+        userNameRef.current?.focus();
+    }, []);
 
     const handleOnChange: OnChangeHandler = (e, inputName) => {
         setData({
@@ -29,27 +36,41 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
 
     const handleSubmit: SubmitHandler = (e) => {
         e.preventDefault();
+        setValidated(true);
 
         axios
             .post(submit.url, data)
             .then((response) => submit.callback(response, data))
             .catch((error) => {
                 console.error(error);
-                const { data } = error.response;
-                toast.error(data.message || error.message);
+                const { message, response } = error;
+
+                if (!response) {
+                    toast.error(message);
+                    return;
+                }
+
+                const { data } = response;
+                toast.error(data.message || message);
             });
     };
 
     return (
-        <div className={classNames("uch-auth", "my-10", "m-auto")}>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <h1 className="h3 mb-3 fw-normal">{title}</h1>
+        <section className={classNames("uch-auth", "my-10", "m-auto")}>
+            <h1 className="h3 mb-3 fw-normal">{title}</h1>
+            <form
+                className={validated ? "was-validated" : undefined}
+                noValidate
+                onSubmit={handleSubmit}
+            >
                 <div className="form-floating">
                     <input
                         id="floatingUserName"
                         className="form-control"
                         onChange={(e) => handleOnChange(e, "userName")}
                         placeholder={t("userName")}
+                        ref={userNameRef}
+                        required
                         type="text"
                         value={data.userName}
                     />
@@ -59,9 +80,11 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
                     <input
                         id="floatingPassword"
                         className="form-control"
+                        minLength={4}
                         onChange={(e) => handleOnChange(e, "password")}
                         placeholder={t("password")}
                         type="password"
+                        required
                         value={data.password}
                     />
                     <label htmlFor="floatingPassword">{t("password")}</label>
@@ -76,7 +99,7 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
                     {buttonText}
                 </button>
             </form>
-        </div>
+        </section>
     );
 };
 

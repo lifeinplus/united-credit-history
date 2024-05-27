@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     PropsWithChildren,
     createContext,
@@ -7,6 +6,7 @@ import {
     useState,
 } from "react";
 
+import axios from "../api/axios";
 import type { Profile } from "../types";
 
 const ProfileContext = createContext<Profile>({});
