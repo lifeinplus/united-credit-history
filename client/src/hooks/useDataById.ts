@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "../api/axios";
 
 export const useDataById = <T>(method: string, id?: string) => {
     const [data, setData] = useState<T>();

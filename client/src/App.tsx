@@ -1,20 +1,17 @@
-import axios from "axios";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import { useThemeUpdate } from "./contexts";
+import { useTheme, useThemeUpdate } from "./contexts";
 import { Footer, Header } from "./layouts";
 import { About, NotFound, Report, Reports, Signin, Signup } from "./pages";
 import { langs } from "./utils";
 
-axios.defaults.baseURL = "http://localhost:9090";
-axios.defaults.withCredentials = true;
-
 const App = () => {
     const { i18n } = useTranslation();
+    const theme = useTheme();
     const toggleTheme = useThemeUpdate();
 
     const cookies = new Cookies();
@@ -66,7 +63,15 @@ const App = () => {
     return (
         <>
             <Header />
-            <Toaster toastOptions={{ duration: 3000 }} />
+            <Toaster
+                toastOptions={{
+                    duration: 3000,
+                    style: {
+                        background: theme === "dark" ? "#2f343a" : "#f9f9fa",
+                        color: theme === "dark" ? "#fff" : "#000",
+                    },
+                }}
+            />
             <main>
                 <div className="container-fluid">
                     <Routes>
