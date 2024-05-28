@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
+import axios from "../api/axios";
 import type { Report } from "../types";
 import { useProfile } from "../contexts";
 import { ReportList } from "../layouts";
