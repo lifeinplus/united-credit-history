@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 
 import axios from "../api/axios";
 import type { Report } from "../types";
-import { useProfile } from "../contexts";
 import { ReportList } from "../layouts";
 
 const Reports = () => {
-    const profile = useProfile();
     const [reports, setReports] = useState<Report[]>();
 
     useEffect(() => {
@@ -15,9 +13,7 @@ const Reports = () => {
         });
     }, []);
 
-    return (
-        <>{profile.userName && reports && <ReportList reports={reports} />}</>
-    );
+    return <>{reports && <ReportList reports={reports} />}</>;
 };
 
 export default Reports;

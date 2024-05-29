@@ -1,12 +1,11 @@
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import { useProfile, useTheme } from "../../../contexts";
-import { useProfileUpdate } from "../../../contexts/ProfileContext";
-import { useTranslation } from "react-i18next";
+import { useProfile, useProfileUpdate, useTheme } from "../../../contexts";
 
-const Signin = () => {
+const Account = () => {
     const navigate = useNavigate();
     const profile = useProfile();
     const profileUpdate = useProfileUpdate();
@@ -81,4 +80,4 @@ const Signin = () => {
     }
 };
 
-export default Signin;
+export default Account;

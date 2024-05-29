@@ -5,18 +5,21 @@ import { getDateFormat, langs } from "../utils";
 
 import ExtendControl from "./ExtendControl";
 
-type HeaderField = { caption: string | undefined; value: string | undefined };
+type HeaderFieldProps = {
+    caption: string | undefined;
+    value: string | undefined;
+};
 
 type HeaderProps = {
-    date?: HeaderField;
+    date?: HeaderFieldProps;
     handleExtend?: () => void;
     iconName: string;
     nameSpaces: string[];
-    number?: HeaderField;
+    number?: HeaderFieldProps;
     showExtendedData?: boolean;
 };
 
-const Header = ({
+const PanelHeader = ({
     date,
     handleExtend,
     iconName,
@@ -66,7 +69,7 @@ const Header = ({
         </nav>
     );
 
-    function HeaderField({ caption, value }: HeaderField) {
+    function HeaderField({ caption, value }: HeaderFieldProps) {
         return (
             caption && (
                 <>
@@ -88,4 +91,4 @@ const Header = ({
     }
 };
 
-export default Header;
+export default PanelHeader;

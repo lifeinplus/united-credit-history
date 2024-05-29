@@ -71,7 +71,7 @@ const RequestCounts = ({ counts, score }: RequestCountsProps) => {
                         })}
                     </ul>
                 )}
-                {type === "all" && <Footer />}
+                {type === "all" && <CardFooter />}
             </div>
         );
     }
@@ -106,7 +106,7 @@ const RequestCounts = ({ counts, score }: RequestCountsProps) => {
         );
     }
 
-    function Footer() {
+    function CardFooter() {
         const scoreStyle = scoreStyles.find(({ min, max }) => {
             return score && score >= min && score <= max;
         });
