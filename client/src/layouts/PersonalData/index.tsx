@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import type { Common, Person, Report, RequestCount } from "../../types";
 
-import Header from "../../components/Header";
+import PanelHeader from "../../components/PanelHeader";
 import Table from "../../components/Table";
 import { useTheme } from "../../contexts";
 import { useDataById } from "../../hooks";
@@ -44,7 +44,7 @@ const PersonalData = ({ commons, report }: PersonalDataProps) => {
             >
                 <div className="col">
                     <div className="row">
-                        <Header
+                        <PanelHeader
                             date={{
                                 caption: "app_creation_date",
                                 value: report?.appCreationDate,

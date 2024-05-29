@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import type { Report } from "../../types";
-import Header from "../../components/Header";
+import PanelHeader from "../../components/PanelHeader";
 import Table from "../../components/Table";
 import { useTheme } from "../../contexts";
 
@@ -32,7 +32,7 @@ const ReportList = ({ reports }: Props) => {
             >
                 <div className="col">
                     <div className="row">
-                        <Header
+                        <PanelHeader
                             iconName={"bi-card-list"}
                             nameSpaces={["report_list"]}
                         />

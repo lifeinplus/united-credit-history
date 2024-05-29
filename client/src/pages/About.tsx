@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import Header from "../components/Header";
+import PanelHeader from "../components/PanelHeader";
 import { useTheme } from "../contexts";
 
 const About = () => {
@@ -43,7 +43,7 @@ const About = () => {
             >
                 <div className="col">
                     <div className="row">
-                        <Header
+                        <PanelHeader
                             iconName={"bi-file-text"}
                             nameSpaces={["about"]}
                         />

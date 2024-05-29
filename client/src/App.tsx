@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import { useTheme, useThemeUpdate } from "./contexts";
-import { Footer, Header } from "./layouts";
+import RequireAuth from "./components/RequireAuth";
+import { useThemeUpdate } from "./contexts";
+import Layout from "./layouts";
 import { About, NotFound, Report, Reports, Signin, Signup } from "./pages";
 import { langs } from "./utils";
 
 const App = () => {
     const { i18n } = useTranslation();
-    const theme = useTheme();
     const toggleTheme = useThemeUpdate();
 
     const cookies = new Cookies();
@@ -61,42 +60,28 @@ const App = () => {
     }
 
     return (
-        <>
-            <Header />
-            <Toaster
-                toastOptions={{
-                    duration: 3000,
-                    style: {
-                        background: theme === "dark" ? "#2f343a" : "#f9f9fa",
-                        color: theme === "dark" ? "#fff" : "#000",
-                    },
-                }}
-            />
-            <main>
-                <div className="container-fluid">
-                    <Routes>
-                        <Route path="/" element={<Reports />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/reports">
-                            <Route index element={<Reports />} />
-                            <Route
-                                path=":reportId"
-                                element={
-                                    <Report
-                                        handleExtend={handleExtend}
-                                        showExtendedData={showExtendedData}
-                                    />
-                                }
-                            />
-                        </Route>
-                        <Route path="/signin" element={<Signin />} />
-                        <Route path="/signup" element={<Signup />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </div>
-            </main>
-            <Footer />
-        </>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route path="/about" element={<About />} />
+                <Route element={<RequireAuth />}>
+                    <Route path="/reports">
+                        <Route index element={<Reports />} />
+                        <Route
+                            path=":reportId"
+                            element={
+                                <Report
+                                    handleExtend={handleExtend}
+                                    showExtendedData={showExtendedData}
+                                />
+                            }
+                        />
+                    </Route>
+                </Route>
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
     );
 };
 

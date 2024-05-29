@@ -24,9 +24,12 @@ const ProfileProvider = ({ children }: PropsWithChildren) => {
     const [profile, setProfile] = useState<Profile>({});
 
     useEffect(() => {
-        if (profile?.userName) return;
+        if (profile.userName) return;
         axios
-            .get("users/getProfile")
+            .get("users/getProfile", {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: true,
+            })
             .then(({ data }) => setProfile(data.profile))
             .catch((error) => console.error(error));
     }, []);
