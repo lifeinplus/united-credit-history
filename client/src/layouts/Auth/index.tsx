@@ -39,7 +39,10 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
         setValidated(true);
 
         axios
-            .post(submit.url, data)
+            .post(submit.url, data, {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: true,
+            })
             .then((response) => submit.callback(response, data))
             .catch((error) => {
                 console.error(error);

@@ -25,14 +25,10 @@ const getProfile = (req: Request, res: Response) => {
 const signin = async (req: Request, res: Response) => {
     const { userName, password } = req.body;
 
-    if (!userName) {
-        return res.status(409).json({ message: `User name is required` });
-    }
-
-    if (!password || password.length < 4) {
-        return res.status(409).json({
-            message: `Password is required and should be at least 4 characters long`,
-        });
+    if (!userName || !password) {
+        return res
+            .status(409)
+            .json({ message: `Username and password required` });
     }
 
     try {
@@ -52,7 +48,8 @@ const signin = async (req: Request, res: Response) => {
 
         const token = jwt.sign(
             { userName: user.userName, id: user._id },
-            config.jwt.secret
+            config.jwt.secret,
+            { expiresIn: "1d" }
         );
 
         return res
@@ -75,7 +72,7 @@ const signup = async (req: Request, res: Response) => {
 
     if (!userName) {
         return res.status(409).json({
-            message: `User name is required`,
+            message: `Username is required`,
         });
     }
 
@@ -90,7 +87,7 @@ const signup = async (req: Request, res: Response) => {
 
         if (user) {
             return res.status(409).json({
-                message: `User name [${userName}] is taken already`,
+                message: `Username [${userName}] is taken already`,
             });
         }
 

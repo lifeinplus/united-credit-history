@@ -1,6 +1,6 @@
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/scss/main.scss";
@@ -16,13 +16,15 @@ const root = createRoot(rootElement!);
 root.render(
     <StrictMode>
         <Suspense fallback={<Spinner />}>
-            <BrowserRouter>
-                <ThemeProvider>
-                    <ProfileProvider>
-                        <App />
-                    </ProfileProvider>
-                </ThemeProvider>
-            </BrowserRouter>
+            <ThemeProvider>
+                <ProfileProvider>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/*" element={<App />} />
+                        </Routes>
+                    </BrowserRouter>
+                </ProfileProvider>
+            </ThemeProvider>
         </Suspense>
     </StrictMode>
 );

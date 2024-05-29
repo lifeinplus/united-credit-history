@@ -12,7 +12,7 @@ import type {
     Report,
 } from "../../types";
 
-import Header from "../../components/Header";
+import PanelHeader from "../../components/PanelHeader";
 import Table from "../../components/Table";
 import { useTheme } from "../../contexts";
 import { useDataById, useDataByIds } from "../../hooks";
@@ -113,7 +113,7 @@ const CreditHistory = ({
             >
                 <div className="col">
                     <div className="row">
-                        <Header
+                        <PanelHeader
                             date={{
                                 caption: "report_date",
                                 value: report?.reportCreationDate,
