@@ -1,6 +1,11 @@
 import { AxiosResponse } from "axios";
 import { ChangeEvent, FormEvent } from "react";
 
+export interface Auth {
+    userName?: string;
+    accessToken?: string;
+}
+
 export interface AuthProps {
     buttonText: string;
     submit: { callback: SubmitCallback; url: string };

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import type { Report } from "../types";
 import { useAxiosPrivate } from "../hooks";
 import { ReportList } from "../layouts";
+import type { Report } from "../types";
 
 const Reports = () => {
     const [reports, setReports] = useState<Report[]>();
     const axiosPrivate = useAxiosPrivate();
-    const navigate = useNavigate();
     const location = useLocation();
+    const navigate = useNavigate();
     const effectRan = useRef(false);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const Reports = () => {
                 })
                 .catch((error) => {
                     console.error(error);
-                    navigate("/signin", {
+                    navigate("/login", {
                         state: { from: location },
                         replace: true,
                     });

@@ -3,23 +3,23 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import { useProfile, useProfileUpdate, useTheme } from "../../../contexts";
+import { useAuth, useAuthUpdate, useTheme } from "../../../contexts";
 
 const Account = () => {
+    const auth = useAuth();
+    const authUpdate = useAuthUpdate();
     const navigate = useNavigate();
-    const profile = useProfile();
-    const profileUpdate = useProfileUpdate();
     const theme = useTheme();
     const { t } = useTranslation("header");
 
-    return profile?.userName ? <Out /> : <In />;
+    return auth?.userName ? <Out /> : <In />;
 
     function Out() {
         const handleClick = () => {
             const cookies = new Cookies();
             cookies.remove("token");
-            profileUpdate({});
-            navigate("/signin");
+            authUpdate({});
+            navigate("/login");
         };
 
         return (
@@ -37,7 +37,7 @@ const Account = () => {
                     aria-expanded="false"
                 >
                     <i className="bi bi-person-circle me-2"></i>
-                    {profile?.userName}
+                    {auth?.userName}
                 </button>
                 <ul
                     className={classNames(
@@ -52,7 +52,7 @@ const Account = () => {
                             onClick={handleClick}
                             type="button"
                         >
-                            {t("signout")}
+                            {t("logout")}
                         </button>
                     </li>
                 </ul>
@@ -70,7 +70,7 @@ const Account = () => {
                         `uch-btn-outline-primary ${theme}`,
                         "btn-sm"
                     )}
-                    onClick={() => navigate("/signin")}
+                    onClick={() => navigate("/login")}
                     type="button"
                 >
                     <i className="bi bi-box-arrow-in-right me-1"></i>

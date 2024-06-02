@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 
 import { axiosPrivate } from "../api/axios";
-import { useProfile } from "../contexts";
+import { useAuth } from "../contexts";
 
 import useRefreshToken from "./useRefreshToken";
 
 const useAxiosPrivate = () => {
-    const profile = useProfile();
+    const auth = useAuth();
     const refreshToken = useRefreshToken();
     const refreshRan = useRef(false);
 
@@ -14,7 +14,7 @@ const useAxiosPrivate = () => {
         const requestIntercept = axiosPrivate.interceptors.request.use(
             (config) => {
                 if (!config.headers.Authorization) {
-                    config.headers.Authorization = `Bearer ${profile.accessToken}`;
+                    config.headers.Authorization = `Bearer ${auth.accessToken}`;
                 }
                 return config;
             },
@@ -43,7 +43,7 @@ const useAxiosPrivate = () => {
             axiosPrivate.interceptors.request.eject(requestIntercept);
             axiosPrivate.interceptors.response.eject(responseIntercept);
         };
-    }, [profile, refreshToken]);
+    }, [auth, refreshToken]);
 
     return axiosPrivate;
 };

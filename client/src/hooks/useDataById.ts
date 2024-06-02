@@ -6,8 +6,8 @@ import useAxiosPrivate from "./useAxiosPrivate";
 const useDataById = <T>(method: string, id?: string) => {
     const [data, setData] = useState<T>();
     const axiosPrivate = useAxiosPrivate();
-    const navigate = useNavigate();
     const location = useLocation();
+    const navigate = useNavigate();
     const effectRan = useRef(false);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const useDataById = <T>(method: string, id?: string) => {
                 .then((response) => setData(response.data))
                 .catch((error) => {
                     console.log(error.message);
-                    navigate("/signin", {
+                    navigate("/login", {
                         state: { from: location },
                         replace: true,
                     });
