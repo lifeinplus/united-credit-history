@@ -12,7 +12,7 @@ const Account = () => {
     const theme = useTheme();
     const { t } = useTranslation("header");
 
-    return profile.userName ? <Out /> : <In />;
+    return profile?.userName ? <Out /> : <In />;
 
     function Out() {
         const handleClick = () => {
@@ -37,7 +37,7 @@ const Account = () => {
                     aria-expanded="false"
                 >
                     <i className="bi bi-person-circle me-2"></i>
-                    {profile.userName}
+                    {profile?.userName}
                 </button>
                 <ul
                     className={classNames(

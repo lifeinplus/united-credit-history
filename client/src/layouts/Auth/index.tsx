@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import axios from "../../api/axios";
+import { axiosPrivate } from "../../api/axios";
 
 import type {
     AuthProps,
@@ -38,11 +38,8 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
         e.preventDefault();
         setValidated(true);
 
-        axios
-            .post(submit.url, data, {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-            })
+        axiosPrivate
+            .post(submit.url, data)
             .then((response) => submit.callback(response, data))
             .catch((error) => {
                 console.error(error);
