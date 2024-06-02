@@ -2,7 +2,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "";
+const ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOKEN_EXPIRES_IN || "5m";
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || "";
+const REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN || "1h";
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
 
 const MONGO_USERNAME = process.env.MONGO_USERNAME || "";
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || "";
@@ -15,13 +18,20 @@ const SERVER_PORT = process.env.SERVER_PORT
     : 1337;
 
 export const config = {
-    jwt: {
-        secret: JWT_SECRET,
-    },
     mongo: {
         uri: MONGO_URI,
     },
     server: {
         port: SERVER_PORT,
+    },
+    token: {
+        access: {
+            expiresIn: ACCESS_TOKEN_EXPIRES_IN,
+            secret: ACCESS_TOKEN_SECRET,
+        },
+        refresh: {
+            expiresIn: REFRESH_TOKEN_EXPIRES_IN,
+            secret: REFRESH_TOKEN_SECRET,
+        },
     },
 };

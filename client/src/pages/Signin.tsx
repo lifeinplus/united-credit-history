@@ -14,9 +14,11 @@ const Signin = () => {
 
     const from = location.state?.from?.pathname || "/";
 
-    const submitCallback: SubmitCallback = ({ status }, { userName }) => {
+    const submitCallback: SubmitCallback = (response, { userName }) => {
+        const { data, status } = response;
+
         if (status === 200) {
-            profileUpdate({ userName });
+            profileUpdate({ userName, accessToken: data.accessToken });
             navigate(from, { replace: true });
         }
     };
