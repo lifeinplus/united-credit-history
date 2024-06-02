@@ -1,16 +1,15 @@
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useAuthUpdate } from "../contexts";
+import { Auth } from "../layouts";
 import type { SubmitCallback } from "../types/Auth";
 
-import { Auth } from "../layouts";
-import { useProfileUpdate } from "../contexts";
-
-const Signin = () => {
+const Login = () => {
+    const authUpdate = useAuthUpdate();
     const location = useLocation();
     const navigate = useNavigate();
-    const profileUpdate = useProfileUpdate();
-    const { t } = useTranslation(["signin"]);
+    const { t } = useTranslation(["login"]);
 
     const from = location.state?.from?.pathname || "/";
 
@@ -18,7 +17,7 @@ const Signin = () => {
         const { data, status } = response;
 
         if (status === 200) {
-            profileUpdate({ userName, accessToken: data.accessToken });
+            authUpdate({ userName, accessToken: data.accessToken });
             navigate(from, { replace: true });
         }
     };
@@ -27,17 +26,17 @@ const Signin = () => {
         <Auth
             buttonText={t("buttonText")}
             question={{
-                link: "/signup",
+                link: "/register",
                 linkText: t("linkText"),
                 text: t("questionText"),
             }}
             submit={{
                 callback: submitCallback,
-                url: "/users/signin",
+                url: "/users/login",
             }}
             title={t("title")}
         />
     );
 };
 
-export default Signin;
+export default Login;

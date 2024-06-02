@@ -8,7 +8,7 @@ import "./assets/js/main";
 
 import App from "./App";
 import Spinner from "./components/Spinner";
-import { ProfileProvider, ThemeProvider } from "./contexts";
+import { AuthProvider, ThemeProvider } from "./contexts";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!);
@@ -17,13 +17,13 @@ root.render(
     <StrictMode>
         <Suspense fallback={<Spinner />}>
             <ThemeProvider>
-                <ProfileProvider>
+                <AuthProvider>
                     <BrowserRouter>
                         <Routes>
                             <Route path="/*" element={<App />} />
                         </Routes>
                     </BrowserRouter>
-                </ProfileProvider>
+                </AuthProvider>
             </ThemeProvider>
         </Suspense>
     </StrictMode>
