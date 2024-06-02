@@ -17,6 +17,7 @@ import {
     RequestCount,
     User,
 } from "./routes";
+import verifyJWT from "./middleware/verifyJWT";
 
 const app = express();
 
@@ -59,6 +60,14 @@ const StartServer = () => {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
+    app.get("/ping", (req, res, next) =>
+        res.status(200).json({ message: "pong" })
+    );
+
+    app.use("/users", User);
+
+    app.use(verifyJWT);
+
     app.use("/commons", Common);
     app.use("/delinquencies", Delinquency);
     app.use("/flcs", Flc);
@@ -67,11 +76,6 @@ const StartServer = () => {
     app.use("/persons", Person);
     app.use("/reports", Report);
     app.use("/requestCounts", RequestCount);
-    app.use("/users", User);
-
-    app.get("/ping", (req, res, next) =>
-        res.status(200).json({ message: "pong" })
-    );
 
     app.use((req, res, next) => {
         const error = new Error("URL not found");
