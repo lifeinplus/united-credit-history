@@ -6,7 +6,7 @@ import {
     useState,
 } from "react";
 
-import axios from "../api/axios";
+import { axiosPrivate } from "../api/axios";
 import type { Profile } from "../types";
 
 const ProfileContext = createContext<Profile>({});
@@ -25,12 +25,9 @@ const ProfileProvider = ({ children }: PropsWithChildren) => {
 
     useEffect(() => {
         if (profile.userName) return;
-        axios
-            .get("users/getProfile", {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-            })
-            .then(({ data }) => setProfile(data.profile))
+        axiosPrivate
+            .get("users/refreshToken")
+            // .then(({ data }) => setProfile(data.profile))
             .catch((error) => console.error(error));
     }, []);
 

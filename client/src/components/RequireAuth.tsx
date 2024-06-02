@@ -5,7 +5,7 @@ const RequireAuth = () => {
     const profile = useProfile();
     const location = useLocation();
 
-    return profile.userName ? (
+    return profile?.userName ? (
         <Outlet />
     ) : (
         <Navigate to="/signin" state={{ from: location }} replace />
