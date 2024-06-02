@@ -7,44 +7,7 @@ import Logging from "../library/Logging";
 import { User } from "../models";
 import { UserToken } from "../types";
 
-const refreshToken = async (req: Request, res: Response) => {
-    const { jwt: refreshToken } = req.cookies;
-    if (!refreshToken)
-        return res.status(401).json({ message: "refreshToken not found" });
-
-    try {
-        const foundUser = await User.findOne({ refreshToken: refreshToken });
-        if (!foundUser)
-            return res.status(403).json({ message: "user not found" });
-
-        const decoded = jwt.verify(
-            refreshToken,
-            config.token.refresh.secret
-        ) as UserToken;
-
-        if (decoded.userName !== foundUser.userName) {
-            return res.status(403).json({ message: "userName incorrect" });
-        }
-
-        const accessToken = jwt.sign(
-            { userName: decoded.userName },
-            config.token.access.secret,
-            { expiresIn: config.token.access.expiresIn }
-        );
-
-        return res.status(200).json({ accessToken });
-    } catch (error) {
-        Logging.error(error);
-
-        if (error instanceof Error) {
-            return res.status(403).json({ message: error.message });
-        }
-
-        return res.status(500).json({ error });
-    }
-};
-
-const signin = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response) => {
     const { userName, password } = req.body;
 
     if (!userName || !password) {
@@ -101,7 +64,7 @@ const signin = async (req: Request, res: Response) => {
     }
 };
 
-const signout = async (req: Request, res: Response) => {
+const logout = async (req: Request, res: Response) => {
     const { jwt: refreshToken } = req.cookies;
     if (!refreshToken) return res.sendStatus(204);
 
@@ -127,7 +90,44 @@ const signout = async (req: Request, res: Response) => {
     }
 };
 
-const signup = async (req: Request, res: Response) => {
+const refreshToken = async (req: Request, res: Response) => {
+    const { jwt: refreshToken } = req.cookies;
+    if (!refreshToken)
+        return res.status(401).json({ message: "refreshToken not found" });
+
+    try {
+        const foundUser = await User.findOne({ refreshToken: refreshToken });
+        if (!foundUser)
+            return res.status(403).json({ message: "user not found" });
+
+        const decoded = jwt.verify(
+            refreshToken,
+            config.token.refresh.secret
+        ) as UserToken;
+
+        if (decoded.userName !== foundUser.userName) {
+            return res.status(403).json({ message: "userName incorrect" });
+        }
+
+        const accessToken = jwt.sign(
+            { userName: decoded.userName },
+            config.token.access.secret,
+            { expiresIn: config.token.access.expiresIn }
+        );
+
+        return res.status(200).json({ accessToken });
+    } catch (error) {
+        Logging.error(error);
+
+        if (error instanceof Error) {
+            return res.status(403).json({ message: error.message });
+        }
+
+        return res.status(500).json({ error });
+    }
+};
+
+const register = async (req: Request, res: Response) => {
     const { userName, password } = req.body;
 
     if (!userName) {
@@ -172,4 +172,4 @@ const signup = async (req: Request, res: Response) => {
     }
 };
 
-export default { refreshToken, signin, signout, signup };
+export default { login, logout, refreshToken, register };

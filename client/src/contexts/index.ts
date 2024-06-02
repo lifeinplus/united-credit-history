@@ -1,14 +1,10 @@
-import ProfileProvider, {
-    useProfile,
-    useProfileUpdate,
-} from "./ProfileContext";
-
+import AuthProvider, { useAuth, useAuthUpdate } from "./AuthProvider";
 import ThemeProvider, { useTheme, useThemeUpdate } from "./ThemeContext";
 
 export {
-    ProfileProvider,
-    useProfile,
-    useProfileUpdate,
+    AuthProvider,
+    useAuth,
+    useAuthUpdate,
     ThemeProvider,
     useTheme,
     useThemeUpdate,

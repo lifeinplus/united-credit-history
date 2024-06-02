@@ -53,11 +53,6 @@ export interface TableColumn {
     type?: string;
 }
 
-export interface Profile {
-    userName?: string;
-    accessToken?: string;
-}
-
 export interface Common extends Record<string, number> {}
 
 export interface Delinquency extends Record<string, string | number> {}

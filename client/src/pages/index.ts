@@ -1,8 +1,8 @@
 import About from "./About";
+import Login from "./Login";
 import NotFound from "./NotFound";
+import Register from "./Register";
 import Report from "./Report";
 import Reports from "./Reports";
-import Signin from "./Signin";
-import Signup from "./Signup";
 
-export { About, NotFound, Report, Reports, Signin, Signup };
+export { About, Login, NotFound, Register, Report, Reports };

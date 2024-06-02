@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import RequireAuth from "./components/RequireAuth";
 import { useThemeUpdate } from "./contexts";
 import Layout from "./layouts";
-import { About, NotFound, Report, Reports, Signin, Signup } from "./pages";
+import { About, Login, NotFound, Register, Report, Reports } from "./pages";
 import { langs } from "./utils";
 
 const App = () => {
@@ -77,8 +77,8 @@ const App = () => {
                         />
                     </Route>
                 </Route>
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>

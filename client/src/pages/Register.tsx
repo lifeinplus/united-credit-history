@@ -2,18 +2,17 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { Auth } from "../layouts";
 import type { SubmitCallback } from "../types/Auth";
 
-import { Auth } from "../layouts";
-
-const Signup = () => {
+const Register = () => {
     const navigate = useNavigate();
-    const { t } = useTranslation(["signup"]);
+    const { t } = useTranslation(["register"]);
 
     const submitCallback: SubmitCallback = ({ data, status }) => {
         if (status === 200) {
             toast.success(data.message);
-            navigate("/signin");
+            navigate("/login");
         }
     };
 
@@ -21,17 +20,17 @@ const Signup = () => {
         <Auth
             buttonText={t("buttonText")}
             question={{
-                link: "/signin",
+                link: "/login",
                 linkText: t("linkText"),
                 text: t("questionText"),
             }}
             submit={{
                 callback: submitCallback,
-                url: "/users/signup",
+                url: "/users/register",
             }}
             title={t("title")}
         />
     );
 };
 
-export default Signup;
+export default Register;

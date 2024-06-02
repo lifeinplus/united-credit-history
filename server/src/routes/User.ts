@@ -4,8 +4,8 @@ import { User } from "../controllers";
 const router = express.Router();
 
 router.get("/refreshToken", User.refreshToken);
-router.post("/signin", User.signin);
-router.get("/signout", User.signout);
-router.post("/signup", User.signup);
+router.get("/logout", User.logout);
+router.post("/login", User.login);
+router.post("/register", User.register);
 
 export = router;
