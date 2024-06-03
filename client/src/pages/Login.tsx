@@ -11,7 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { t } = useTranslation(["login"]);
 
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/reports";
 
     const submitCallback: SubmitCallback = (response, { userName }) => {
         const { data, status } = response;

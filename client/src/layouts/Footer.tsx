@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { useTheme } from "../../contexts";
+import { useTheme } from "../contexts";
 
 const Footer = () => {
     const { t } = useTranslation(["footer"]);

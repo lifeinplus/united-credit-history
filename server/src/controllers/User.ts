@@ -71,7 +71,7 @@ const logout = async (req: Request, res: Response) => {
     res.clearCookie("jwt");
 
     try {
-        const foundUser = await User.findOne({ refreshToken: refreshToken });
+        const foundUser = await User.findOne({ refreshToken });
 
         if (foundUser) {
             foundUser.refreshToken = "";
@@ -97,8 +97,10 @@ const refreshToken = async (req: Request, res: Response) => {
 
     try {
         const foundUser = await User.findOne({ refreshToken: refreshToken });
-        if (!foundUser)
+
+        if (!foundUser) {
             return res.status(403).json({ message: "user not found" });
+        }
 
         const decoded = jwt.verify(
             refreshToken,
@@ -115,7 +117,9 @@ const refreshToken = async (req: Request, res: Response) => {
             { expiresIn: config.token.access.expiresIn }
         );
 
-        return res.status(200).json({ accessToken });
+        return res
+            .status(200)
+            .json({ accessToken, userName: foundUser.userName });
     } catch (error) {
         Logging.error(error);
 
