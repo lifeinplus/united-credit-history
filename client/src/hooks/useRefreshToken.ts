@@ -7,8 +7,8 @@ const useRefreshToken = () => {
 
     return async () => {
         const response = await axiosPrivate.get("users/refreshToken");
-        const { accessToken } = response.data;
-        authUpdate({ ...auth, accessToken });
+        const { accessToken, userName } = response.data;
+        authUpdate({ ...auth, accessToken, userName });
         return accessToken;
     };
 };
