@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 
+import { axiosPrivate } from "../../../api/axios";
 import { useAuth, useAuthUpdate, useTheme } from "../../../contexts";
 
 const Account = () => {
@@ -15,11 +15,13 @@ const Account = () => {
     return auth?.userName ? <Out /> : <In />;
 
     function Out() {
-        const handleClick = () => {
-            const cookies = new Cookies();
-            cookies.remove("token");
-            authUpdate({});
-            navigate("/login");
+        const handleLogout = () => {
+            axiosPrivate("/users/logout")
+                .then(() => {
+                    authUpdate({});
+                    navigate("/login");
+                })
+                .catch((error) => console.error(error));
         };
 
         return (
@@ -49,7 +51,7 @@ const Account = () => {
                     <li>
                         <button
                             className="dropdown-item"
-                            onClick={handleClick}
+                            onClick={handleLogout}
                             type="button"
                         >
                             {t("logout")}

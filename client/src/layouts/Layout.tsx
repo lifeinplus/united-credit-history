@@ -3,14 +3,8 @@ import { Outlet } from "react-router-dom";
 
 import { useTheme } from "../contexts";
 
-import Auth from "./Auth";
-import CreditHistory from "./CreditHistory";
 import Footer from "./Footer";
 import Header from "./Header";
-import PersonalData from "./PersonalData";
-import ReportList from "./ReportList";
-
-export { Auth, CreditHistory, PersonalData, ReportList };
 
 const Layout = () => {
     const theme = useTheme();

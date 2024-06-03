@@ -4,14 +4,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { axiosPrivate } from "../../api/axios";
+import { axiosPrivate } from "../api/axios";
 
 import type {
     AuthProps,
     OnChangeHandler,
     SubmitHandler,
     UserData,
-} from "../../types/Auth";
+} from "../types/Auth";
 
 const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
     const { t } = useTranslation(["auth"]);

@@ -3,9 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import RequireAuth from "./components/RequireAuth";
 import { useThemeUpdate } from "./contexts";
-import Layout from "./layouts";
+import { Layout, PersistLogin, RequireAuth } from "./layouts";
 import { About, Login, NotFound, Register, Report, Reports } from "./pages";
 import { langs } from "./utils";
 
@@ -63,22 +62,26 @@ const App = () => {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route path="/about" element={<About />} />
-                <Route element={<RequireAuth />}>
-                    <Route path="/reports">
-                        <Route index element={<Reports />} />
-                        <Route
-                            path=":reportId"
-                            element={
-                                <Report
-                                    handleExtend={handleExtend}
-                                    showExtendedData={showExtendedData}
-                                />
-                            }
-                        />
-                    </Route>
-                </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+
+                <Route element={<PersistLogin />}>
+                    <Route element={<RequireAuth />}>
+                        <Route path="/reports">
+                            <Route index element={<Reports />} />
+                            <Route
+                                path=":reportId"
+                                element={
+                                    <Report
+                                        handleExtend={handleExtend}
+                                        showExtendedData={showExtendedData}
+                                    />
+                                }
+                            />
+                        </Route>
+                    </Route>
+                </Route>
+
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
