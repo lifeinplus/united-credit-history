@@ -1,9 +1,14 @@
 import { AxiosResponse } from "axios";
-import { ChangeEvent, FormEvent } from "react";
+import { Dispatch, FormEvent, SetStateAction } from "react";
 
 export interface Auth {
     userName?: string;
     accessToken?: string;
+}
+
+export interface AuthContext {
+    auth: Auth;
+    setAuth: Dispatch<SetStateAction<Auth>>;
 }
 
 export interface AuthProps {
@@ -17,19 +22,10 @@ export interface AuthProps {
     title: string;
 }
 
-export interface OnChangeHandler {
-    (e: ChangeEvent<HTMLInputElement>, inputName: string): void;
-}
-
 export interface SubmitCallback {
-    (response: AxiosResponse, userData: UserData): void;
+    (response: AxiosResponse, userName: string): void;
 }
 
 export interface SubmitHandler {
     (e: FormEvent<HTMLFormElement>): void;
-}
-
-export interface UserData {
-    userName: string;
-    password: string;
 }

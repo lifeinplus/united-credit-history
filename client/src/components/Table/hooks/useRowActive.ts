@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Loan, Person, Report } from "../../../types";
 
-export const useRowActive = (
+const useRowActive = (
     rowActive: boolean,
     data: Loan[] | Person[] | Report[] = []
 ) => {
@@ -14,3 +14,5 @@ export const useRowActive = (
             : data;
     }, [rowActive, data]);
 };
+
+export default useRowActive;

@@ -3,11 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { axiosPrivate } from "../../../api/axios";
-import { useAuth, useAuthUpdate, useTheme } from "../../../contexts";
+import { useAuth, useTheme } from "../../../contexts";
 
 const Account = () => {
-    const auth = useAuth();
-    const authUpdate = useAuthUpdate();
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const theme = useTheme();
     const { t } = useTranslation("header");
@@ -18,7 +17,7 @@ const Account = () => {
         const handleLogout = () => {
             axiosPrivate("/users/logout")
                 .then(() => {
-                    authUpdate({});
+                    setAuth({});
                     navigate("/login");
                 })
                 .catch((error) => console.error(error));
