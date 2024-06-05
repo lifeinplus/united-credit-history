@@ -22,4 +22,4 @@ const useTooltip = (tooltips: boolean, columns: TableColumn[]) => {
     }, [tooltips, columns]);
 };
 
-export { useTooltip };
+export default useTooltip;

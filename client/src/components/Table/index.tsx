@@ -43,7 +43,7 @@ const Table = ({
     const rowActiveData = useRowActive(rowActive, data);
     const theme = useTheme();
 
-    const { sortedData, requestSort, sortConfig } = useSortableData(
+    const [sortedData, requestSort, sortConfig] = useSortableData(
         rowActiveData,
         {
             dataType: "amount",
@@ -53,9 +53,8 @@ const Table = ({
         }
     );
 
-    const { tableWrapperRef, headerRef } = useStickyHeader(stickyHeader);
-    const { scrollWrapperRef, btnRefs, handleScroll } =
-        useTableScroll(scrolling);
+    const [tableWrapperRef, headerRef] = useStickyHeader(stickyHeader);
+    const [scrollWrapperRef, btnRefs, handleScroll] = useTableScroll(scrolling);
 
     const getSortClass: SortClass = (sysName) => {
         return sortConfig && sortConfig.sysName === sysName

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const useStickyHeader = (sticky: boolean) => {
+const useStickyHeader = (sticky: boolean) => {
     const tableWrapperRef = useRef<HTMLDivElement | null>(null);
     const headerRef = useRef<HTMLTableSectionElement>(null);
 
@@ -43,5 +43,7 @@ export const useStickyHeader = (sticky: boolean) => {
         };
     }, [sticky]);
 
-    return { tableWrapperRef, headerRef };
+    return [tableWrapperRef, headerRef] as const;
 };
+
+export default useStickyHeader;

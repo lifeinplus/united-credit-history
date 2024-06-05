@@ -10,7 +10,7 @@ const Register = () => {
     const { t } = useTranslation(["register"]);
 
     const submitCallback: SubmitCallback = ({ data, status }) => {
-        if (status === 200) {
+        if (status === 201) {
             toast.success(data.message);
             navigate("/login");
         }

@@ -5,42 +5,28 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { axiosPrivate } from "../api/axios";
-
-import type {
-    AuthProps,
-    OnChangeHandler,
-    SubmitHandler,
-    UserData,
-} from "../types/Auth";
+import { useInput } from "../hooks";
+import { AuthProps, SubmitHandler } from "../types/Auth";
 
 const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
     const { t } = useTranslation(["auth"]);
     const userNameRef = useRef<HTMLInputElement>(null);
     const [validated, setValidated] = useState(false);
 
-    const [data, setData] = useState<UserData>({
-        userName: "",
-        password: "",
-    });
+    const [userName, userNameAttributes] = useInput("userName", "");
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
         userNameRef.current?.focus();
     }, []);
-
-    const handleOnChange: OnChangeHandler = (e, inputName) => {
-        setData({
-            ...data,
-            [inputName]: e.target.value,
-        });
-    };
 
     const handleSubmit: SubmitHandler = (e) => {
         e.preventDefault();
         setValidated(true);
 
         axiosPrivate
-            .post(submit.url, data)
-            .then((response) => submit.callback(response, data))
+            .post(submit.url, { userName, password })
+            .then((response) => submit.callback(response, userName))
             .catch((error) => {
                 console.error(error);
                 const { message, response } = error;
@@ -67,12 +53,11 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
                     <input
                         id="floatingUserName"
                         className="form-control"
-                        onChange={(e) => handleOnChange(e, "userName")}
                         placeholder={t("userName")}
                         ref={userNameRef}
                         required
                         type="text"
-                        value={data.userName}
+                        {...userNameAttributes}
                     />
                     <label htmlFor="floatingUserName">{t("userName")}</label>
                 </div>
@@ -81,11 +66,11 @@ const Auth = ({ buttonText, question, submit, title }: AuthProps) => {
                         id="floatingPassword"
                         className="form-control"
                         minLength={4}
-                        onChange={(e) => handleOnChange(e, "password")}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder={t("password")}
                         type="password"
                         required
-                        value={data.password}
+                        value={password}
                     />
                     <label htmlFor="floatingPassword">{t("password")}</label>
                 </div>
