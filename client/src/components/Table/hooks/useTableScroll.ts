@@ -76,7 +76,7 @@ const useTableScroll = (scrolling: boolean) => {
         btnEndRef,
     };
 
-    return { scrollWrapperRef, btnRefs, handleScroll };
+    return [scrollWrapperRef, btnRefs, handleScroll] as const;
 };
 
 function blurTimeout(btnRef: RefObject<HTMLButtonElement>) {
@@ -120,4 +120,4 @@ function scrollEnd(
     wrapper.scrollLeft += wrapper.scrollWidth;
 }
 
-export { useTableScroll };
+export default useTableScroll;

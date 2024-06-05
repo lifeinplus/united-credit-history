@@ -6,7 +6,7 @@ import { useAuth } from "../contexts";
 import useRefreshToken from "./useRefreshToken";
 
 const useAxiosPrivate = () => {
-    const auth = useAuth();
+    const { auth } = useAuth();
     const refreshToken = useRefreshToken();
     const refreshRan = useRef(false);
 

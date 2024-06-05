@@ -1,23 +1,21 @@
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useAuthUpdate } from "../contexts";
+import { useAuth } from "../contexts";
 import { Auth } from "../layouts";
-import type { SubmitCallback } from "../types/Auth";
+import { SubmitCallback } from "../types/Auth";
 
 const Login = () => {
-    const authUpdate = useAuthUpdate();
+    const { setAuth } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const { t } = useTranslation(["login"]);
 
     const from = location.state?.from?.pathname || "/reports";
 
-    const submitCallback: SubmitCallback = (response, { userName }) => {
-        const { data, status } = response;
-
+    const submitCallback: SubmitCallback = ({ data, status }, userName) => {
         if (status === 200) {
-            authUpdate({ userName, accessToken: data.accessToken });
+            setAuth({ userName, accessToken: data.accessToken });
             navigate(from, { replace: true });
         }
     };

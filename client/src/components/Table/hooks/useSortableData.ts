@@ -9,7 +9,7 @@ type SortConfig = {
     sysNameStatus?: string;
 };
 
-export const useSortableData = (
+const useSortableData = (
     data: (Loan | Person | Report)[] = [],
     config: SortConfig
 ) => {
@@ -65,7 +65,7 @@ export const useSortableData = (
         setSortConfig({ ...column, direction });
     };
 
-    return { sortedData, requestSort, sortConfig };
+    return [sortedData, requestSort, sortConfig] as const;
 };
 
 interface CompareOptions {
@@ -138,3 +138,5 @@ function getCompareFunction(type: string) {
 
     return _compareFunctions[type];
 }
+
+export default useSortableData;
