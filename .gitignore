@@ -1,5 +1,6 @@
-dist
-node_modules
 *bundle*
-data
 .env
+data
+dist
+logs
+node_modules
