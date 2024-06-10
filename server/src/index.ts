@@ -34,15 +34,13 @@ mongoose
 
 const StartServer = () => {
     app.use((req, res, next) => {
-        Logging.info(
-            `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]]`,
-            "incoming"
+        Logging.infoIn(
+            `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]]`
         );
 
         res.on("finish", () => {
-            Logging.info(
-                `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]] - Status: [${res.statusCode}]`,
-                "outgoing"
+            Logging.infoOut(
+                `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]] - Status: [${res.statusCode}]`
             );
         });
 
