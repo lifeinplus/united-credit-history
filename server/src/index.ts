@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 import { config } from "./config";
 import Logging from "./library/Logging";
+import { jwtVerifier, requestLogger } from "./middleware";
 
 import {
     Common,
@@ -17,7 +18,6 @@ import {
     RequestCount,
     User,
 } from "./routes";
-import verifyJWT from "./middleware/verifyJWT";
 
 const app = express();
 
@@ -33,19 +33,7 @@ mongoose
     });
 
 const StartServer = () => {
-    app.use((req, res, next) => {
-        Logging.infoIn(
-            `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]]`
-        );
-
-        res.on("finish", () => {
-            Logging.infoOut(
-                `Method: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]] - Status: [${res.statusCode}]`
-            );
-        });
-
-        next();
-    });
+    app.use(requestLogger);
 
     app.use(
         cors({
@@ -64,7 +52,7 @@ const StartServer = () => {
 
     app.use("/users", User);
 
-    app.use(verifyJWT);
+    app.use(jwtVerifier);
 
     app.use("/commons", Common);
     app.use("/delinquencies", Delinquency);
