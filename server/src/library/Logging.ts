@@ -1,12 +1,8 @@
 import chalk from "chalk";
-import EventEmitter from "events";
 import fs from "fs";
 import path from "path";
 
-class Emitter extends EventEmitter {}
-const emitter = new Emitter();
-
-emitter.on("fileLog", async (message) => {
+const fileLog = async (message: string) => {
     const dirPath = path.join("logs");
     const filePath = path.join(dirPath, "main.log");
 
@@ -19,24 +15,9 @@ emitter.on("fileLog", async (message) => {
     } catch (error) {
         console.error(error);
     }
-});
+};
 
-export default class Logging {
-    private static write = ({
-        time,
-        timeChalk,
-        direction,
-        directionChalk,
-        message,
-        messageChalk,
-    }: Record<string, string>) => {
-        direction = direction ? direction + " " : "";
-        directionChalk = directionChalk ? directionChalk + " " : "";
-
-        console.log(timeChalk + " " + directionChalk + messageChalk);
-        emitter.emit("fileLog", time + " " + direction + message);
-    };
-
+class Logging {
     public static log = (value: any) => this.info(value);
 
     public static info = (message: any) => {
@@ -46,7 +27,8 @@ export default class Logging {
         const messageChalk =
             typeof message === "string" ? chalk.blueBright(message) : message;
 
-        this.write({ time, timeChalk, message, messageChalk });
+        console.log(`${timeChalk} ${messageChalk}`);
+        fileLog(`${time} ${message}`);
     };
 
     public static infoIn = (message: any) => {
@@ -59,14 +41,8 @@ export default class Logging {
         const messageChalk =
             typeof message === "string" ? chalk.blueBright(message) : message;
 
-        this.write({
-            time,
-            timeChalk,
-            direction,
-            directionChalk,
-            message,
-            messageChalk,
-        });
+        console.log(`${timeChalk} ${directionChalk} ${messageChalk}`);
+        fileLog(`${time} ${direction} ${message}`);
     };
 
     public static infoOut = (message: any) => {
@@ -79,14 +55,8 @@ export default class Logging {
         const messageChalk =
             typeof message === "string" ? chalk.blueBright(message) : message;
 
-        this.write({
-            time,
-            timeChalk,
-            direction,
-            directionChalk,
-            message,
-            messageChalk,
-        });
+        console.log(`${timeChalk} ${directionChalk} ${messageChalk}`);
+        fileLog(`${time} ${direction} ${message}`);
     };
 
     public static warn = (message: any) => {
@@ -96,7 +66,8 @@ export default class Logging {
         const messageChalk =
             typeof message === "string" ? chalk.yellowBright(message) : message;
 
-        this.write({ time, timeChalk, message, messageChalk });
+        console.log(`${timeChalk} ${messageChalk}`);
+        fileLog(`${time} ${message}`);
     };
 
     public static error = (message: any) => {
@@ -106,6 +77,9 @@ export default class Logging {
         const messageChalk =
             typeof message === "string" ? chalk.redBright(message) : message;
 
-        this.write({ time, timeChalk, message, messageChalk });
+        console.log(`${timeChalk} ${messageChalk}`);
+        fileLog(`${time} ${message}`);
     };
 }
+
+export default Logging;

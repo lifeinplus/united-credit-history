@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { config } from "../config";
 import Logging from "../library/Logging";
 
-const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
+const jwtVerifier = (req: Request, res: Response, next: NextFunction) => {
     const authorization = req.headers.authorization;
 
     if (!authorization) return res.sendStatus(401);
@@ -25,4 +25,4 @@ const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export default verifyJWT;
+export default jwtVerifier;
