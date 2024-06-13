@@ -2,6 +2,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const CORS_CREDENTIALS = process.env.CORS_CREDENTIALS?.toLowerCase() === "true";
+const CORS_ORIGIN = process.env.CORS_ORIGIN || "";
+
 const ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOKEN_EXPIRES_IN || "5m";
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || "";
 const REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN || "1h";
@@ -18,6 +21,10 @@ const SERVER_PORT = process.env.SERVER_PORT
     : 1337;
 
 export const config = {
+    cors: {
+        credentials: CORS_CREDENTIALS,
+        origin: CORS_ORIGIN,
+    },
     mongo: {
         uri: MONGO_URI,
     },
