@@ -34,14 +34,7 @@ mongoose
 
 const StartServer = () => {
     app.use(requestLogger);
-
-    app.use(
-        cors({
-            credentials: true,
-            origin: "http://localhost:8080",
-        })
-    );
-
+    app.use(cors(config.cors));
     app.use(cookieParser());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
