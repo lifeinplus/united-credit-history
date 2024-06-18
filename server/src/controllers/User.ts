@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 import { config } from "../config";
+import ROLE_LIST from "../config/role_list";
 import Logging from "../library/Logging";
 import { User } from "../models";
 import { UserToken } from "../types";
@@ -31,8 +32,10 @@ const login = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "Password is incorrect" });
         }
 
+        const roles = Object.values(foundUser.roles || {});
+
         const accessToken = jwt.sign(
-            { userName: foundUser.userName },
+            { userName: foundUser.userName, roles },
             config.token.access.secret,
             { expiresIn: config.token.access.expiresIn }
         );
@@ -50,6 +53,8 @@ const login = async (req: Request, res: Response) => {
             .status(200)
             .cookie("jwt", refreshToken, {
                 httpOnly: true,
+                sameSite: "none",
+                secure: true,
                 maxAge: 24 * 60 * 60 * 1000,
             })
             .json({ accessToken });
@@ -111,8 +116,10 @@ const refreshToken = async (req: Request, res: Response) => {
             return res.status(403).json({ message: "userName incorrect" });
         }
 
+        const roles = Object.values(foundUser.roles || {});
+
         const accessToken = jwt.sign(
-            { userName: decoded.userName },
+            { userName: decoded.userName, roles },
             config.token.access.secret,
             { expiresIn: config.token.access.expiresIn }
         );
@@ -160,6 +167,7 @@ const register = async (req: Request, res: Response) => {
         const newUser = await User.create({
             userName,
             password: hashedPassword,
+            roles: { user: ROLE_LIST.user },
         });
 
         return res.status(201).json({
