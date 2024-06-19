@@ -4,6 +4,7 @@ import { Dispatch, FormEvent, SetStateAction } from "react";
 export interface Auth {
     userName?: string;
     accessToken?: string;
+    roles?: number[];
 }
 
 export interface AuthContext {
