@@ -6,10 +6,10 @@ const useRefreshToken = () => {
 
     return async () => {
         const response = await axiosPrivate.get("users/refreshToken");
-        const { accessToken, userName } = response.data;
+        const { accessToken, roles, userName } = response.data;
 
         setAuth((prev) => {
-            return { ...prev, accessToken, userName };
+            return { ...prev, accessToken, roles, userName };
         });
 
         return accessToken;

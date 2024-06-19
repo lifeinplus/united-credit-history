@@ -4,8 +4,9 @@ import express from "express";
 import mongoose from "mongoose";
 
 import { config } from "./config";
+import ROLE_LIST from "./config/role_list";
 import Logging from "./library/Logging";
-import { jwtVerifier, requestLogger } from "./middleware";
+import { jwtVerifier, requestLogger, rolesVerifier } from "./middleware";
 
 import {
     Common,
@@ -44,16 +45,16 @@ const StartServer = () => {
     );
 
     app.use("/users", User);
-
     app.use(jwtVerifier);
-
+    app.use(rolesVerifier(ROLE_LIST.user));
+    app.use("/reports", Report);
+    app.use(rolesVerifier(ROLE_LIST.admin));
     app.use("/commons", Common);
     app.use("/delinquencies", Delinquency);
     app.use("/flcs", Flc);
     app.use("/loans", Loan);
     app.use("/paymenthistories", PaymentHistory);
     app.use("/persons", Person);
-    app.use("/reports", Report);
     app.use("/requestCounts", RequestCount);
 
     app.use((req, res, next) => {

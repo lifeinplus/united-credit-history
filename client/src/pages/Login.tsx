@@ -14,8 +14,10 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/reports";
 
     const submitCallback: SubmitCallback = ({ data, status }, userName) => {
+        const { accessToken, roles } = data;
+
         if (status === 200) {
-            setAuth({ userName, accessToken: data.accessToken });
+            setAuth({ accessToken, roles, userName });
             navigate(from, { replace: true });
         }
     };

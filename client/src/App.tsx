@@ -5,7 +5,17 @@ import Cookies from "universal-cookie";
 
 import { useThemeUpdate } from "./contexts";
 import { Layout, PersistLogin, RequireAuth } from "./layouts";
-import { About, Login, NotFound, Register, Report, Reports } from "./pages";
+
+import {
+    About,
+    Login,
+    NotFound,
+    Register,
+    Report,
+    Reports,
+    Unauthorized,
+} from "./pages";
+
 import { langs } from "./utils";
 
 const App = () => {
@@ -64,20 +74,25 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/unauthorized" element={<Unauthorized />} />
 
                 <Route element={<PersistLogin />}>
-                    <Route element={<RequireAuth />}>
+                    <Route element={<RequireAuth allowedRoles={[2020]} />}>
                         <Route path="/reports">
                             <Route index element={<Reports />} />
                             <Route
-                                path=":reportId"
-                                element={
-                                    <Report
-                                        handleExtend={handleExtend}
-                                        showExtendedData={showExtendedData}
-                                    />
-                                }
-                            />
+                                element={<RequireAuth allowedRoles={[1010]} />}
+                            >
+                                <Route
+                                    path=":reportId"
+                                    element={
+                                        <Report
+                                            handleExtend={handleExtend}
+                                            showExtendedData={showExtendedData}
+                                        />
+                                    }
+                                />
+                            </Route>
                         </Route>
                     </Route>
                 </Route>
