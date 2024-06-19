@@ -1,16 +1,26 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
+
 import { config } from "../config";
 import Logging from "../library/Logging";
+import { UserRequest, UserToken } from "../types";
 
-const jwtVerifier = (req: Request, res: Response, next: NextFunction) => {
+const jwtVerifier = (req: UserRequest, res: Response, next: NextFunction) => {
     const authorization = req.headers.authorization;
 
-    if (!authorization) return res.sendStatus(401);
+    if (!authorization?.startsWith("Bearer ")) {
+        return res.sendStatus(401);
+    }
 
     try {
         const token = authorization.split(" ")[1];
-        jwt.verify(token, config.token.access.secret);
+
+        const decoded = jwt.verify(
+            token,
+            config.token.access.secret
+        ) as UserToken;
+
+        req.roles = decoded.roles;
         next();
     } catch (error) {
         Logging.error(error);
@@ -18,7 +28,7 @@ const jwtVerifier = (req: Request, res: Response, next: NextFunction) => {
         if (error instanceof Error) {
             return res
                 .status(403)
-                .json({ message: "verifyJWT: " + error.message });
+                .json({ message: "jwtVerifier: " + error.message });
         }
 
         return res.status(500).json({ error });

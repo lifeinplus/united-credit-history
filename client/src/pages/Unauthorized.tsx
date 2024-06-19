@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useTheme } from "../contexts";
 
-const NotFound = () => {
+const Unauthorized = () => {
     const theme = useTheme();
     const textClass = theme === "light" ? "text-dark" : "text-light";
 
@@ -15,11 +15,11 @@ const NotFound = () => {
                 )}
             >
                 <div className="col">
-                    <h3 className={textClass}>404 Not Found</h3>
+                    <h3 className={textClass}>401 Unauthorized</h3>
                 </div>
             </div>
         </div>
     );
 };
 
-export default NotFound;
+export default Unauthorized;
