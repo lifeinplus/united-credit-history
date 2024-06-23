@@ -2,10 +2,8 @@ import express from "express";
 import { User } from "../controllers";
 
 const router = express.Router();
-
-router.post("/login", User.login);
-router.get("/logout", User.logout);
-router.get("/refreshToken", User.refreshToken);
-router.post("/register", User.register);
+router.get("/getAll", User.getAll);
+router.put("/updateById", User.updateById);
+router.delete("/deleteById/:id", User.deleteById);
 
 export = router;
