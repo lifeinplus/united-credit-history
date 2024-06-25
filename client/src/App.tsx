@@ -14,6 +14,7 @@ import {
     Report,
     Reports,
     Unauthorized,
+    Users,
 } from "./pages";
 
 import { langs } from "./utils";
@@ -81,18 +82,17 @@ const App = () => {
                         <Route path="/reports">
                             <Route index element={<Reports />} />
                             <Route
-                                element={<RequireAuth allowedRoles={[1010]} />}
-                            >
-                                <Route
-                                    path=":reportId"
-                                    element={
-                                        <Report
-                                            handleExtend={handleExtend}
-                                            showExtendedData={showExtendedData}
-                                        />
-                                    }
-                                />
-                            </Route>
+                                path=":reportId"
+                                element={
+                                    <Report
+                                        handleExtend={handleExtend}
+                                        showExtendedData={showExtendedData}
+                                    />
+                                }
+                            />
+                        </Route>
+                        <Route element={<RequireAuth allowedRoles={[1010]} />}>
+                            <Route path="/users" element={<Users />} />
                         </Route>
                     </Route>
                 </Route>

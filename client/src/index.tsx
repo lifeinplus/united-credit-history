@@ -9,7 +9,7 @@ import "./assets/js/main";
 
 import App from "./App";
 import Spinner from "./components/Spinner";
-import { AuthProvider, ThemeProvider } from "./contexts";
+import { AuthProvider, ModalDataProvider, ThemeProvider } from "./contexts";
 
 if (process.env.NODE_ENV === "production") {
     disableReactDevTools();
@@ -21,15 +21,17 @@ const root = createRoot(rootElement!);
 root.render(
     <StrictMode>
         <Suspense fallback={<Spinner />}>
-            <ThemeProvider>
-                <AuthProvider>
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path="/*" element={<App />} />
-                        </Routes>
-                    </BrowserRouter>
-                </AuthProvider>
-            </ThemeProvider>
+            <AuthProvider>
+                <ModalDataProvider>
+                    <ThemeProvider>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="/*" element={<App />} />
+                            </Routes>
+                        </BrowserRouter>
+                    </ThemeProvider>
+                </ModalDataProvider>
+            </AuthProvider>
         </Suspense>
     </StrictMode>
 );

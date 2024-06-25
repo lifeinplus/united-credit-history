@@ -32,7 +32,7 @@ const Login = () => {
             }}
             submit={{
                 callback: submitCallback,
-                url: "/users/login",
+                url: "/auth/login",
             }}
             title={t("title")}
         />

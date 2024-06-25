@@ -1,4 +1,5 @@
-import type { PaymentHistory, TableColumn } from "../../types";
+import { PaymentHistory } from "../../types/Report";
+import { TableColumn } from "../../types/Table";
 import { getDateFormat } from "../../utils";
 
 export class TimePeriod {

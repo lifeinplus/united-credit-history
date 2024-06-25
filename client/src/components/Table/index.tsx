@@ -1,13 +1,9 @@
 import classNames from "classnames";
 
-import type { TableColumn, Loan, Person, Report, SortClass } from "../../types";
-
 import { useTheme } from "../../contexts";
+import { TableSortClass, Table } from "../../types/Table";
 
-import Head from "./components/Head";
-import Body from "./components/Body";
-import ScrollButtons from "./components/ScrollButtons";
-
+import { Body, Head, ScrollButtons } from "./components";
 import {
     useRowActive,
     useSortableData,
@@ -15,21 +11,9 @@ import {
     useTableScroll,
 } from "./hooks";
 
-type TableProps = {
-    id: string;
-    columns: TableColumn[];
-    data?: Loan[] | Person[] | Report[];
-    mobileView?: boolean;
-    rowActive?: boolean;
-    rowHover?: boolean;
-    scrolling?: boolean;
-    stickyHeader?: boolean;
-    textDifference?: boolean;
-    tooltips?: boolean;
-};
-
 const Table = ({
     id,
+    actions = false,
     columns,
     data,
     mobileView = false,
@@ -39,7 +23,7 @@ const Table = ({
     stickyHeader = false,
     textDifference = false,
     tooltips = false,
-}: TableProps) => {
+}: Table) => {
     const rowActiveData = useRowActive(rowActive, data);
     const theme = useTheme();
 
@@ -56,7 +40,7 @@ const Table = ({
     const [tableWrapperRef, headerRef] = useStickyHeader(stickyHeader);
     const [scrollWrapperRef, btnRefs, handleScroll] = useTableScroll(scrolling);
 
-    const getSortClass: SortClass = (sysName) => {
+    const getSortClass: TableSortClass = (sysName) => {
         return sortConfig && sortConfig.sysName === sysName
             ? sortConfig.direction
             : undefined;
@@ -93,6 +77,7 @@ const Table = ({
                 )}
             >
                 <Head
+                    actions={actions}
                     columns={columns}
                     getSortClass={getSortClass}
                     ref={headerRef}
@@ -100,6 +85,7 @@ const Table = ({
                     tooltips={tooltips}
                 />
                 <Body
+                    actions={actions}
                     columns={columns}
                     data={sortedData}
                     mobileView={mobileView}

@@ -1,48 +1,31 @@
+import classNames from "classnames";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import type { TableColumn, Loan, Person, Report } from "../../../types";
-import { useTheme } from "../../../contexts";
+import { useModalData, useTheme } from "../../../contexts";
+import {
+    TableBody,
+    TableDataCell,
+    TableDiff,
+    TableDiffBadges,
+    TableRow,
+} from "../../../types/Table";
 import { getDateFormat, langs } from "../../../utils";
 
-type BodyProps = {
-    columns: TableColumn[];
-    data?: (Person | Report | Loan)[];
-    mobileView: boolean;
-    rowActive: boolean;
-    textDifference: boolean;
-};
-
-type RowProps = {
-    data: Loan | Person | Report;
-};
-
-type CellProps = {
-    id: string;
-    column: TableColumn;
-    data: Loan | Person | Report;
-};
-
-type Diff = { text?: string; spanText?: string };
-
-type DiffBadgesProps = {
-    id: string;
-    data?: Diff[];
-};
-
 const Body = ({
+    actions,
     columns,
     data,
     mobileView,
     rowActive,
     textDifference,
-}: BodyProps) => {
+}: TableBody) => {
+    const theme = useTheme();
+    const { modalData, setModalData } = useModalData();
     const [activeRowId, setActiveRowId] = useState<string | undefined>(
         undefined
     );
-
-    const theme = useTheme();
 
     const { i18n } = useTranslation();
     const lang = langs[i18n.resolvedLanguage || "en"];
@@ -67,7 +50,7 @@ const Body = ({
         </tbody>
     );
 
-    function Row({ data }: RowProps) {
+    function Row({ data }: TableRow) {
         const { activeId, _id } = data;
 
         return (
@@ -86,11 +69,49 @@ const Body = ({
                         <Cell key={key} id={key} column={element} data={data} />
                     );
                 })}
+                {actions && <ActionCell data={data} />}
             </tr>
         );
     }
 
-    function Cell(params: CellProps) {
+    function ActionCell({ data }: TableRow) {
+        return (
+            <td className={"text-end"}>
+                <div className="btn-group" role="group">
+                    <button
+                        className={classNames(
+                            "btn",
+                            "btn-outline-primary",
+                            `uch-btn-outline-primary ${theme}`,
+                            "btn-sm"
+                        )}
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                        onClick={() => setModalData(data)}
+                        type="button"
+                    >
+                        <i className="bi bi-pencil-square"></i>
+                    </button>
+                    <button
+                        className={classNames(
+                            "btn",
+                            "btn-outline-primary",
+                            `uch-btn-outline-primary ${theme}`,
+                            "btn-sm"
+                        )}
+                        onClick={() => setModalData(data)}
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                        type="button"
+                    >
+                        <i className="bi bi-trash"></i>
+                    </button>
+                </div>
+            </td>
+        );
+    }
+
+    function Cell(params: TableDataCell) {
         const { id, column, data } = params;
         const { isLink, name, type } = column;
 
@@ -120,7 +141,7 @@ const Body = ({
         );
     }
 
-    function DiffBadges({ id, data }: DiffBadgesProps) {
+    function DiffBadges({ id, data }: TableDiffBadges) {
         return data?.map((element, index) => {
             const { spanText, text } = element;
             const key = `${id}-span${index}`;
@@ -135,7 +156,7 @@ const Body = ({
         });
     }
 
-    function getCommonData({ column, data }: CellProps) {
+    function getCommonData({ column, data }: TableDataCell) {
         const {
             alignment,
             badgeEqual,
@@ -166,7 +187,7 @@ const Body = ({
         return { cell: alignment, badge, diffData, value: currentValue };
     }
 
-    function getStatusData({ column, data }: CellProps) {
+    function getStatusData({ column, data }: TableDataCell) {
         const { name } = column;
 
         const value = data[name || ""];
@@ -201,7 +222,7 @@ const Body = ({
         valueA: string | number = "",
         valueB: string | number = ""
     ) {
-        let result: Diff[] = [];
+        let result: TableDiff[] = [];
 
         const arrayA = String(valueA).split(" ");
         const arrayB = String(valueB).split(" ");

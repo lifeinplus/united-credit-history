@@ -1,0 +1,7 @@
+{
+    "table": {
+        "userName": "User Name",
+        "roles": "Roles"
+    },
+    "title": "User List"
+}

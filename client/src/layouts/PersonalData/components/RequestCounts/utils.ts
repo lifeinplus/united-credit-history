@@ -1,4 +1,5 @@
-import type { ListField, ScoreStyle } from "../../../../types";
+import { ListField } from "../../../../types";
+import { ScoreStyle } from "../../../../types/PersonalData";
 
 export const customFields: ListField[] = [
     {

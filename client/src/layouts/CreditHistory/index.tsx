@@ -3,30 +3,15 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import type {
-    Common,
-    Delinquency,
-    Flc,
-    Loan,
-    PaymentHistory,
-    Report,
-} from "../../types";
-
-import PanelHeader from "../../components/PanelHeader";
-import Table from "../../components/Table";
+import { PanelHeader, Table } from "../../components";
 import { useTheme } from "../../contexts";
 import { useDataById, useDataByIds } from "../../hooks";
+import { CreditHistoryProps } from "../../types/CreditHistory";
+import { Delinquency, Flc, Loan, PaymentHistory } from "../../types/Report";
 import { getDateFormat } from "../../utils";
 
 import PaymentAmounts from "./components/PaymentAmounts";
 import { TimePeriod, tableColumns } from "./utils";
-
-type CreditHistoryProps = {
-    commons?: Common;
-    handleExtend: () => void;
-    report?: Report;
-    showExtendedData: boolean;
-};
 
 const CreditHistory = ({
     commons,

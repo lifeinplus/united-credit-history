@@ -1,18 +1,13 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { Report } from "../../types";
-import PanelHeader from "../../components/PanelHeader";
-import Table from "../../components/Table";
+import { PanelHeader, Table } from "../../components";
 import { useTheme } from "../../contexts";
+import { ReportListProps } from "../../types";
 
 import { tableColumns } from "./utils";
 
-type Props = {
-    reports: Report[];
-};
-
-const ReportList = ({ reports }: Props) => {
+const ReportList = ({ reports }: ReportListProps) => {
     const theme = useTheme();
     const { t } = useTranslation(["report_list"]);
 

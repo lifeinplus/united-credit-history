@@ -1,21 +1,10 @@
-interface Lang {
-    countryCode: string;
-    locale: string;
-    nativeName: string;
-}
+import { DateOptions, Lang } from "../types";
 
 export const langs: Record<string, Lang> = {
     en: { countryCode: "gb", locale: "en-GB", nativeName: "English" },
     ru: { countryCode: "ru", locale: "ru-RU", nativeName: "Русский" },
     tr: { countryCode: "tr", locale: "tr-TR", nativeName: "Türkçe" },
 };
-
-interface DateOptions {
-    date: Intl.DateTimeFormatOptions;
-    header: Intl.DateTimeFormatOptions;
-    status: Intl.DateTimeFormatOptions;
-    time: Intl.DateTimeFormatOptions;
-}
 
 const dateOptions: DateOptions = {
     date: {

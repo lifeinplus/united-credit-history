@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
 
+import { ModalDelete, ModalEdit } from "../components";
 import { useTheme } from "../contexts";
 
 import Footer from "./Footer";
@@ -20,6 +21,8 @@ const Layout = () => {
                     },
                 }}
             />
+            <ModalDelete />
+            <ModalEdit />
             <Header />
             <main>
                 <div className="container-fluid">

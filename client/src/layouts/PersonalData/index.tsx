@@ -2,20 +2,14 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import type { Common, Person, Report, RequestCount } from "../../types";
-
-import PanelHeader from "../../components/PanelHeader";
-import Table from "../../components/Table";
+import { PanelHeader, Table } from "../../components";
 import { useTheme } from "../../contexts";
 import { useDataById } from "../../hooks";
+import { PersonalDataProps } from "../../types/PersonalData";
+import { Person, RequestCount } from "../../types/Report";
 
 import RequestCounts from "./components/RequestCounts";
 import { tableColumns } from "./utils";
-
-type PersonalDataProps = {
-    commons?: Common;
-    report?: Report;
-};
 
 const PersonalData = ({ commons, report }: PersonalDataProps) => {
     const { reportId } = useParams();
