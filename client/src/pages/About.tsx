@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import PanelHeader from "../components/PanelHeader";
+import { PanelHeader } from "../components";
 import { useTheme } from "../contexts";
 
 const About = () => {

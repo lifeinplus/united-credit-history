@@ -1,0 +1,7 @@
+{
+    "table": {
+        "userName": "Kullanıcı adı",
+        "roles": "Roller"
+    },
+    "title": "Kullanıcı listesi"
+}

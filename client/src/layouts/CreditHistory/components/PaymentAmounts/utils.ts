@@ -1,4 +1,7 @@
-import { AmountField, AmountContextField } from "../../../../types";
+import {
+    AmountField,
+    AmountContextField,
+} from "../../../../types/CreditHistory";
 
 export const obligationFields: AmountField[] = [
     { sysName: "chbLoansAmount", type: "loan" },

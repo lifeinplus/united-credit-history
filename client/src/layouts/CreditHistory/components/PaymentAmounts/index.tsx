@@ -1,26 +1,15 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type {
-    Common,
-    AmountContextField,
-    AmountListField,
-} from "../../../../types";
-
 import { useTheme } from "../../../../contexts";
+import {
+    AmountContextField,
+    GroupProps,
+    PaymentAmountsProps,
+} from "../../../../types/CreditHistory";
 import { langs } from "../../../../utils";
 
 import { obligationFields, paymentFields } from "./utils";
-
-type PaymentAmountsProps = {
-    data?: Common;
-    showExtendedData: boolean;
-};
-
-type GroupProps = {
-    amounts: AmountListField[];
-    justify: string;
-};
 
 const PaymentAmounts = ({ data, showExtendedData }: PaymentAmountsProps) => {
     const { i18n, t } = useTranslation(["credit_history"]);

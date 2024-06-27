@@ -1,23 +1,13 @@
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "../contexts";
-import { getDateFormat, langs } from "../utils";
+import { useTheme } from "../../contexts";
+import {
+    PanelHeaderProps,
+    PanelHeaderFieldProps,
+} from "../../types/PanelHeader";
+import { getDateFormat, langs } from "../../utils";
 
-import ExtendControl from "./ExtendControl";
-
-type HeaderFieldProps = {
-    caption: string | undefined;
-    value: string | undefined;
-};
-
-type HeaderProps = {
-    date?: HeaderFieldProps;
-    handleExtend?: () => void;
-    iconName: string;
-    nameSpaces: string[];
-    number?: HeaderFieldProps;
-    showExtendedData?: boolean;
-};
+import ExtendControl from "./components/ExtendControl";
 
 const PanelHeader = ({
     date,
@@ -26,7 +16,7 @@ const PanelHeader = ({
     nameSpaces,
     number,
     showExtendedData,
-}: HeaderProps) => {
+}: PanelHeaderProps) => {
     const { i18n, t } = useTranslation(nameSpaces);
     const theme = useTheme();
 
@@ -69,7 +59,7 @@ const PanelHeader = ({
         </nav>
     );
 
-    function HeaderField({ caption, value }: HeaderFieldProps) {
+    function HeaderField({ caption, value }: PanelHeaderFieldProps) {
         return (
             caption && (
                 <>

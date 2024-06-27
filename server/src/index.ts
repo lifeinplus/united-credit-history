@@ -9,6 +9,7 @@ import Logging from "./library/Logging";
 import { jwtVerifier, requestLogger, rolesVerifier } from "./middleware";
 
 import {
+    Auth,
     Common,
     Delinquency,
     Flc,
@@ -44,11 +45,10 @@ const StartServer = () => {
         res.status(200).json({ message: "pong" })
     );
 
-    app.use("/users", User);
+    app.use("/auth", Auth);
     app.use(jwtVerifier);
     app.use(rolesVerifier(ROLE_LIST.user));
     app.use("/reports", Report);
-    app.use(rolesVerifier(ROLE_LIST.admin));
     app.use("/commons", Common);
     app.use("/delinquencies", Delinquency);
     app.use("/flcs", Flc);
@@ -56,6 +56,8 @@ const StartServer = () => {
     app.use("/paymenthistories", PaymentHistory);
     app.use("/persons", Person);
     app.use("/requestCounts", RequestCount);
+    app.use(rolesVerifier(ROLE_LIST.admin));
+    app.use("/users", User);
 
     app.use((req, res, next) => {
         const error = new Error("URL not found");

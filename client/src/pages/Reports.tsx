@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAxiosPrivate } from "../hooks";
 import { ReportList } from "../layouts";
-import type { Report } from "../types";
+import { Report } from "../types/Report";
 
 const Reports = () => {
     const [reports, setReports] = useState<Report[]>();
@@ -18,7 +18,7 @@ const Reports = () => {
 
         if (effectRan.current === true) {
             axiosPrivate
-                .get("/reports/get", {
+                .get("/reports/getAll", {
                     signal: controller.signal,
                 })
                 .then((response) => {

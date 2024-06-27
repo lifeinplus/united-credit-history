@@ -4,6 +4,6 @@ import { Report } from "../controllers";
 const router = express.Router();
 
 router.get("/getById/:reportId", Report.getById);
-router.get("/get", Report.get);
+router.get("/getAll", Report.getAll);
 
 export = router;

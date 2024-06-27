@@ -1,3 +1,4 @@
+import Auth from "./Auth";
 import Common from "./Common";
 import Delinquency from "./Delinquency";
 import Flc from "./Flc";
@@ -9,6 +10,7 @@ import RequestCount from "./RequestCount";
 import User from "./User";
 
 export {
+    Auth,
     Common,
     Delinquency,
     Flc,

@@ -26,7 +26,7 @@ const Register = () => {
             }}
             submit={{
                 callback: submitCallback,
-                url: "/users/register",
+                url: "/auth/register",
             }}
             title={t("title")}
         />

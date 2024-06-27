@@ -1,11 +1,8 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts";
+import { RequireAuthProps } from "../types";
 
-interface Props {
-    allowedRoles: number[];
-}
-
-const RequireAuth = ({ allowedRoles }: Props) => {
+const RequireAuth = ({ allowedRoles }: RequireAuthProps) => {
     const { auth } = useAuth();
     const location = useLocation();
 
