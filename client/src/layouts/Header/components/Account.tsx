@@ -15,12 +15,16 @@ const Account = () => {
 
     function Out() {
         const handleLogout = () => {
-            axiosPrivate("/users/logout")
+            axiosPrivate("/auth/logout")
                 .then(() => {
                     setAuth({});
                     navigate("/login");
                 })
                 .catch((error) => console.error(error));
+        };
+
+        const handleUsers = () => {
+            navigate("/users");
         };
 
         return (
@@ -47,6 +51,17 @@ const Account = () => {
                         theme === "dark" && "dropdown-menu-dark"
                     )}
                 >
+                    {auth?.roles?.find((role) => role === 1010) && (
+                        <li>
+                            <button
+                                className="dropdown-item"
+                                onClick={handleUsers}
+                                type="button"
+                            >
+                                {t("users")}
+                            </button>
+                        </li>
+                    )}
                     <li>
                         <button
                             className="dropdown-item"

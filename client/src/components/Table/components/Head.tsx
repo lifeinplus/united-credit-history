@@ -1,28 +1,18 @@
 import classNames from "classnames";
 import { forwardRef } from "react";
 
-import type { Sort, SortClass, TableColumn } from "../../../types";
 import { useTheme } from "../../../contexts";
+import { TableHead, TableHeaderCell } from "../../../types/Table";
 
 import { useTooltip } from "../hooks";
+import { useTranslation } from "react-i18next";
 
-type HeadProps = {
-    columns: TableColumn[];
-    getSortClass: SortClass;
-    requestSort: Sort;
-    tooltips: boolean;
-};
+const Head = forwardRef<HTMLTableSectionElement, TableHead>(
+    (props: TableHead, ref) => {
+        const { columns, actions, getSortClass, requestSort, tooltips } = props;
 
-type ThProps = {
-    column: TableColumn;
-    getSortClass: SortClass;
-    requestSort: Sort;
-    theme: string;
-};
-
-const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
-    ({ columns, getSortClass, requestSort, tooltips }: HeadProps, ref) => {
         const theme = useTheme();
+        const { t } = useTranslation("table");
         useTooltip(tooltips, columns);
 
         return (
@@ -43,44 +33,66 @@ const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
                             theme={theme}
                         />
                     ))}
+                    {actions && <ActionTh />}
                 </tr>
             </thead>
         );
+
+        function ActionTh() {
+            return (
+                <th className={"text-end"} scope="col">
+                    {t("actions")}
+                </th>
+            );
+        }
+
+        function Th({
+            column,
+            getSortClass,
+            requestSort,
+            theme,
+        }: TableHeaderCell) {
+            const {
+                alignment,
+                extended,
+                name,
+                sortable,
+                sysName,
+                tooltipName,
+                type,
+            } = column;
+
+            const common = type === "common";
+
+            const extendedClass =
+                common &&
+                extended &&
+                (theme === "light" ? "table-info" : "uch-table dark info");
+
+            const sortableThemeClass =
+                common && sortable && `sortable ${theme}`;
+            const sortClass = common && sortable && getSortClass(sysName);
+
+            return (
+                <th
+                    className={classNames(
+                        extendedClass,
+                        sortableThemeClass,
+                        sortClass,
+                        alignment
+                    )}
+                    data-bs-toggle={tooltipName && "tooltip"}
+                    data-bs-placement={tooltipName && "top"}
+                    data-bs-custom-class={`uch-tooltip ${theme}`}
+                    data-bs-title={tooltipName}
+                    onClick={common ? () => requestSort(column) : undefined}
+                    scope="col"
+                >
+                    {name}
+                </th>
+            );
+        }
     }
 );
-
-const Th = ({ column, getSortClass, requestSort, theme }: ThProps) => {
-    const { alignment, extended, name, sortable, sysName, tooltipName, type } =
-        column;
-
-    const common = type === "common";
-
-    const extendedClass =
-        common &&
-        extended &&
-        (theme === "light" ? "table-info" : "uch-table dark info");
-
-    const sortableThemeClass = common && sortable && `sortable ${theme}`;
-    const sortClass = common && sortable && getSortClass(sysName);
-
-    return (
-        <th
-            className={classNames(
-                extendedClass,
-                sortableThemeClass,
-                sortClass,
-                alignment
-            )}
-            data-bs-toggle={tooltipName && "tooltip"}
-            data-bs-placement={tooltipName && "top"}
-            data-bs-custom-class={`uch-tooltip ${theme}`}
-            data-bs-title={tooltipName}
-            onClick={common ? () => requestSort(column) : undefined}
-            scope="col"
-        >
-            {name}
-        </th>
-    );
-};
 
 export default Head;

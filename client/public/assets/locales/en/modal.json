@@ -1,0 +1,18 @@
+{
+    "title": {
+        "delete": "Delete",
+        "edit": "Edit"
+    },
+    "label": {
+        "userName": "User Name",
+        "roles": "Roles"
+    },
+    "message": {
+        "delete": "Are you sure you want to delete the user ({{userName}})?"
+    },
+    "button": {
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "save": "Save"
+    }
+}

@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import PersistLogin from "./PersistLogin";
 import PersonalData from "./PersonalData";
 import ReportList from "./ReportList";
+import RoleList from "./UserList";
 import RequireAuth from "./RequireAuth";
 
 export {
@@ -13,5 +14,6 @@ export {
     PersistLogin,
     PersonalData,
     ReportList,
+    RoleList,
     RequireAuth,
 };

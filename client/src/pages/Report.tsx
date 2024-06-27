@@ -1,14 +1,9 @@
 import { useParams } from "react-router-dom";
 
-import type { Common, Report } from "../types";
-
 import { useDataById } from "../hooks";
 import { CreditHistory, PersonalData } from "../layouts";
-
-type ReportProps = {
-    handleExtend: () => void;
-    showExtendedData: boolean;
-};
+import { ReportProps } from "../types/Report";
+import { Common, Report } from "../types/Report";
 
 const Report = ({ handleExtend, showExtendedData }: ReportProps) => {
     const { reportId } = useParams();

@@ -1,18 +1,7 @@
 import { useMemo, useState } from "react";
+import { TableSortConfig, TableColumn, TableData } from "../../../types/Table";
 
-import type { Loan, Person, Report, TableColumn } from "../../../types";
-
-type SortConfig = {
-    dataType?: string;
-    direction: string;
-    sysName?: string;
-    sysNameStatus?: string;
-};
-
-const useSortableData = (
-    data: (Loan | Person | Report)[] = [],
-    config: SortConfig
-) => {
+const useSortableData = (data: TableData[] = [], config: TableSortConfig) => {
     const [sortConfig, setSortConfig] = useState(config);
 
     const sortedData = useMemo(() => {

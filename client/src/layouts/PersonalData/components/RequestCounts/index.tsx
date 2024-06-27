@@ -2,25 +2,13 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "../../../../contexts";
-import type { RequestCount } from "../../../../types";
+import {
+    RequestCountsCard,
+    RequestCountsItem,
+    RequestCountsProps,
+} from "../../../../types/PersonalData";
 
 import { customFields, scoreStyles } from "./utils";
-
-type RequestCountsProps = {
-    counts?: RequestCount;
-    score?: number;
-};
-
-type CardProps = {
-    title: string;
-    type: string;
-};
-
-type ItemProps = {
-    count: number;
-    sysName: string;
-    type: string;
-};
 
 const RequestCounts = ({ counts, score }: RequestCountsProps) => {
     const { t } = useTranslation(["personal_data"]);
@@ -33,7 +21,7 @@ const RequestCounts = ({ counts, score }: RequestCountsProps) => {
         </div>
     );
 
-    function Card({ title, type }: CardProps) {
+    function Card({ title, type }: RequestCountsCard) {
         const fields = customFields.filter((item) => item.type === type);
         const values = fields.map(({ sysName }) => counts && counts[sysName]);
 
@@ -76,7 +64,7 @@ const RequestCounts = ({ counts, score }: RequestCountsProps) => {
         );
     }
 
-    function Item({ count, sysName, type }: ItemProps) {
+    function Item({ count, sysName, type }: RequestCountsItem) {
         const isDanger = type === "micro" && count > 0;
 
         return (

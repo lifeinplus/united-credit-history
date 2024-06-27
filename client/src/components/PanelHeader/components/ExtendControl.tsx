@@ -1,9 +1,5 @@
 import { useTranslation } from "react-i18next";
-
-type ExtendControlProps = {
-    handleExtend?: () => void;
-    showExtendedData?: boolean;
-};
+import { ExtendControlProps } from "../../../types/CreditHistory";
 
 const ExtendControl = ({
     handleExtend,

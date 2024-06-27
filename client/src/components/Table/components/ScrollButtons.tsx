@@ -1,19 +1,11 @@
-import { MouseEvent, RefObject } from "react";
 import { useTheme } from "../../../contexts";
-
-type ScrollButtonsProps = {
-    btnRefs: {
-        [key: string]: RefObject<HTMLButtonElement>;
-    };
-    handleScroll: (arg0: MouseEvent<HTMLButtonElement>) => void;
-    wrapperRef: RefObject<HTMLDivElement>;
-};
+import { TableScrollButtons } from "../../../types/Table";
 
 const ScrollButtons = ({
     btnRefs,
     handleScroll,
     wrapperRef,
-}: ScrollButtonsProps) => {
+}: TableScrollButtons) => {
     const theme = useTheme();
 
     const buttons = [
